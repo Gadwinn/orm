@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+    cacheDirectory=".phpunit.cache"
+    colors="true"
+    failOnWarning="true"
+    failOnNotice="true"
+    displayDetailsOnTestsThatTriggerDeprecations="true"
+    displayDetailsOnTestsThatTriggerWarnings="true"
+    displayDetailsOnTestsThatTriggerNotices="true"
+    displayDetailsOnPhpunitDeprecations="true"
+    displayDetailsOnPhpunitNotices="true"
+    beStrictAboutOutputDuringTests="true"
+    beStrictAboutChangesToGlobalState="true"
+>
+    <testsuites>
+        <testsuite name="orm">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <source>
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+    </source>
+
+    <coverage>
+        <report>
+            <html outputDirectory="logs/html-coverage" lowUpperBound="50" highLowerBound="90" />
+            <text outputFile="php://stdout" showUncoveredFiles="true" showOnlySummary="false" />
+        </report>
+    </coverage>
+</phpunit>
