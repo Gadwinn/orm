@@ -41,6 +41,36 @@ final class QueryBuilder implements QueryBuilderInterface
     private const TARGET_WHERE = 'where';
     private const TARGET_HAVING = 'having';
 
+    /**
+     * The closed set of comparison operators the inline where()/having() form
+     * accepts. Normalised to upper case, anything outside it is rejected before
+     * reaching the compiler, so a caller-supplied operator string can never be
+     * interpolated into the SQL verbatim.
+     *
+     * @var list<string>
+     */
+    private const ALLOWED_OPERATORS = [
+        '=', '<>', '!=', '>', '>=', '<', '<=',
+        'LIKE', 'NOT LIKE', 'REGEXP', 'NOT REGEXP', 'IN', 'NOT IN',
+        'BETWEEN', 'IS NULL', 'IS NOT NULL',
+    ];
+
+    /**
+     * The only sort directions ORDER BY accepts.
+     *
+     * @var list<string>
+     */
+    private const ALLOWED_DIRECTIONS = ['ASC', 'DESC'];
+
+    /**
+     * A bare or singly-qualified identifier ("col" or "alias.col"). It rejects
+     * whitespace, punctuation, parentheses and operators — exactly the payload
+     * an injected column or ORDER BY term needs. Raw SQL expressions
+     * (aggregates, function calls) remain available through select() and
+     * havingRaw(), which are the trusted SQL-first surfaces.
+     */
+    private const IDENTIFIER_PATTERN = '/^[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)?$/';
+
     private QueryState $state;
 
     /**
@@ -163,12 +193,59 @@ final class QueryBuilder implements QueryBuilderInterface
         return $this->predicate(self::TARGET_WHERE, 'OR', $column, $operator, $value);
     }
 
+    public function whereRaw(string $expression, array $bindings = []): static
+    {
+        $this->state->wheres[] = $this->rawPredicate($expression, $bindings);
+
+        return $this;
+    }
+
     public function having(
         string $column,
         ?string $operator = null,
         mixed $value = null
     ): static|QueryExpressionClauseInterface {
         return $this->predicate(self::TARGET_HAVING, 'AND', $column, $operator, $value);
+    }
+
+    /**
+     * Append a raw HAVING expression with its own positional bindings.
+     *
+     * Trusted surface: unlike having(), the expression is emitted verbatim and
+     * is NOT validated against the identifier whitelist, so it can carry the
+     * aggregates having() deliberately rejects (e.g. "COUNT(*) > ?"). The
+     * caller owns the safety of the expression string — it must be a literal or
+     * developer-controlled fragment, never assembled from external input. Bind
+     * every value through a "?" placeholder and pass it via $bindings; never
+     * interpolate a value into the expression.
+     *
+     * @param list<mixed> $bindings
+     */
+    public function havingRaw(string $expression, array $bindings = []): static
+    {
+        $this->state->having[] = $this->rawPredicate($expression, $bindings);
+
+        return $this;
+    }
+
+    /**
+     * Build a raw predicate entry for the WHERE or HAVING bucket: the
+     * expression is emitted verbatim by the compiler with its own positional
+     * bindings, combined with the preceding predicate using AND.
+     *
+     * @param list<mixed> $bindings
+     *
+     * @return array{boolean: string, column: string, operator: string, values: list<mixed>, raw: bool}
+     */
+    private function rawPredicate(string $expression, array $bindings): array
+    {
+        return [
+            'boolean' => 'AND',
+            'column' => $expression,
+            'operator' => '',
+            'values' => $bindings,
+            'raw' => true,
+        ];
     }
 
     public function join(string $tableOrEntity, ?string $aliasOrCondition = null): static
@@ -193,14 +270,41 @@ final class QueryBuilder implements QueryBuilderInterface
 
     public function orderBy(string $column, string $direction = 'ASC'): static
     {
-        $this->state->orderBy[] = ['column' => $column, 'direction' => $direction];
+        $this->assertSafeIdentifier($column);
+
+        $normalized = strtoupper($direction);
+        if (!in_array($normalized, self::ALLOWED_DIRECTIONS, true)) {
+            throw new QueryException(
+                sprintf('Invalid sort direction "%s"; expected ASC or DESC.', $direction)
+            );
+        }
+
+        $this->state->orderBy[] = ['column' => $column, 'direction' => $normalized, 'raw' => false];
+
+        return $this;
+    }
+
+    public function orderByRaw(string $expression): static
+    {
+        $this->state->orderBy[] = ['column' => $expression, 'direction' => '', 'raw' => true];
 
         return $this;
     }
 
     public function groupBy(string ...$columns): static
     {
+        foreach ($columns as $column) {
+            $this->assertSafeIdentifier($column);
+        }
+
         $this->state->groupBy = array_merge($this->state->groupBy, array_values($columns));
+
+        return $this;
+    }
+
+    public function groupByRaw(string ...$expressions): static
+    {
+        $this->state->groupBy = array_merge($this->state->groupBy, array_values($expressions));
 
         return $this;
     }
@@ -363,6 +467,7 @@ final class QueryBuilder implements QueryBuilderInterface
             'column' => $column,
             'operator' => $operator,
             'values' => $values,
+            'raw' => false,
         ];
 
         if ($target === self::TARGET_HAVING) {
@@ -381,11 +486,31 @@ final class QueryBuilder implements QueryBuilderInterface
         ?string $operator,
         mixed $value
     ): static|QueryExpressionClauseInterface {
+        $this->assertSafeIdentifier($column);
+
         if ($operator === null) {
             return new QueryExpressionClause($this, $target, $boolean, $column);
         }
 
-        return $this->pushPredicate($target, $boolean, $column, $operator, $this->manualValues($operator, $value));
+        $normalized = strtoupper(trim($operator));
+        if (!in_array($normalized, self::ALLOWED_OPERATORS, true)) {
+            throw new QueryException(sprintf('Unsupported SQL operator "%s".', $operator));
+        }
+
+        return $this->pushPredicate($target, $boolean, $column, $normalized, $this->manualValues($normalized, $value));
+    }
+
+    /**
+     * Guard a column/identifier token bound for a clause that cannot be
+     * parameterised (WHERE/HAVING column, ORDER BY / GROUP BY term). Accepts a
+     * bare or singly-qualified identifier only; anything else is an injection
+     * attempt or an expression that belongs in select()/havingRaw().
+     */
+    private function assertSafeIdentifier(string $identifier): void
+    {
+        if (preg_match(self::IDENTIFIER_PATTERN, $identifier) !== 1) {
+            throw new QueryException(sprintf('Unsafe SQL identifier "%s".', $identifier));
+        }
     }
 
     /**

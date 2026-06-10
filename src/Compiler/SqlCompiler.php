@@ -149,7 +149,7 @@ final class SqlCompiler implements SqlCompilerInterface
      * Compile a predicate list (WHERE or HAVING) into a clause body and its
      * bindings. The body excludes the leading keyword.
      *
-     * @param list<array{boolean: string, column: string, operator: string, values: list<mixed>}> $predicates
+     * @param list<array{boolean: string, column: string, operator: string, values: list<mixed>, raw: bool}> $predicates
      *
      * @return array{0: string, 1: list<mixed>}
      */
@@ -176,12 +176,18 @@ final class SqlCompiler implements SqlCompilerInterface
     }
 
     /**
-     * @param array{boolean: string, column: string, operator: string, values: list<mixed>} $predicate
+     * @param array{boolean: string, column: string, operator: string, values: list<mixed>, raw: bool} $predicate
      *
      * @return array{0: string, 1: list<mixed>}
      */
     private function compilePredicate(array $predicate): array
     {
+        if ($predicate['raw']) {
+            // A trusted havingRaw() fragment: the placeholders already live in
+            // the expression, so it is emitted verbatim with its own bindings.
+            return [$predicate['column'], $predicate['values']];
+        }
+
         $column = $predicate['column'];
         $operator = strtoupper($predicate['operator']);
         $values = $predicate['values'];
@@ -216,7 +222,7 @@ final class SqlCompiler implements SqlCompilerInterface
     }
 
     /**
-     * @param list<array{column: string, direction: string}> $orderBy
+     * @param list<array{column: string, direction: string, raw: bool}> $orderBy
      */
     private function compileOrderBy(array $orderBy): string
     {
@@ -226,7 +232,12 @@ final class SqlCompiler implements SqlCompilerInterface
 
         $parts = [];
         foreach ($orderBy as $term) {
-            $parts[] = $term['column'] . ' ' . strtoupper($term['direction']);
+            // A raw term (orderByRaw) is a trusted, verbatim expression that
+            // already carries its own direction; a standard term pairs the
+            // validated column with its whitelisted direction.
+            $parts[] = $term['raw']
+                ? $term['column']
+                : $term['column'] . ' ' . strtoupper($term['direction']);
         }
 
         return ' ORDER BY ' . implode(', ', $parts);

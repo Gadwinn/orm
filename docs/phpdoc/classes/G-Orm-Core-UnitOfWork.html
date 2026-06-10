@@ -1,0 +1,2275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+            <title>Documentation</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">Documentation</a></h1>
+    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+        </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/g.html" class="">G</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/g-orm.html" class="">Orm</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+                <section class="phpdocumentor-sidebar__category -packages">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Application.html" class="">Application</a>
+</h4>
+
+                        </section>
+            
+    <section class="phpdocumentor-sidebar__category -reports">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category -indices">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/g.html">G</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/g-orm.html">Orm</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/g-orm-core.html">Core</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -class">
+        <h2 class="phpdocumentor-content__title">
+    UnitOfWork
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                            </ul>
+        </div>
+    
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <a href="classes/G-Orm-Contract-UnitOfWorkInterface.html"><abbr title="\G\Orm\Contract\UnitOfWorkInterface">UnitOfWorkInterface</abbr></a>                    </span>
+    
+    </h2>
+
+<div class="phpdocumentor-label-line">
+
+    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Final</span><span>Yes</span></div>
+
+
+</div>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">63</span>
+
+    </aside>
+
+            <p class="phpdocumentor-summary">Snapshot-based Unit Of Work.</p>
+
+
+    <section class="phpdocumentor-description"><p>Three intentions are tracked by instance: pending inserts, pending deletes
+and the managed set (persistent entities with an original-state snapshot).
+Updates are never stored as an intention: there are no dirty flags. At
+flush time every managed entity's current state is diffed against its
+snapshot and only the changed, non-key columns are written.</p>
+<p>Entities are keyed by spl_object_id() so identity is by instance, never by
+value. Partial hydration is honoured through per-entity loaded-field masks:
+a column absent from the mask is &quot;unknown&quot; and never diffed, which prevents
+phantom updates from never-loaded columns.</p>
+<p>A dual-layer lifecycle wraps each write. Internal hooks — methods flagged
+with the #[Before*]/#[After*] attributes — always fire; an optional PSR-14
+dispatcher additionally emits the matching events. For updates the pipeline
+is synchronised: the user-driven <a href="classes/G-Orm-Event-Changeset.html"><abbr title="\G\Orm\Event\Changeset">Changeset</abbr></a> is handed to #[BeforeUpdate]
+hooks, the entity is then re-diffed so columns the hook mutated join the SET
+clause, and only that final change set is dispatched and written. Hooks for
+a managed entity fire only when it actually has pending changes.</p>
+<p>Hook discovery is reflection-based but paid for once per class: the first
+row of a type is scanned and its lifecycle methods indexed by attribute into
+<abbr title="\G\Orm\Core\self::$hookCache">self::$hookCache</abbr>; every subsequent row of that type runs straight from
+the cache without touching reflection again.</p>
+</section>
+
+
+
+    
+    
+<h3 id="toc">
+    Table of Contents
+    <a href="classes/G-Orm-Core-UnitOfWork.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+    <h4 id="toc-interfaces">
+        Interfaces
+        <a href="classes/G-Orm-Core-UnitOfWork.html#toc-interfaces" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/G-Orm-Contract-UnitOfWorkInterface.html"><abbr title="\G\Orm\Contract\UnitOfWorkInterface">UnitOfWorkInterface</abbr></a></dt><dd>Coordinates entity persistence.</dd>    </dl>
+
+
+
+
+<h4 id="toc-constants">
+    Constants
+    <a href="classes/G-Orm-Core-UnitOfWork.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#constant_LIFECYCLE_ATTRIBUTES">LIFECYCLE_ATTRIBUTES</a>
+    <span>
+        &nbsp;: array&lt;int, class-string&gt;&nbsp;= [\G\Orm\Attribute\Event\BeforeInsert::class, \G...                            </span>
+</dt>
+<dd>The full set of lifecycle attributes a class is indexed against on its
+first encounter.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#constant_PHP_TYPE_INT">PHP_TYPE_INT</a>
+    <span>
+        &nbsp;: mixed&nbsp;= &#039;int&#039;                            </span>
+</dt>
+<dd>Native scalar type name a generated identifier is cast to when the
+mapped primary-key property is typed as int.</dd>
+
+    </dl>
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/G-Orm-Core-UnitOfWork.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#property_compiler">$compiler</a>
+    <span>
+                        &nbsp;: <a href="classes/G-Orm-Compiler-SqlCompilerInterface.html"><abbr title="\G\Orm\Compiler\SqlCompilerInterface">SqlCompilerInterface</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#property_connection">$connection</a>
+    <span>
+                        &nbsp;: <a href="classes/G-Orm-Contract-Driver-ConnectionInterface.html"><abbr title="\G\Orm\Contract\Driver\ConnectionInterface">ConnectionInterface</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#property_deletes">$deletes</a>
+    <span>
+                        &nbsp;: array&lt;int, object&gt;            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#property_dispatcher">$dispatcher</a>
+    <span>
+                        &nbsp;: <abbr title="\Psr\EventDispatcher\EventDispatcherInterface">EventDispatcherInterface</abbr>|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#property_flushing">$flushing</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+<dd>Re-entrancy guard. Lifecycle hooks and PSR-14 listeners run inside the
+flush loop while the intention queues are still populated; a hook that
+called flush() again would re-iterate those queues — double-writing rows
+and, for a self-triggering hook, recursing without bound until memory is
+exhausted. The guard turns that into an explicit OrmException instead of
+silent state duplication.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#property_hookCache">$hookCache</a>
+    <span>
+                        &nbsp;: array&lt;class-string, array&lt;class-string, array&lt;int, <abbr title="\ReflectionMethod">ReflectionMethod</abbr>&gt;&gt;&gt;            </span>
+</dt>
+<dd>Memoised lifecycle-hook index: entity class =&gt; attribute class =&gt; the
+reflected methods carrying that attribute, in declaration order. Built
+lazily, once per class, on first use.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#property_hydrator">$hydrator</a>
+    <span>
+                        &nbsp;: <a href="classes/G-Orm-Contract-HydratorInterface.html"><abbr title="\G\Orm\Contract\HydratorInterface">HydratorInterface</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#property_identityMap">$identityMap</a>
+    <span>
+                        &nbsp;: <a href="classes/G-Orm-Contract-IdentityMapInterface.html"><abbr title="\G\Orm\Contract\IdentityMapInterface">IdentityMapInterface</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#property_inserts">$inserts</a>
+    <span>
+                        &nbsp;: array&lt;int, object&gt;            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#property_loadedFields">$loadedFields</a>
+    <span>
+                        &nbsp;: array&lt;int, array&lt;int, string&gt;|null&gt;            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#property_managed">$managed</a>
+    <span>
+                        &nbsp;: array&lt;int, object&gt;            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#property_metadata">$metadata</a>
+    <span>
+                        &nbsp;: <a href="classes/G-Orm-Contract-MetadataReaderInterface.html"><abbr title="\G\Orm\Contract\MetadataReaderInterface">MetadataReaderInterface</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#property_snapshots">$snapshots</a>
+    <span>
+                        &nbsp;: array&lt;int, array&lt;string, mixed&gt;&gt;            </span>
+</dt>
+
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/G-Orm-Core-UnitOfWork.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_clear">clear()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Detach every managed entity and reset all queues and snapshots.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_detach">detach()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Stop tracking an entity. Its snapshot and Identity Map entry are
+dropped; it is removed from every pending queue.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_flush">flush()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Compute change sets and synchronise all queues with the database.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_identityMap">identityMap()</a>
+    <span>
+                                &nbsp;: <a href="classes/G-Orm-Contract-IdentityMapInterface.html"><abbr title="\G\Orm\Contract\IdentityMapInterface">IdentityMapInterface</abbr></a>    </span>
+</dt>
+<dd>Return the Identity Map backing this Unit Of Work.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_isManaged">isManaged()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Whether the given entity instance is currently managed.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_persist">persist()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Schedule a new entity for insertion.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_register">register()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Register an already persistent entity as managed.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_remove">remove()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Schedule a managed entity for deletion.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_assignGeneratedId">assignGeneratedId()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_changedColumns">changedColumns()</a>
+    <span>
+                                &nbsp;: array&lt;string, mixed&gt;    </span>
+</dt>
+<dd>Diff a freshly extracted state against a snapshot, returning only the
+changed, non-key columns. Shared by the initial dirty scan and the
+post-#[BeforeUpdate] re-evaluation.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_computeUpdates">computeUpdates()</a>
+    <span>
+                                &nbsp;: array&lt;int, array{objectId: int, table: string, changes: array<string,mixed>, where: array<string,mixed>}&gt;    </span>
+</dt>
+<dd>Diff every managed entity against its snapshot and return the pending
+UPDATE descriptors. Primary-key columns are never part of the SET.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_dispatch">dispatch()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Dispatch a lifecycle event when a PSR-14 dispatcher is configured.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_executeDeletes">executeDeletes()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_executeInserts">executeInserts()</a>
+    <span>
+                                &nbsp;: array&lt;int, array{objectId: int, entity: object}&gt;    </span>
+</dt>
+<dd>Execute pending INSERTs, firing the insert lifecycle hooks and events
+around each row and writing back any generated identifier so #[AfterInsert]
+hooks observe it.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_executeUpdates">executeUpdates()</a>
+    <span>
+                                &nbsp;: array&lt;int, array{objectId: int, current: array<string,mixed>}&gt;    </span>
+</dt>
+<dd>Execute pending UPDATEs through the synchronised hook pipeline:</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_hooksFor">hooksFor()</a>
+    <span>
+                                &nbsp;: array&lt;int, <abbr title="\ReflectionMethod">ReflectionMethod</abbr>&gt;    </span>
+</dt>
+<dd>The cached hook methods declared for the given attribute on a class,
+indexing the class on first request.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_indexHooks">indexHooks()</a>
+    <span>
+                                &nbsp;: array&lt;class-string, array&lt;int, <abbr title="\ReflectionMethod">ReflectionMethod</abbr>&gt;&gt;    </span>
+</dt>
+<dd>Scan a class exactly once, mapping each lifecycle attribute to the
+methods carrying it. Classes with no hooks still produce an entry (with
+empty method lists), so the scan never repeats for them either.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_primaryKeyColumns">primaryKeyColumns()</a>
+    <span>
+                                &nbsp;: array&lt;int, string&gt;    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_runHooks">runHooks()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Invoke every method on the entity carrying the given lifecycle attribute,
+in declaration order, forwarding the supplied arguments. The methods are
+resolved from the per-class cache, so only the first row of each type
+pays for reflection.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_synchronise">synchronise()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Apply in-memory synchronisation after a successful flush: promote inserts
+into the managed set, refresh snapshots and empty the intention queues.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_writeBuilder">writeBuilder()</a>
+    <span>
+                                &nbsp;: <a href="classes/G-Orm-Query-QueryBuilder.html"><abbr title="\G\Orm\Query\QueryBuilder">QueryBuilder</abbr></a>    </span>
+</dt>
+
+    </dl>
+
+
+
+        
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/G-Orm-Core-UnitOfWork.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article class="phpdocumentor-element -constant -private ">
+    <h4 class="phpdocumentor-element__name" id="constant_LIFECYCLE_ATTRIBUTES">
+        LIFECYCLE_ATTRIBUTES
+        <a href="classes/G-Orm-Core-UnitOfWork.html#constant_LIFECYCLE_ATTRIBUTES" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">71</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The full set of lifecycle attributes a class is indexed against on its
+first encounter.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">array&lt;int, class-string&gt;</span>
+    <span class="phpdocumentor-signature__name">LIFECYCLE_ATTRIBUTES</span>
+    = <span class="phpdocumentor-signature__default-value">[\G\Orm\Attribute\Event\BeforeInsert::class, \G\Orm\Attribute\Event\AfterInsert::class, \G\Orm\Attribute\Event\BeforeUpdate::class, \G\Orm\Attribute\Event\AfterUpdate::class, \G\Orm\Attribute\Event\BeforeDelete::class, \G\Orm\Attribute\Event\AfterDelete::class]</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -private ">
+    <h4 class="phpdocumentor-element__name" id="constant_PHP_TYPE_INT">
+        PHP_TYPE_INT
+        <a href="classes/G-Orm-Core-UnitOfWork.html#constant_PHP_TYPE_INT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">84</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Native scalar type name a generated identifier is cast to when the
+mapped primary-key property is typed as int.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">PHP_TYPE_INT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;int&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+            </section>
+
+        
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/G-Orm-Core-UnitOfWork.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_compiler">
+        $compiler
+        <a href="classes/G-Orm-Core-UnitOfWork.html#property_compiler" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">132</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/G-Orm-Compiler-SqlCompilerInterface.html"><abbr title="\G\Orm\Compiler\SqlCompilerInterface">SqlCompilerInterface</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$compiler</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_connection">
+        $connection
+        <a href="classes/G-Orm-Core-UnitOfWork.html#property_connection" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">131</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/G-Orm-Contract-Driver-ConnectionInterface.html"><abbr title="\G\Orm\Contract\Driver\ConnectionInterface">ConnectionInterface</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$connection</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_deletes">
+        $deletes
+        <a href="classes/G-Orm-Core-UnitOfWork.html#property_deletes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">94</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, object&gt;</span>
+    <span class="phpdocumentor-signature__name">$deletes</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_dispatcher">
+        $dispatcher
+        <a href="classes/G-Orm-Core-UnitOfWork.html#property_dispatcher" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">136</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\Psr\EventDispatcher\EventDispatcherInterface">EventDispatcherInterface</abbr>|null</span>
+    <span class="phpdocumentor-signature__name">$dispatcher</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_flushing">
+        $flushing
+        <a href="classes/G-Orm-Core-UnitOfWork.html#property_flushing" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">128</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Re-entrancy guard. Lifecycle hooks and PSR-14 listeners run inside the
+flush loop while the intention queues are still populated; a hook that
+called flush() again would re-iterate those queues — double-writing rows
+and, for a self-triggering hook, recursing without bound until memory is
+exhausted. The guard turns that into an explicit OrmException instead of
+silent state duplication.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$flushing</span>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_hookCache">
+        $hookCache
+        <a href="classes/G-Orm-Core-UnitOfWork.html#property_hookCache" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">118</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Memoised lifecycle-hook index: entity class =&gt; attribute class =&gt; the
+reflected methods carrying that attribute, in declaration order. Built
+lazily, once per class, on first use.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;class-string, array&lt;class-string, array&lt;int, <abbr title="\ReflectionMethod">ReflectionMethod</abbr>&gt;&gt;&gt;</span>
+    <span class="phpdocumentor-signature__name">$hookCache</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_hydrator">
+        $hydrator
+        <a href="classes/G-Orm-Core-UnitOfWork.html#property_hydrator" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">134</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/G-Orm-Contract-HydratorInterface.html"><abbr title="\G\Orm\Contract\HydratorInterface">HydratorInterface</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$hydrator</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_identityMap">
+        $identityMap
+        <a href="classes/G-Orm-Core-UnitOfWork.html#property_identityMap" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">135</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/G-Orm-Contract-IdentityMapInterface.html"><abbr title="\G\Orm\Contract\IdentityMapInterface">IdentityMapInterface</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$identityMap</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_inserts">
+        $inserts
+        <a href="classes/G-Orm-Core-UnitOfWork.html#property_inserts" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">89</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, object&gt;</span>
+    <span class="phpdocumentor-signature__name">$inserts</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_loadedFields">
+        $loadedFields
+        <a href="classes/G-Orm-Core-UnitOfWork.html#property_loadedFields" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">109</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, array&lt;int, string&gt;|null&gt;</span>
+    <span class="phpdocumentor-signature__name">$loadedFields</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_managed">
+        $managed
+        <a href="classes/G-Orm-Core-UnitOfWork.html#property_managed" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">99</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, object&gt;</span>
+    <span class="phpdocumentor-signature__name">$managed</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_metadata">
+        $metadata
+        <a href="classes/G-Orm-Core-UnitOfWork.html#property_metadata" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">133</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/G-Orm-Contract-MetadataReaderInterface.html"><abbr title="\G\Orm\Contract\MetadataReaderInterface">MetadataReaderInterface</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$metadata</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_snapshots">
+        $snapshots
+        <a href="classes/G-Orm-Core-UnitOfWork.html#property_snapshots" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">104</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, array&lt;string, mixed&gt;&gt;</span>
+    <span class="phpdocumentor-signature__name">$snapshots</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+            </section>
+
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/G-Orm-Core-UnitOfWork.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">130</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/G-Orm-Contract-Driver-ConnectionInterface.html"><abbr title="\G\Orm\Contract\Driver\ConnectionInterface">ConnectionInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$connection</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/G-Orm-Compiler-SqlCompilerInterface.html"><abbr title="\G\Orm\Compiler\SqlCompilerInterface">SqlCompilerInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$compiler</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/G-Orm-Contract-MetadataReaderInterface.html"><abbr title="\G\Orm\Contract\MetadataReaderInterface">MetadataReaderInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$metadata</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/G-Orm-Contract-HydratorInterface.html"><abbr title="\G\Orm\Contract\HydratorInterface">HydratorInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$hydrator</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/G-Orm-Contract-IdentityMapInterface.html"><abbr title="\G\Orm\Contract\IdentityMapInterface">IdentityMapInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$identityMap</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Psr\EventDispatcher\EventDispatcherInterface">EventDispatcherInterface</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dispatcher</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$connection</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/G-Orm-Contract-Driver-ConnectionInterface.html"><abbr title="\G\Orm\Contract\Driver\ConnectionInterface">ConnectionInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$compiler</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/G-Orm-Compiler-SqlCompilerInterface.html"><abbr title="\G\Orm\Compiler\SqlCompilerInterface">SqlCompilerInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$metadata</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/G-Orm-Contract-MetadataReaderInterface.html"><abbr title="\G\Orm\Contract\MetadataReaderInterface">MetadataReaderInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$hydrator</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/G-Orm-Contract-HydratorInterface.html"><abbr title="\G\Orm\Contract\HydratorInterface">HydratorInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$identityMap</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/G-Orm-Contract-IdentityMapInterface.html"><abbr title="\G\Orm\Contract\IdentityMapInterface">IdentityMapInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$dispatcher</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Psr\EventDispatcher\EventDispatcherInterface">EventDispatcherInterface</abbr>|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_clear">
+        clear()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_clear" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">250</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Detach every managed entity and reset all queues and snapshots.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">clear</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Intended for batch boundaries and for state isolation between
+requests/coroutines on persistent runtimes.</p>
+</section>
+
+    
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_detach">
+        detach()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_detach" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">175</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Stop tracking an entity. Its snapshot and Identity Map entry are
+dropped; it is removed from every pending queue.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">detach</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entity</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$entity</span>
+                : <span class="phpdocumentor-argument-list__argument__type">object</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_flush">
+        flush()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_flush" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">199</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Compute change sets and synchronise all queues with the database.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">flush</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Implementations coordinate the necessary SQL transaction so that the
+whole flush is atomic.</p>
+</section>
+
+    
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_identityMap">
+        identityMap()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_identityMap" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">261</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Return the Identity Map backing this Unit Of Work.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">identityMap</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/G-Orm-Contract-IdentityMapInterface.html"><abbr title="\G\Orm\Contract\IdentityMapInterface">IdentityMapInterface</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/G-Orm-Contract-IdentityMapInterface.html"><abbr title="\G\Orm\Contract\IdentityMapInterface">IdentityMapInterface</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isManaged">
+        isManaged()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_isManaged" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">190</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Whether the given entity instance is currently managed.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">isManaged</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entity</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$entity</span>
+                : <span class="phpdocumentor-argument-list__argument__type">object</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_persist">
+        persist()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_persist" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">140</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Schedule a new entity for insertion.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">persist</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entity</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Calling persist() on an already managed entity is a no-op; its
+changes are detected automatically at flush time.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$entity</span>
+                : <span class="phpdocumentor-argument-list__argument__type">object</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_register">
+        register()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_register" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">165</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Register an already persistent entity as managed.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">register</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entity</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">int|string|array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$loadedFields</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Used by repositories after hydration: the entity is added to the
+Identity Map and its original-state snapshot is captured so that
+subsequent changes can be detected.</p>
+<p>For partial hydration, $loadedFields lists the property names that
+were actually populated by the query (the primary key is always
+implied). The snapshot is masked to those fields and change detection
+ignores any field outside the set. Passing null marks the entity as
+fully hydrated.</p>
+<p>A field absent from $loadedFields is &quot;unknown&quot; and is never diffed; a
+field present in $loadedFields whose value is null is a real database
+NULL. This structural distinction prevents phantom updates.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$entity</span>
+                : <span class="phpdocumentor-argument-list__argument__type">object</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$id</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int|string|array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Primary key value; a scalar
+for a single key or an
+associative field =&gt; value
+map for a composite key.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$loadedFields</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Property names populated by the
+query, or null when fully hydrated.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_remove">
+        remove()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_remove" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">152</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Schedule a managed entity for deletion.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">remove</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entity</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$entity</span>
+                : <span class="phpdocumentor-argument-list__argument__type">object</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_assignGeneratedId">
+        assignGeneratedId()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_assignGeneratedId" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">519</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">assignGeneratedId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entity</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$primaryKeyField</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">int|string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$generatedId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$entity</span>
+                : <span class="phpdocumentor-argument-list__argument__type">object</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$primaryKeyField</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$generatedId</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int|string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_changedColumns">
+        changedColumns()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_changedColumns" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">320</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Diff a freshly extracted state against a snapshot, returning only the
+changed, non-key columns. Shared by the initial dirty scan and the
+post-#[BeforeUpdate] re-evaluation.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">changedColumns</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/G-Orm-Contract-EntityMetadataInterface.html"><abbr title="\G\Orm\Contract\EntityMetadataInterface">EntityMetadataInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$schema</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$current</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$snapshot</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$schema</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/G-Orm-Contract-EntityMetadataInterface.html"><abbr title="\G\Orm\Contract\EntityMetadataInterface">EntityMetadataInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$current</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>state keyed by column name</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$snapshot</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>baseline state keyed by column name</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_computeUpdates">
+        computeUpdates()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_computeUpdates" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">277</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Diff every managed entity against its snapshot and return the pending
+UPDATE descriptors. Primary-key columns are never part of the SET.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">computeUpdates</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;int, array{objectId: int, table: string, changes: array<string,mixed>, where: array<string,mixed>}&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;int, array{objectId: int, table: string, changes: array<string,mixed>, where: array<string,mixed>}&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_dispatch">
+        dispatch()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_dispatch" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">608</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Dispatch a lifecycle event when a PSR-14 dispatcher is configured.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">dispatch</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$event</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$event</span>
+                : <span class="phpdocumentor-argument-list__argument__type">object</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_executeDeletes">
+        executeDeletes()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_executeDeletes" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">454</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">executeDeletes</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_executeInserts">
+        executeInserts()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_executeInserts" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">345</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Execute pending INSERTs, firing the insert lifecycle hooks and events
+around each row and writing back any generated identifier so #[AfterInsert]
+hooks observe it.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">executeInserts</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;int, array{objectId: int, entity: object}&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;int, array{objectId: int, entity: object}&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_executeUpdates">
+        executeUpdates()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_executeUpdates" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">407</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Execute pending UPDATEs through the synchronised hook pipeline:</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">executeUpdates</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;int, array{objectId: int, table: string, changes: array<string,mixed>, where: array<string,mixed>}&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$updates</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;int, array{objectId: int, current: array<string,mixed>}&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><ol>
+<li>Hand the user-driven change set to #[BeforeUpdate] hooks.</li>
+<li>Re-diff the entity so any column a hook mutated (e.g. an audit
+timestamp) joins the SET clause.</li>
+<li>Dispatch BeforeUpdateEvent with that final change set.</li>
+<li>Write the row, then run #[AfterUpdate] hooks and dispatch
+AfterUpdateEvent.</li>
+</ol>
+<p>Returns the post-flush snapshot for each touched entity.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$updates</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;int, array{objectId: int, table: string, changes: array<string,mixed>, where: array<string,mixed>}&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;int, array{objectId: int, current: array<string,mixed>}&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hooksFor">
+        hooksFor()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_hooksFor" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">569</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The cached hook methods declared for the given attribute on a class,
+indexing the class on first request.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">hooksFor</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">class-string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$class</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">class-string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$attribute</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;int, <abbr title="\ReflectionMethod">ReflectionMethod</abbr>&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$class</span>
+                : <span class="phpdocumentor-argument-list__argument__type">class-string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$attribute</span>
+                : <span class="phpdocumentor-argument-list__argument__type">class-string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;int, <abbr title="\ReflectionMethod">ReflectionMethod</abbr>&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_indexHooks">
+        indexHooks()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_indexHooks" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">587</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Scan a class exactly once, mapping each lifecycle attribute to the
+methods carrying it. Classes with no hooks still produce an entry (with
+empty method lists), so the scan never repeats for them either.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">indexHooks</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">class-string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$class</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;class-string, array&lt;int, <abbr title="\ReflectionMethod">ReflectionMethod</abbr>&gt;&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$class</span>
+                : <span class="phpdocumentor-argument-list__argument__type">class-string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;class-string, array&lt;int, <abbr title="\ReflectionMethod">ReflectionMethod</abbr>&gt;&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_primaryKeyColumns">
+        primaryKeyColumns()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_primaryKeyColumns" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">534</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">primaryKeyColumns</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/G-Orm-Contract-EntityMetadataInterface.html"><abbr title="\G\Orm\Contract\EntityMetadataInterface">EntityMetadataInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$schema</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;int, string&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$schema</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/G-Orm-Contract-EntityMetadataInterface.html"><abbr title="\G\Orm\Contract\EntityMetadataInterface">EntityMetadataInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;int, string&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_runHooks">
+        runHooks()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_runHooks" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">553</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Invoke every method on the entity carrying the given lifecycle attribute,
+in declaration order, forwarding the supplied arguments. The methods are
+resolved from the per-class cache, so only the first row of each type
+pays for reflection.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">runHooks</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entity</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">class-string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$attribute</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$arguments</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$entity</span>
+                : <span class="phpdocumentor-argument-list__argument__type">object</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$attribute</span>
+                : <span class="phpdocumentor-argument-list__argument__type">class-string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$arguments</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;int, mixed&gt;</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">[]</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_synchronise">
+        synchronise()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_synchronise" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">489</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Apply in-memory synchronisation after a successful flush: promote inserts
+into the managed set, refresh snapshots and empty the intention queues.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">synchronise</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;int, array{objectId: int, entity: object}&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$insertSync</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;int, array{objectId: int, current: array<string,mixed>}&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$updateSync</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Generated identifiers are written back during the insert pass, and the
+identity map is already seeded there too; the add() below is a safe,
+idempotent re-affirmation (same key, same instance) covering any entity
+whose identifier only became resolvable after its hooks ran.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$insertSync</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;int, array{objectId: int, entity: object}&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$updateSync</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;int, array{objectId: int, current: array<string,mixed>}&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_writeBuilder">
+        writeBuilder()
+        <a href="classes/G-Orm-Core-UnitOfWork.html#method_writeBuilder" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">613</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">writeBuilder</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/G-Orm-Query-QueryBuilder.html"><abbr title="\G\Orm\Query\QueryBuilder">QueryBuilder</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/G-Orm-Query-QueryBuilder.html"><abbr title="\G\Orm\Query\QueryBuilder">QueryBuilder</abbr></a></span>
+            </section>
+
+</article>
+            </section>
+
+        
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                        <li><a href="classes/G-Orm-Core-UnitOfWork.html#toc-constants">Constants</a></li>
+                                                            <li><a href="classes/G-Orm-Core-UnitOfWork.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/G-Orm-Core-UnitOfWork.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+                            <li class="phpdocumentor-on-this-page-section__title">Constants</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#constant_LIFECYCLE_ATTRIBUTES">LIFECYCLE_ATTRIBUTES</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#constant_PHP_TYPE_INT">PHP_TYPE_INT</a></li>
+                                            </ul>
+                </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#property_compiler">$compiler</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#property_connection">$connection</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#property_deletes">$deletes</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#property_dispatcher">$dispatcher</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#property_flushing">$flushing</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#property_hookCache">$hookCache</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#property_hydrator">$hydrator</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#property_identityMap">$identityMap</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#property_inserts">$inserts</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#property_loadedFields">$loadedFields</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#property_managed">$managed</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#property_metadata">$metadata</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#property_snapshots">$snapshots</a></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_clear">clear()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_detach">detach()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_flush">flush()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_identityMap">identityMap()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_isManaged">isManaged()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_persist">persist()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_register">register()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_remove">remove()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_assignGeneratedId">assignGeneratedId()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_changedColumns">changedColumns()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_computeUpdates">computeUpdates()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_dispatch">dispatch()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_executeDeletes">executeDeletes()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_executeInserts">executeInserts()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_executeUpdates">executeUpdates()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_hooksFor">hooksFor()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_indexHooks">indexHooks()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_primaryKeyColumns">primaryKeyColumns()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_runHooks">runHooks()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_synchronise">synchronise()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Core-UnitOfWork.html#method_writeBuilder">writeBuilder()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        </div>
+        <a href="classes/G-Orm-Core-UnitOfWork.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>

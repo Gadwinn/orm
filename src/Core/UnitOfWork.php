@@ -24,6 +24,7 @@ use G\Orm\Event\BeforeDeleteEvent;
 use G\Orm\Event\BeforeInsertEvent;
 use G\Orm\Event\BeforeUpdateEvent;
 use G\Orm\Event\Changeset;
+use G\Orm\Exception\OrmException;
 use G\Orm\Query\QueryBuilder;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use ReflectionClass;
@@ -116,6 +117,16 @@ final class UnitOfWork implements UnitOfWorkInterface
      */
     private array $hookCache = [];
 
+    /**
+     * Re-entrancy guard. Lifecycle hooks and PSR-14 listeners run inside the
+     * flush loop while the intention queues are still populated; a hook that
+     * called flush() again would re-iterate those queues — double-writing rows
+     * and, for a self-triggering hook, recursing without bound until memory is
+     * exhausted. The guard turns that into an explicit OrmException instead of
+     * silent state duplication.
+     */
+    private bool $flushing = false;
+
     public function __construct(
         private readonly ConnectionInterface $connection,
         private readonly SqlCompilerInterface $compiler,
@@ -187,6 +198,10 @@ final class UnitOfWork implements UnitOfWorkInterface
 
     public function flush(): void
     {
+        if ($this->flushing) {
+            throw OrmException::reentrantFlush();
+        }
+
         $updates = $this->computeUpdates();
 
         if ($this->inserts === [] && $updates === [] && $this->deletes === []) {
@@ -197,6 +212,8 @@ final class UnitOfWork implements UnitOfWorkInterface
         if ($ownsTransaction) {
             $this->connection->beginTransaction();
         }
+
+        $this->flushing = true;
 
         try {
             $insertSync = $this->executeInserts();
@@ -221,6 +238,10 @@ final class UnitOfWork implements UnitOfWorkInterface
             }
 
             throw $exception;
+        } finally {
+            // Released even on failure so a rolled-back flush never leaves the
+            // unit of work permanently wedged in the flushing state.
+            $this->flushing = false;
         }
 
         $this->synchronise($insertSync, $updateSync);

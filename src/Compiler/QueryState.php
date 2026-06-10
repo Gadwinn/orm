@@ -15,9 +15,11 @@ namespace G\Orm\Compiler;
  * kept raw so the compiler can parameterise them.
  *
  * A "predicate" entry (used by both WHERE and HAVING) has the shape:
- *   array{boolean: 'AND'|'OR', column: string, operator: string, values: list<mixed>}
+ *   array{boolean: 'AND'|'OR', column: string, operator: string, values: list<mixed>, raw: bool}
  * where `values` holds 0 (IS [NOT] NULL), 1 (most operators), 2 (BETWEEN) or
- * more (IN / NOT IN) raw values.
+ * more (IN / NOT IN) raw values. When `raw` is true the entry is a verbatim
+ * HAVING expression (column holds the whole fragment, operator is empty) and
+ * the compiler emits it as-is with `values` as its bindings.
  */
 final class QueryState
 {
@@ -55,7 +57,7 @@ final class QueryState
     public array $joins = [];
 
     /**
-     * @var list<array{boolean: string, column: string, operator: string, values: list<mixed>}>
+     * @var list<array{boolean: string, column: string, operator: string, values: list<mixed>, raw: bool}>
      */
     public array $wheres = [];
 
@@ -65,12 +67,15 @@ final class QueryState
     public array $groupBy = [];
 
     /**
-     * @var list<array{boolean: string, column: string, operator: string, values: list<mixed>}>
+     * @var list<array{boolean: string, column: string, operator: string, values: list<mixed>, raw: bool}>
      */
     public array $having = [];
 
     /**
-     * @var list<array{column: string, direction: string}>
+     * Each term is either a validated "column direction" pair (raw=false) or a
+     * verbatim ORDER BY expression (raw=true, direction empty).
+     *
+     * @var list<array{column: string, direction: string, raw: bool}>
      */
     public array $orderBy = [];
 

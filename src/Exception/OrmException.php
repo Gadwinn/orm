@@ -26,4 +26,17 @@ final class OrmException extends RuntimeException implements OrmExceptionInterfa
             . 'Call OrmRegistry::set($manager) during bootstrap.'
         );
     }
+
+    /**
+     * flush() was re-entered while a flush was already running — typically a
+     * lifecycle hook or PSR-14 listener calling flush()/save() from inside the
+     * write pipeline, which would re-process the still-pending intention queues.
+     */
+    public static function reentrantFlush(): self
+    {
+        return new self(
+            'flush() was called while a flush is already in progress; a lifecycle '
+            . 'hook or event listener must not trigger another flush.'
+        );
+    }
 }

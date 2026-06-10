@@ -83,6 +83,22 @@ interface QueryBuilderInterface
     ): static|QueryExpressionClauseInterface;
 
     /**
+     * Append a raw WHERE expression with its own positional bindings, combined
+     * with AND.
+     *
+     * Trusted surface: the expression is emitted verbatim and bypasses the
+     * identifier whitelist that guards where(), so it can carry native
+     * functions and database-specific syntax (e.g. "LOWER(email) = ?",
+     * "JSON_EXTRACT(meta, '$.tier') = ?"). The caller owns its safety — it must
+     * be a literal/developer-controlled fragment, never built from external
+     * input — and every value must travel through a "?" placeholder via
+     * $bindings rather than being interpolated.
+     *
+     * @param list<mixed> $bindings
+     */
+    public function whereRaw(string $expression, array $bindings = []): static;
+
+    /**
      * Add an INNER JOIN.
      *
      * Dual mode: pass a raw table name together with an explicit ON
@@ -122,14 +138,37 @@ interface QueryBuilderInterface
     /**
      * Add an ORDER BY clause.
      *
-     * @param 'ASC'|'DESC'|'asc'|'desc' $direction
+     * The column is validated against the identifier whitelist and the
+     * direction against {ASC, DESC} (case-insensitive) at runtime, so a
+     * free-string sort parameter can be passed safely; an unknown direction or
+     * an unsafe identifier raises a QueryException.
      */
     public function orderBy(string $column, string $direction = 'ASC'): static;
+
+    /**
+     * Append a raw ORDER BY expression, emitted verbatim.
+     *
+     * Trusted surface: it bypasses the identifier/direction whitelist that
+     * guards orderBy(), so it can carry native ordering expressions such as
+     * "LOWER(name) DESC" or "FIELD(status, 'a', 'b')". The caller owns its
+     * safety — it must never be assembled from external input.
+     */
+    public function orderByRaw(string $expression): static;
 
     /**
      * Add one or more GROUP BY columns.
      */
     public function groupBy(string ...$columns): static;
+
+    /**
+     * Append one or more raw GROUP BY expressions, emitted verbatim.
+     *
+     * Trusted surface: it bypasses the identifier whitelist that guards
+     * groupBy(), so it can carry native grouping expressions such as
+     * "YEAR(created_at)". The caller owns its safety — it must never be
+     * assembled from external input.
+     */
+    public function groupByRaw(string ...$expressions): static;
 
     /**
      * Add a HAVING predicate, combined with AND.
@@ -145,6 +184,20 @@ interface QueryBuilderInterface
         ?string $operator = null,
         mixed $value = null
     ): static|QueryExpressionClauseInterface;
+
+    /**
+     * Append a raw HAVING expression with its own positional bindings.
+     *
+     * Trusted surface: the expression is emitted verbatim and is not validated
+     * against the identifier whitelist that guards having(), so it can carry
+     * aggregate expressions such as "COUNT(*) > ?". The caller owns its safety —
+     * it must be a literal/developer-controlled fragment, never built from
+     * external input — and every value must travel through a "?" placeholder via
+     * $bindings rather than being interpolated.
+     *
+     * @param list<mixed> $bindings
+     */
+    public function havingRaw(string $expression, array $bindings = []): static;
 
     /**
      * Limit the number of returned rows.

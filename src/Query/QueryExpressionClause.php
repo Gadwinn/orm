@@ -61,6 +61,21 @@ final class QueryExpressionClause implements QueryExpressionClauseInterface
         return $this->push('LIKE', [$pattern]);
     }
 
+    public function notLike(string $value): QueryBuilderInterface
+    {
+        return $this->push('NOT LIKE', [$value]);
+    }
+
+    public function regexp(string $pattern): QueryBuilderInterface
+    {
+        return $this->push('REGEXP', [$pattern]);
+    }
+
+    public function notRegexp(string $pattern): QueryBuilderInterface
+    {
+        return $this->push('NOT REGEXP', [$pattern]);
+    }
+
     public function in(array $values): QueryBuilderInterface
     {
         return $this->push('IN', $values);

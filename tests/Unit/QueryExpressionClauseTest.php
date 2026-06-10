@@ -66,6 +66,21 @@ final class QueryExpressionClauseTest extends OrmTestCase
         self::assertSame(['%phone%', 'a', 'b', 'c', 'x', 'y', 100, 200], $builder->getBindings());
     }
 
+    public function testPatternMatchingOperatorsCompileWithBindings(): void
+    {
+        $builder = $this->builder()
+            ->from('users')
+            ->where('name')->notLike('%test%')
+            ->andWhere('email')->regexp('^[a-z]+@')
+            ->andWhere('handle')->notRegexp('[0-9]$');
+
+        self::assertSame(
+            'SELECT * FROM users WHERE name NOT LIKE ? AND email REGEXP ? AND handle NOT REGEXP ?',
+            $builder->toSql()
+        );
+        self::assertSame(['%test%', '^[a-z]+@', '[0-9]$'], $builder->getBindings());
+    }
+
     public function testNullOperatorsBindNoValues(): void
     {
         $builder = $this->builder()

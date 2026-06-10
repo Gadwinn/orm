@@ -96,6 +96,51 @@ final class IdentityMapTest extends TestCase
         self::assertSame($role, $map->get(UserRole::class, ['user_id' => 5, 'role_id' => 12]));
     }
 
+    /**
+     * Pre-hardening, a scalar string key "id=5" and the composite ['id' => 5]
+     * folded to the identical slot "User#id=5" and clobbered one another. The
+     * s:/c: discriminator now keeps them apart.
+     */
+    public function testScalarAndCompositeFoldsDoNotCollideForTheSameClass(): void
+    {
+        $map = new IdentityMap();
+        $scalar = $this->user(1);
+        $composite = $this->user(2);
+
+        $map->add($scalar, 'id=5');
+        $map->add($composite, ['id' => 5]);
+
+        self::assertSame($scalar, $map->get(User::class, 'id=5'));
+        self::assertSame($composite, $map->get(User::class, ['id' => 5]));
+        self::assertNotSame(
+            $map->get(User::class, 'id=5'),
+            $map->get(User::class, ['id' => 5])
+        );
+    }
+
+    /**
+     * Pre-hardening, a value containing the '&'/'=' delimiters could forge a
+     * neighbouring composite fold: ['a' => '1&b=2', 'z' => 'x'] and
+     * ['a' => '1', 'b' => '2', 'z' => 'x'] both folded to "a=1&b=2&z=x".
+     * Percent-encoding the components removes the ambiguity.
+     */
+    public function testDelimiterInjectionInCompositeValueDoesNotCollide(): void
+    {
+        $map = new IdentityMap();
+        $forged = $this->user(1);
+        $genuine = $this->user(2);
+
+        $map->add($forged, ['a' => '1&b=2', 'z' => 'x']);
+        $map->add($genuine, ['a' => '1', 'b' => '2', 'z' => 'x']);
+
+        self::assertSame($forged, $map->get(User::class, ['a' => '1&b=2', 'z' => 'x']));
+        self::assertSame($genuine, $map->get(User::class, ['a' => '1', 'b' => '2', 'z' => 'x']));
+        self::assertNotSame(
+            $map->get(User::class, ['a' => '1&b=2', 'z' => 'x']),
+            $map->get(User::class, ['a' => '1', 'b' => '2', 'z' => 'x'])
+        );
+    }
+
     public function testRemoveDropsByInstance(): void
     {
         $map = new IdentityMap();

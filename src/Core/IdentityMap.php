@@ -12,12 +12,16 @@ use G\Orm\Contract\IdentityMapInterface;
  * Both scalar and composite primary keys are folded into a single
  * deterministic string key of the form:
  *
- *   ClassName#field=value                 (scalar key)
- *   ClassName#field_a=1&field_b=2          (composite key, fields sorted)
+ *   ClassName#s:value                      (scalar key)
+ *   ClassName#c:field_a=1&field_b=2         (composite key, fields sorted)
  *
- * Composite identifiers are associative arrays; their fields are sorted
- * alphabetically before flattening so that two callers passing the same
- * key in a different order resolve to the same slot.
+ * The s:/c: discriminator keeps a scalar key from ever folding onto a
+ * single-field composite that stringifies identically, and every field and
+ * value is percent-encoded so the '=' and '&' structural delimiters can never
+ * appear inside a component — a string primary key containing them would
+ * otherwise alias a different identity. Composite identifiers are associative
+ * arrays; their fields are sorted alphabetically before flattening so that two
+ * callers passing the same key in a different order resolve to the same slot.
  *
  * A parallel reverse index (object-id => string key) lets contains() and
  * remove() operate by instance without re-deriving the identifier, so an
@@ -104,22 +108,29 @@ final class IdentityMap implements IdentityMapInterface
     }
 
     /**
+     * Fold an identifier into a collision-free, deterministic suffix.
+     *
+     * A leading 's:' / 'c:' discriminator separates scalar keys from composite
+     * ones, and both field names and values are percent-encoded so the '=' and
+     * '&' delimiters can never appear inside a component and forge a different
+     * key. The composite fold is order-independent thanks to the ksort().
+     *
      * @param int|string|array<string, scalar> $id
      */
     private function foldIdentifier(int|string|array $id): string
     {
         if (!is_array($id)) {
-            return (string) $id;
+            return 's:' . rawurlencode((string) $id);
         }
 
         ksort($id);
 
         $parts = [];
         foreach ($id as $field => $value) {
-            $parts[] = $field . '=' . $this->scalarToString($value);
+            $parts[] = rawurlencode((string) $field) . '=' . rawurlencode($this->scalarToString($value));
         }
 
-        return implode('&', $parts);
+        return 'c:' . implode('&', $parts);
     }
 
     private function scalarToString(string|int|float|bool $value): string

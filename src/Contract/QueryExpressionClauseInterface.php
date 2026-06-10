@@ -60,6 +60,21 @@ interface QueryExpressionClauseInterface
     public function like(string $pattern): QueryBuilderInterface;
 
     /**
+     * column NOT LIKE value
+     */
+    public function notLike(string $value): QueryBuilderInterface;
+
+    /**
+     * column REGEXP pattern
+     */
+    public function regexp(string $pattern): QueryBuilderInterface;
+
+    /**
+     * column NOT REGEXP pattern
+     */
+    public function notRegexp(string $pattern): QueryBuilderInterface;
+
+    /**
      * column IN (...values)
      *
      * @param list<mixed> $values
