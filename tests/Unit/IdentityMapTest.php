@@ -141,6 +141,26 @@ final class IdentityMapTest extends TestCase
         );
     }
 
+    /**
+     * Re-adding the same instance under a new identity must evict its previous
+     * slot. Before the fix, the stale forward entry kept serving the old key
+     * (returning an entity whose primary key no longer matched) and pinned the
+     * instance in memory for the lifetime of the map.
+     */
+    public function testReAddingAnInstanceUnderANewIdentityEvictsTheOldSlot(): void
+    {
+        $map = new IdentityMap();
+        $user = $this->user(1);
+
+        $map->add($user, 1);
+        $map->add($user, 2);
+
+        self::assertFalse($map->has(User::class, 1));
+        self::assertNull($map->get(User::class, 1));
+        self::assertSame($user, $map->get(User::class, 2));
+        self::assertTrue($map->contains($user));
+    }
+
     public function testRemoveDropsByInstance(): void
     {
         $map = new IdentityMap();

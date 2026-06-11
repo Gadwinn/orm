@@ -12,6 +12,7 @@ use G\Orm\Metadata\MetadataReader;
 use G\Orm\Metadata\PropertyMetadata;
 use G\Orm\Metadata\RelationMetadata;
 use G\Orm\Tests\Fixture\Address;
+use G\Orm\Tests\Fixture\CompositeRelationEntity;
 use G\Orm\Tests\Fixture\CustomUserRepository;
 use G\Orm\Tests\Fixture\GeneratedCompositeKey;
 use G\Orm\Tests\Fixture\Tag;
@@ -86,6 +87,14 @@ final class MetadataReaderTest extends TestCase
         $this->expectExceptionMessage('generated identifiers are only supported on single-column keys');
 
         (new MetadataReader())->getSchemaFor(GeneratedCompositeKey::class);
+    }
+
+    public function testRejectsRelationTowardsACompositeKeyTarget(): void
+    {
+        $this->expectException(MetadataException::class);
+        $this->expectExceptionMessage('relations to composite-key targets are not supported');
+
+        (new MetadataReader())->getSchemaFor(CompositeRelationEntity::class);
     }
 
     public function testReadsBelongsToRelation(): void

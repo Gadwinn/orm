@@ -10,10 +10,10 @@ use G\Orm\Compiler\SqlCompilerInterface;
 use G\Orm\Compiler\StatementType;
 use G\Orm\Contract\Driver\ConnectionInterface;
 use G\Orm\Contract\HydratorInterface;
-use G\Orm\Contract\IdentityMapInterface;
 use G\Orm\Contract\MetadataReaderInterface;
 use G\Orm\Contract\QueryBuilderInterface;
 use G\Orm\Contract\QueryExpressionClauseInterface;
+use G\Orm\Contract\UnitOfWorkInterface;
 use G\Orm\Exception\QueryException;
 use G\Orm\Mapping\RelationType;
 use ReflectionProperty;
@@ -68,6 +68,11 @@ final class QueryBuilder implements QueryBuilderInterface
      * an injected column or ORDER BY term needs. Raw SQL expressions
      * (aggregates, function calls) remain available through select() and
      * havingRaw(), which are the trusted SQL-first surfaces.
+     *
+     * Identifiers are emitted unquoted (SQL-first transparency), so a column
+     * named after a reserved word ("order", "group") will not compile on most
+     * engines; map such a column to a non-reserved name via #[Column(name:)]
+     * or reach it through a raw surface with engine quoting.
      */
     private const IDENTIFIER_PATTERN = '/^[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)?$/';
 
@@ -115,7 +120,7 @@ final class QueryBuilder implements QueryBuilderInterface
         private readonly ConnectionInterface $connection,
         private readonly ?MetadataReaderInterface $metadataReader = null,
         private readonly ?HydratorInterface $hydrator = null,
-        private readonly ?IdentityMapInterface $identityMap = null,
+        private readonly ?UnitOfWorkInterface $unitOfWork = null,
     ) {
         $this->state = new QueryState();
     }
@@ -193,8 +198,14 @@ final class QueryBuilder implements QueryBuilderInterface
         return $this->predicate(self::TARGET_WHERE, 'OR', $column, $operator, $value);
     }
 
+    /**
+     * @param literal-string $expression
+     * @param list<mixed>    $bindings
+     */
     public function whereRaw(string $expression, array $bindings = []): static
     {
+        $this->assertRawExpression($expression);
+
         $this->state->wheres[] = $this->rawPredicate($expression, $bindings);
 
         return $this;
@@ -209,20 +220,13 @@ final class QueryBuilder implements QueryBuilderInterface
     }
 
     /**
-     * Append a raw HAVING expression with its own positional bindings.
-     *
-     * Trusted surface: unlike having(), the expression is emitted verbatim and
-     * is NOT validated against the identifier whitelist, so it can carry the
-     * aggregates having() deliberately rejects (e.g. "COUNT(*) > ?"). The
-     * caller owns the safety of the expression string — it must be a literal or
-     * developer-controlled fragment, never assembled from external input. Bind
-     * every value through a "?" placeholder and pass it via $bindings; never
-     * interpolate a value into the expression.
-     *
-     * @param list<mixed> $bindings
+     * @param literal-string $expression
+     * @param list<mixed>    $bindings
      */
     public function havingRaw(string $expression, array $bindings = []): static
     {
+        $this->assertRawExpression($expression);
+
         $this->state->having[] = $this->rawPredicate($expression, $bindings);
 
         return $this;
@@ -284,8 +288,13 @@ final class QueryBuilder implements QueryBuilderInterface
         return $this;
     }
 
+    /**
+     * @param literal-string $expression
+     */
     public function orderByRaw(string $expression): static
     {
+        $this->assertRawExpression($expression);
+
         $this->state->orderBy[] = ['column' => $expression, 'direction' => '', 'raw' => true];
 
         return $this;
@@ -302,8 +311,15 @@ final class QueryBuilder implements QueryBuilderInterface
         return $this;
     }
 
+    /**
+     * @param literal-string ...$expressions
+     */
     public function groupByRaw(string ...$expressions): static
     {
+        foreach ($expressions as $expression) {
+            $this->assertRawExpression($expression);
+        }
+
         $this->state->groupBy = array_merge($this->state->groupBy, array_values($expressions));
 
         return $this;
@@ -381,6 +397,10 @@ final class QueryBuilder implements QueryBuilderInterface
      *     entirely: the relation property is left untouched, never lazily
      *     fetched.
      *
+     * Every hydrated entity (root and joined alike) is registered with the
+     * Unit Of Work, so it is change-tracked exactly like a repository-loaded
+     * one: mutate it and the next flush() writes the diff.
+     *
      * @return list<object>
      *
      * @throws QueryException
@@ -389,11 +409,11 @@ final class QueryBuilder implements QueryBuilderInterface
     {
         $metadata = $this->metadataReader;
         $hydrator = $this->hydrator;
-        $identityMap = $this->identityMap;
+        $unitOfWork = $this->unitOfWork;
 
-        if ($metadata === null || $hydrator === null || $identityMap === null) {
+        if ($metadata === null || $hydrator === null || $unitOfWork === null) {
             throw new QueryException(
-                'getEntities() requires a metadata reader, a hydrator and an identity map; '
+                'getEntities() requires a metadata reader, a hydrator and a unit of work; '
                 . 'build the query through a repository or pass them to the constructor.'
             );
         }
@@ -406,9 +426,19 @@ final class QueryBuilder implements QueryBuilderInterface
             );
         }
 
+        // The wildcard expansion is scoped to this execution: the developer's
+        // select is restored afterwards so a later get()/toSql() on the same
+        // builder is not silently rewritten.
+        $originalColumns = $this->state->columns;
         $this->expandWildcardSelect($metadata);
 
-        return $this->ventilate($this->get(), $rootClass, $rootAlias, $hydrator, $identityMap);
+        try {
+            $rows = $this->get();
+        } finally {
+            $this->state->columns = $originalColumns;
+        }
+
+        return $this->ventilate($rows, $rootClass, $rootAlias, $hydrator, $unitOfWork);
     }
 
     public function first(): ?array
@@ -510,6 +540,18 @@ final class QueryBuilder implements QueryBuilderInterface
     {
         if (preg_match(self::IDENTIFIER_PATTERN, $identifier) !== 1) {
             throw new QueryException(sprintf('Unsafe SQL identifier "%s".', $identifier));
+        }
+    }
+
+    /**
+     * Reject a blank raw expression up front: emitted verbatim, it would
+     * compile into syntactically broken SQL ("WHERE  AND ...") that only fails
+     * at execution time, far from its origin.
+     */
+    private function assertRawExpression(string $expression): void
+    {
+        if (trim($expression) === '') {
+            throw new QueryException('A raw SQL expression must not be empty.');
         }
     }
 
@@ -677,14 +719,14 @@ final class QueryBuilder implements QueryBuilderInterface
         string $rootClass,
         string $rootAlias,
         HydratorInterface $hydrator,
-        IdentityMapInterface $identityMap
+        UnitOfWorkInterface $unitOfWork
     ): array {
         /** @var array<int, true> $seen */
         $seen = [];
         $roots = [];
 
         foreach ($rows as $row) {
-            $root = $this->hydrateAliased($rootClass, $rootAlias, $row, $hydrator, $identityMap);
+            $root = $this->hydrateAliased($rootClass, $rootAlias, $row, $hydrator, $unitOfWork);
             if ($root === null) {
                 continue;
             }
@@ -696,7 +738,7 @@ final class QueryBuilder implements QueryBuilderInterface
             }
 
             foreach ($this->eagerJoins as $join) {
-                $related = $this->hydrateAliased($join['class'], $join['alias'], $row, $hydrator, $identityMap);
+                $related = $this->hydrateAliased($join['class'], $join['alias'], $row, $hydrator, $unitOfWork);
                 if ($related !== null) {
                     $this->link($root, $join['property'], $join['type'], $related);
                 }
@@ -708,9 +750,11 @@ final class QueryBuilder implements QueryBuilderInterface
 
     /**
      * Hydrate one alias's slice of a row, resolving the instance through the
-     * identity map so a row that repeats a key reuses the same object. Returns
-     * null when the alias contributed no columns (its dataset was not selected)
-     * or only nulls (an unmatched outer join).
+     * identity map so a row that repeats a key reuses the same object. A fresh
+     * instance is registered with the Unit Of Work — identity map entry plus
+     * original-state snapshot — so it is change-tracked from the moment it is
+     * returned. Returns null when the alias contributed no columns (its dataset
+     * was not selected) or only nulls (an unmatched outer join).
      *
      * @param class-string         $class
      * @param array<string, mixed> $row
@@ -720,7 +764,7 @@ final class QueryBuilder implements QueryBuilderInterface
         string $alias,
         array $row,
         HydratorInterface $hydrator,
-        IdentityMapInterface $identityMap
+        UnitOfWorkInterface $unitOfWork
     ): ?object {
         $subRow = $this->subRowFor($alias, $row);
         if ($subRow === null) {
@@ -733,11 +777,12 @@ final class QueryBuilder implements QueryBuilderInterface
             return $entity;
         }
 
+        $identityMap = $unitOfWork->identityMap();
         if ($identityMap->has($class, $identifier)) {
             return $identityMap->get($class, $identifier) ?? $entity;
         }
 
-        $identityMap->add($entity, $identifier);
+        $unitOfWork->register($entity, $identifier);
 
         return $entity;
     }

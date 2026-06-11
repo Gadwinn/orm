@@ -57,7 +57,9 @@ final class DbManager implements DbManagerInterface
     {
         $metadata = new MetadataReader();
         $hydrator = new Hydrator($metadata);
-        $compiler = new SqlCompiler();
+        // The compiler speaks the dialect of the engine this connection is
+        // bound to; the platform was resolved once at connection time.
+        $compiler = new SqlCompiler($connection->getPlatform());
         $identityMap = new IdentityMap();
         $unitOfWork = new UnitOfWork($connection, $compiler, $metadata, $hydrator, $identityMap, $dispatcher);
 
@@ -83,21 +85,22 @@ final class DbManager implements DbManagerInterface
     public function query(?string $sql = null, array $bindings = []): QueryBuilderInterface|array|int
     {
         if ($sql === null) {
-            return new QueryBuilder($this->compiler, $this->connection, $this->metadata);
+            return new QueryBuilder(
+                $this->compiler,
+                $this->connection,
+                $this->metadata,
+                $this->hydrator,
+                $this->unitOfWork,
+            );
         }
 
         $result = $this->connection->prepare($sql)->execute($bindings);
 
-        return $this->isReadStatement($sql) ? $result->fetchAll() : $result->rowCount();
-    }
-
-    /**
-     * Whether a raw statement is a row-returning read, deciding between a
-     * fetched result set and an affected-row count without fetching first.
-     */
-    private function isReadStatement(string $sql): bool
-    {
-        return (bool) preg_match('/^\s*(SELECT|WITH|SHOW|PRAGMA|EXPLAIN|DESCRIBE|DESC|VALUES)\b/i', $sql);
+        // The driver, not a keyword heuristic, decides between a fetched
+        // result set and an affected-row count — so leading comments,
+        // parenthesised SELECTs and data-modifying CTEs are all classified
+        // by what they actually produced.
+        return $result->isResultSet() ? $result->fetchAll() : $result->rowCount();
     }
 
     public function persist(object $entity): void
@@ -122,17 +125,29 @@ final class DbManager implements DbManagerInterface
 
     public function transaction(callable $work): mixed
     {
-        $this->connection->beginTransaction();
+        // Same ownership rule as the Unit Of Work's flush(): only the
+        // outermost call opens and resolves the physical transaction, so
+        // transaction() calls nest by participating in the enclosing one. An
+        // inner failure propagates to the owner, which rolls back and purges.
+        $ownsTransaction = !$this->connection->inTransaction();
+        if ($ownsTransaction) {
+            $this->connection->beginTransaction();
+        }
 
         try {
             $result = $work($this);
-            $this->connection->commit();
-        } catch (Throwable $exception) {
-            if ($this->connection->inTransaction()) {
-                $this->connection->rollBack();
-            }
 
-            $this->purgeStaleState();
+            if ($ownsTransaction) {
+                $this->connection->commit();
+            }
+        } catch (Throwable $exception) {
+            if ($ownsTransaction) {
+                if ($this->connection->inTransaction()) {
+                    $this->connection->rollBack();
+                }
+
+                $this->purgeStaleState();
+            }
 
             throw $exception;
         }

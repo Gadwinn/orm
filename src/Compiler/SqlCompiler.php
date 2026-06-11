@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace G\Orm\Compiler;
 
+use G\Orm\Compiler\Platform\PlatformInterface;
+use G\Orm\Compiler\Platform\SqlitePlatform;
 use G\Orm\Exception\QueryException;
 
 /**
- * Default, engine-neutral SQL compiler.
+ * Default SQL compiler.
  *
  * Stateless and reusable. It parameterises every value with positional `?`
  * placeholders and emits a flat binding list in placeholder order. It never
@@ -15,9 +17,19 @@ use G\Orm\Exception\QueryException;
  * keeps expressions, aliases and qualified names ("t.col", "COUNT(*) AS n")
  * transparent and avoids breaking valid SQL. Identifier quoting, when needed,
  * is the connection's concern.
+ *
+ * Engine-neutral except where SQL genuinely diverges: those fragments
+ * (regular-expression predicates today) are delegated to the injected
+ * {@see PlatformInterface}, defaulting to the standard-conforming SQLite
+ * platform.
  */
 final class SqlCompiler implements SqlCompilerInterface
 {
+    public function __construct(
+        private readonly PlatformInterface $platform = new SqlitePlatform(),
+    ) {
+    }
+
     public function compile(QueryState $state): CompiledQuery
     {
         return match ($state->type) {
@@ -198,6 +210,8 @@ final class SqlCompiler implements SqlCompilerInterface
             'IN' => $this->compileInPredicate($column, $values, false),
             'NOT IN' => $this->compileInPredicate($column, $values, true),
             'BETWEEN' => [$column . ' BETWEEN ? AND ?', $values],
+            'REGEXP' => [$this->platform->compileRegexp($column, '?'), $values],
+            'NOT REGEXP' => [$this->platform->compileNotRegexp($column, '?'), $values],
             default => [$column . ' ' . $operator . ' ?', $values],
         };
     }

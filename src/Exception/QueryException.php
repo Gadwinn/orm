@@ -26,4 +26,16 @@ final class QueryException extends RuntimeException implements OrmExceptionInter
             . 'either bind values individually or pass them all to execute().'
         );
     }
+
+    /**
+     * A whitelisted operator reached a platform whose engine has no reliable
+     * native syntax for it. Failing at compile time beats emitting SQL that
+     * only breaks once it reaches a production server.
+     */
+    public static function unsupportedOperator(string $operator, string $platform): self
+    {
+        return new self(
+            sprintf('The %s operator is not supported on the "%s" platform.', $operator, $platform)
+        );
+    }
 }

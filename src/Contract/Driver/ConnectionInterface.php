@@ -4,15 +4,26 @@ declare(strict_types=1);
 
 namespace G\Orm\Contract\Driver;
 
+use G\Orm\Compiler\Platform\PlatformInterface;
+
 /**
  * Wraps an open database session.
  *
- * Exposes explicit transaction control, value/identifier quoting and
- * statement preparation. Transaction control is deliberately explicit: the
- * connection never opens or commits transactions on its own.
+ * Exposes explicit transaction control, value/identifier quoting, statement
+ * preparation and the SQL platform (dialect) of the engine behind the
+ * session. Transaction control is deliberately explicit: the connection
+ * never opens or commits transactions on its own.
  */
 interface ConnectionInterface
 {
+    /**
+     * The SQL platform (dialect) of the engine this session is connected to.
+     *
+     * Resolved once at connection time; consumers (the compiler above all)
+     * delegate every dialect-sensitive SQL fragment to it.
+     */
+    public function getPlatform(): PlatformInterface;
+
     /**
      * Begin a transaction.
      *

@@ -136,6 +136,25 @@ final class QueryBuilderSecurityTest extends OrmTestCase
         self::assertSame(['gold'], $builder->getBindings());
     }
 
+    public function testRejectsBlankRawExpressions(): void
+    {
+        $cases = [
+            'whereRaw' => fn (QueryBuilder $builder): QueryBuilder => $builder->whereRaw('   '),
+            'havingRaw' => fn (QueryBuilder $builder): QueryBuilder => $builder->havingRaw(''),
+            'orderByRaw' => fn (QueryBuilder $builder): QueryBuilder => $builder->orderByRaw(' '),
+            'groupByRaw' => fn (QueryBuilder $builder): QueryBuilder => $builder->groupByRaw('y', ''),
+        ];
+
+        foreach ($cases as $method => $case) {
+            try {
+                $case($this->builder()->from('users'));
+                self::fail(sprintf('Expected %s() to reject a blank expression.', $method));
+            } catch (QueryException $exception) {
+                self::assertStringContainsString('must not be empty', $exception->getMessage());
+            }
+        }
+    }
+
     public function testOrderByRawAndGroupByRawEmitNativeExpressionsVerbatim(): void
     {
         $builder = $this->builder()

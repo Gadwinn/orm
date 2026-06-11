@@ -72,6 +72,57 @@ final class TransactionTest extends OrmTestCase
         self::assertSame(0, $this->countRows('users'));
     }
 
+    public function testNestedTransactionCallbacksShareOneTransaction(): void
+    {
+        [$manager, $recording] = $this->recordingManager();
+
+        // The inner transaction() participates in the outer one instead of
+        // attempting a second BEGIN, which PDO would reject.
+        $manager->transaction(function (DbManagerInterface $outer): void {
+            $outer->persist($this->makeUser('Ada', 'ada@test.com'));
+            $outer->flush();
+
+            $outer->transaction(function (DbManagerInterface $inner): void {
+                $inner->persist($this->makeUser('Grace', 'grace@test.com'));
+                $inner->flush();
+            });
+        });
+
+        // Exactly one physical transaction wrapped both units.
+        self::assertSame(['BEGIN', 'COMMIT'], $recording->controlLog());
+        self::assertFalse($this->pdo->inTransaction());
+        self::assertSame(2, $this->countRows('users'));
+    }
+
+    public function testInnerTransactionFailureRollsBackTheWholeUnit(): void
+    {
+        [$manager, $recording] = $this->recordingManager();
+
+        $caught = null;
+        try {
+            $manager->transaction(function (DbManagerInterface $outer): void {
+                $outer->persist($this->makeUser('Ada', 'ada@test.com'));
+                $outer->flush();
+
+                $outer->transaction(static function (): void {
+                    throw new RuntimeException('inner boom');
+                });
+            });
+        } catch (RuntimeException $exception) {
+            $caught = $exception;
+        }
+
+        self::assertInstanceOf(RuntimeException::class, $caught);
+        self::assertSame('inner boom', $caught->getMessage());
+
+        // The inner participant rethrows without rolling back; the owning
+        // outer call performs the single rollback and the state purge, so the
+        // outer write is undone together with everything else.
+        self::assertSame(['BEGIN', 'ROLLBACK'], $recording->controlLog());
+        self::assertFalse($this->pdo->inTransaction());
+        self::assertSame(0, $this->countRows('users'));
+    }
+
     public function testFailedTransactionCallbackRollsBackAndPurgesState(): void
     {
         [$manager, $recording] = $this->recordingManager();

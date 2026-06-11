@@ -218,28 +218,44 @@ final class MetadataReader implements MetadataReaderInterface
      * Resolve the primary-key column of a target entity without building its
      * full schema, keeping relation resolution free of cross-entity cycles.
      *
+     * Relations join on exactly one key column, so a composite-key target is
+     * rejected explicitly instead of silently joining on its first #[Id]
+     * column — a condition that would look right and match wrong rows.
+     *
      * @param class-string $entityClass
      */
     private function primaryKeyColumn(string $entityClass): string
     {
         $reflection = new ReflectionClass($entityClass);
 
+        $columns = [];
         foreach ($reflection->getProperties() as $property) {
             if ($property->getAttributes(Id::class) === []) {
                 continue;
             }
 
             $column = $this->firstAttribute($property, Column::class);
-            if ($column !== null && $column->name !== null) {
-                return $column->name;
-            }
-
-            return $property->getName();
+            $columns[] = $column->name ?? $property->getName();
         }
 
-        throw new MetadataException(
-            sprintf('Target entity %s declares no #[Id] property for relation resolution.', $entityClass)
-        );
+        if ($columns === []) {
+            throw new MetadataException(
+                sprintf('Target entity %s declares no #[Id] property for relation resolution.', $entityClass)
+            );
+        }
+
+        if (count($columns) > 1) {
+            throw new MetadataException(
+                sprintf(
+                    'Target entity %s has a composite primary key (%s); '
+                    . 'relations to composite-key targets are not supported.',
+                    $entityClass,
+                    implode(', ', $columns),
+                )
+            );
+        }
+
+        return $columns[0];
     }
 
     private function inferType(ReflectionProperty $property): ?string

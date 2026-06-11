@@ -57,9 +57,18 @@ final class IdentityMap implements IdentityMapInterface
     public function add(object $entity, int|string|array $id): void
     {
         $key = $this->keyFor($entity::class, $id);
+        $objectId = spl_object_id($entity);
+
+        // Re-adding the same instance under a new identity must evict its
+        // previous slot: a stale forward entry would keep serving the old key
+        // and pin the instance in memory for the lifetime of the map.
+        $previousKey = $this->keysByObject[$objectId] ?? null;
+        if ($previousKey !== null && $previousKey !== $key) {
+            unset($this->entities[$previousKey]);
+        }
 
         $this->entities[$key] = $entity;
-        $this->keysByObject[spl_object_id($entity)] = $key;
+        $this->keysByObject[$objectId] = $key;
     }
 
     public function contains(object $entity): bool

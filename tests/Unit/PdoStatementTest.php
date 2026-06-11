@@ -63,6 +63,30 @@ final class PdoStatementTest extends TestCase
         self::assertSame([['i' => 7, 's' => 'bulk']], $rows);
     }
 
+    /**
+     * The bulk path must never delegate binding to PDOStatement::execute(),
+     * which types everything PARAM_STR: false would land as '' (a TEXT in
+     * SQLite's affinity rules) instead of 0. Each value travels with its
+     * inferred PDO type, exactly like the bind() path.
+     */
+    public function testBulkExecuteBindsEachValueWithItsInferredType(): void
+    {
+        $connection = $this->connection();
+
+        $connection->prepare('INSERT INTO t (i, b, n, s) VALUES (?, ?, ?, ?)')
+            ->execute([42, false, null, 'typed']);
+
+        $rows = $connection
+            ->prepare('SELECT b, typeof(i) AS ti, typeof(b) AS tb, typeof(n) AS tn FROM t')
+            ->execute()
+            ->fetchAll();
+
+        self::assertSame(
+            [['b' => 0, 'ti' => 'integer', 'tb' => 'integer', 'tn' => 'null']],
+            $rows
+        );
+    }
+
     public function testMixingBindAndExecuteParametersIsRejected(): void
     {
         $statement = $this->connection()

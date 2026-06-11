@@ -116,6 +116,13 @@ abstract class OrmTestCase extends TestCase
                 name TEXT NOT NULL
             )'
         );
+
+        $this->pdo->exec(
+            'CREATE TABLE appointments (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                scheduled_at TEXT NOT NULL
+            )'
+        );
     }
 
     /**

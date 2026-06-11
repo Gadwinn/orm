@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace G\Orm\Hydrator;
 
 use BackedEnum;
+use DateTimeImmutable;
 use G\Orm\Contract\EntityMetadataInterface;
 use G\Orm\Contract\HydratorInterface;
 use G\Orm\Contract\MetadataReaderInterface;
+use G\Orm\Contract\PropertyMetadataInterface;
+use G\Orm\Hydrator\Type\DateTimeImmutableConverter;
+use G\Orm\Hydrator\Type\ValueConverterInterface;
 use ReflectionClass;
 
 /**
@@ -21,12 +25,38 @@ use ReflectionClass;
  * (it is skipped, i.e. treated as "unknown"), and hydration only writes the
  * properties actually present in the row, so partial selections never touch
  * absent fields. The primary key is always part of the loaded set.
+ *
+ * Rich types cross the boundary through {@see ValueConverterInterface}
+ * converters, resolved by the property's declared (or inferred) type.
+ * Conversion happens at extraction as well as at hydration, so snapshots,
+ * change diffs and statement bindings all operate on the scalar database
+ * form: an equal-but-distinct object instance is never a phantom change, and
+ * no reference type is shared between an entity and its snapshot.
+ * DateTimeImmutable ships as the built-in converter; additional ones can be
+ * registered through the constructor, keyed by type name.
  */
 final class Hydrator implements HydratorInterface
 {
+    /**
+     * Converters by property type name, custom registrations taking
+     * precedence over the built-in defaults.
+     *
+     * @var array<string, ValueConverterInterface>
+     */
+    private readonly array $converters;
+
+    /**
+     * @param array<string, ValueConverterInterface> $converters Additional or
+     *        overriding converters, keyed by the property type they handle
+     *        (e.g. DateTimeImmutable::class).
+     */
     public function __construct(
         private readonly MetadataReaderInterface $metadata,
+        array $converters = [],
     ) {
+        $this->converters = $converters + [
+            DateTimeImmutable::class => new DateTimeImmutableConverter(),
+        ];
     }
 
     public function hydrate(string $entityClass, array $row, ?array $loadedFields = null): object
@@ -66,7 +96,10 @@ final class Hydrator implements HydratorInterface
                 continue;
             }
 
-            $state[$propertyMetadata->getColumnName()] = $this->toDatabaseValue($property->getValue($entity));
+            $state[$propertyMetadata->getColumnName()] = $this->toDatabaseValue(
+                $propertyMetadata,
+                $property->getValue($entity),
+            );
         }
 
         return $state;
@@ -84,7 +117,7 @@ final class Hydrator implements HydratorInterface
                 return null;
             }
 
-            $value = $this->toDatabaseValue($property->getValue($entity));
+            $value = $this->toDatabaseValue($schema->getProperty($field), $property->getValue($entity));
             if ($value === null || !is_scalar($value)) {
                 return null;
             }
@@ -130,7 +163,7 @@ final class Hydrator implements HydratorInterface
                 continue;
             }
 
-            $value = $this->toPhpValue($propertyMetadata->getEnumClass(), $row[$column]);
+            $value = $this->toPhpValue($propertyMetadata, $row[$column]);
             $reflection->getProperty($propertyName)->setValue($entity, $value);
         }
 
@@ -155,19 +188,42 @@ final class Hydrator implements HydratorInterface
     }
 
     /**
-     * @param class-string<BackedEnum>|null $enumClass
+     * Convert a raw database value to the property's PHP representation:
+     * backed enums first, then any converter registered for the property's
+     * type, otherwise the value as-is.
      */
-    private function toPhpValue(?string $enumClass, mixed $value): mixed
+    private function toPhpValue(PropertyMetadataInterface $property, mixed $value): mixed
     {
+        $enumClass = $property->getEnumClass();
         if ($enumClass !== null && (is_int($value) || is_string($value))) {
             return $enumClass::from($value);
         }
 
-        return $value;
+        $converter = $this->converterFor($property);
+
+        return $converter === null ? $value : $converter->fromDatabase($value);
     }
 
-    private function toDatabaseValue(mixed $value): mixed
+    /**
+     * Convert a PHP property value to its scalar database representation:
+     * backed enums first, then any converter registered for the property's
+     * type, otherwise the value as-is.
+     */
+    private function toDatabaseValue(?PropertyMetadataInterface $property, mixed $value): mixed
     {
-        return $value instanceof BackedEnum ? $value->value : $value;
+        if ($value instanceof BackedEnum) {
+            return $value->value;
+        }
+
+        $converter = $property === null ? null : $this->converterFor($property);
+
+        return $converter === null ? $value : $converter->toDatabase($value);
+    }
+
+    private function converterFor(PropertyMetadataInterface $property): ?ValueConverterInterface
+    {
+        $type = $property->getType();
+
+        return $type === null ? null : ($this->converters[$type] ?? null);
     }
 }

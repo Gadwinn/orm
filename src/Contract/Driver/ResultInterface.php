@@ -14,6 +14,14 @@ namespace G\Orm\Contract\Driver;
 interface ResultInterface
 {
     /**
+     * Whether the executed statement produced a result set (columns to
+     * fetch), as reported by the driver. False for plain write statements,
+     * true for anything row-returning — regardless of the SQL's leading
+     * keyword, comments or CTE structure.
+     */
+    public function isResultSet(): bool;
+
+    /**
      * Return every remaining row as a list of associative arrays.
      *
      * @return list<array<string, mixed>>

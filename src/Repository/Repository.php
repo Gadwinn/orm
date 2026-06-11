@@ -84,8 +84,15 @@ class Repository implements RepositoryInterface
 
     public function query(): QueryBuilderInterface
     {
-        return (new QueryBuilder($this->compiler, $this->connection, $this->metadata))
-            ->from($this->entityClass);
+        $builder = new QueryBuilder(
+            $this->compiler,
+            $this->connection,
+            $this->metadata,
+            $this->hydrator,
+            $this->unitOfWork,
+        );
+
+        return $builder->from($this->entityClass);
     }
 
     public function save(object $entity): void

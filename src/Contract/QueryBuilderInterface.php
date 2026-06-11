@@ -89,12 +89,16 @@ interface QueryBuilderInterface
      * Trusted surface: the expression is emitted verbatim and bypasses the
      * identifier whitelist that guards where(), so it can carry native
      * functions and database-specific syntax (e.g. "LOWER(email) = ?",
-     * "JSON_EXTRACT(meta, '$.tier') = ?"). The caller owns its safety — it must
-     * be a literal/developer-controlled fragment, never built from external
-     * input — and every value must travel through a "?" placeholder via
-     * $bindings rather than being interpolated.
+     * "JSON_EXTRACT(meta, '$.tier') = ?"). The literal-string constraint makes
+     * PHPStan reject any expression assembled from external or runtime input at
+     * the call site; every value must travel through a "?" placeholder via
+     * $bindings rather than being interpolated. A blank expression is rejected
+     * at call time.
      *
-     * @param list<mixed> $bindings
+     * @param literal-string $expression
+     * @param list<mixed>    $bindings
+     *
+     * @throws \G\Orm\Exception\QueryException When the expression is blank.
      */
     public function whereRaw(string $expression, array $bindings = []): static;
 
@@ -150,8 +154,14 @@ interface QueryBuilderInterface
      *
      * Trusted surface: it bypasses the identifier/direction whitelist that
      * guards orderBy(), so it can carry native ordering expressions such as
-     * "LOWER(name) DESC" or "FIELD(status, 'a', 'b')". The caller owns its
-     * safety — it must never be assembled from external input.
+     * "LOWER(name) DESC" or "FIELD(status, 'a', 'b')". The literal-string
+     * constraint makes PHPStan reject any expression assembled from external or
+     * runtime input at the call site. A blank expression is rejected at call
+     * time.
+     *
+     * @param literal-string $expression
+     *
+     * @throws \G\Orm\Exception\QueryException When the expression is blank.
      */
     public function orderByRaw(string $expression): static;
 
@@ -165,8 +175,13 @@ interface QueryBuilderInterface
      *
      * Trusted surface: it bypasses the identifier whitelist that guards
      * groupBy(), so it can carry native grouping expressions such as
-     * "YEAR(created_at)". The caller owns its safety — it must never be
-     * assembled from external input.
+     * "YEAR(created_at)". The literal-string constraint makes PHPStan reject
+     * any expression assembled from external or runtime input at the call
+     * site. A blank expression is rejected at call time.
+     *
+     * @param literal-string ...$expressions
+     *
+     * @throws \G\Orm\Exception\QueryException When an expression is blank.
      */
     public function groupByRaw(string ...$expressions): static;
 
@@ -190,12 +205,16 @@ interface QueryBuilderInterface
      *
      * Trusted surface: the expression is emitted verbatim and is not validated
      * against the identifier whitelist that guards having(), so it can carry
-     * aggregate expressions such as "COUNT(*) > ?". The caller owns its safety —
-     * it must be a literal/developer-controlled fragment, never built from
-     * external input — and every value must travel through a "?" placeholder via
-     * $bindings rather than being interpolated.
+     * aggregate expressions such as "COUNT(*) > ?". The literal-string
+     * constraint makes PHPStan reject any expression assembled from external or
+     * runtime input at the call site; every value must travel through a "?"
+     * placeholder via $bindings rather than being interpolated. A blank
+     * expression is rejected at call time.
      *
-     * @param list<mixed> $bindings
+     * @param literal-string $expression
+     * @param list<mixed>    $bindings
+     *
+     * @throws \G\Orm\Exception\QueryException When the expression is blank.
      */
     public function havingRaw(string $expression, array $bindings = []): static;
 

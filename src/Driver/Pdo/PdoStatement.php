@@ -15,7 +15,10 @@ use PDOException;
  *
  * Values may be bound individually with bind() (PDO type inferred from the
  * PHP value) or supplied in bulk at execute() time. Positional bindings use
- * 1-based integer placeholders; named bindings use string placeholders.
+ * 1-based integer placeholders for bind() and a 0-based list for execute(),
+ * matching PDO's own conventions; named bindings use string placeholders.
+ * Both paths bind each value with its inferred PDO type — the bulk path never
+ * falls back to PDO's everything-is-a-string default.
  *
  * Bind OR Execute rule: choose one binding style per statement. Either chain
  * bind() and then call execute() with no arguments, or pass the full set of
@@ -55,11 +58,16 @@ final class PdoStatement implements StatementInterface
         }
 
         try {
-            if ($params === []) {
-                $this->statement->execute();
-            } else {
-                $this->statement->execute($params);
+            // Never delegate the binding to PDOStatement::execute($params):
+            // it binds everything as PARAM_STR, silently turning false into ''
+            // and null/int into strings on strict engines. Each value is bound
+            // individually with its inferred PDO type instead.
+            foreach ($params as $key => $value) {
+                $param = is_int($key) ? $key + 1 : $key;
+                $this->statement->bindValue($param, $value, $this->pdoType($value));
             }
+
+            $this->statement->execute();
         } catch (PDOException $exception) {
             throw new QueryException(
                 'Unable to execute statement: ' . $exception->getMessage(),

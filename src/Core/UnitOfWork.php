@@ -218,7 +218,7 @@ final class UnitOfWork implements UnitOfWorkInterface
         try {
             $insertSync = $this->executeInserts();
             $updateSync = $this->executeUpdates($updates);
-            $this->executeDeletes();
+            $deleteSync = $this->executeDeletes();
 
             if ($ownsTransaction) {
                 $this->connection->commit();
@@ -244,7 +244,7 @@ final class UnitOfWork implements UnitOfWorkInterface
             $this->flushing = false;
         }
 
-        $this->synchronise($insertSync, $updateSync);
+        $this->synchronise($insertSync, $updateSync, $deleteSync);
     }
 
     public function clear(): void
@@ -293,7 +293,13 @@ final class UnitOfWork implements UnitOfWorkInterface
 
             $where = [];
             foreach ($this->primaryKeyColumns($schema) as $column) {
-                $where[$column] = $current[$column] ?? null;
+                // A null or missing key would compile to "pk = NULL", which
+                // matches no row: the UPDATE would silently write nothing.
+                if (!isset($current[$column])) {
+                    throw OrmException::entityWithoutIdentifier($entity::class, 'update');
+                }
+
+                $where[$column] = $current[$column];
             }
 
             $updates[] = [
@@ -360,6 +366,10 @@ final class UnitOfWork implements UnitOfWorkInterface
                 ->values($state)
                 ->execute();
 
+            // Engine note: lastInsertId() without a sequence name covers
+            // MySQL/MariaDB/SQLite. PostgreSQL requires the sequence name (or
+            // INSERT ... RETURNING); generated identifiers are not yet
+            // supported there — assign the key explicitly instead.
             $primaryKeyFields = $schema->getPrimaryKeyFields();
             if (count($primaryKeyFields) === 1 && $this->hydrator->extractIdentifier($entity) === null) {
                 $this->assignGeneratedId($entity, $primaryKeyFields[0], $this->connection->lastInsertId());
@@ -442,7 +452,12 @@ final class UnitOfWork implements UnitOfWorkInterface
                 $builder->where($column, '=', $value);
             }
 
-            $builder->execute();
+            if ($builder->execute() === 0) {
+                // The row vanished (or already drifted to these exact values)
+                // between load and flush: aborting surfaces the lost update
+                // instead of refreshing the snapshot over a fiction.
+                throw OrmException::writeAffectedNoRow($entity::class, 'UPDATE');
+            }
 
             $this->runHooks($entity, AfterUpdate::class, [$changeset]);
             $this->dispatch(new AfterUpdateEvent($entity, $changeset));
@@ -451,9 +466,26 @@ final class UnitOfWork implements UnitOfWorkInterface
         return $sync;
     }
 
-    private function executeDeletes(): void
+    /**
+     * Execute pending DELETEs and return the sync descriptor of each processed
+     * entity, so synchronise() can de-register exactly those — a removal staged
+     * by a hook during this very loop stays queued for the next flush.
+     *
+     * @return list<array{objectId: int, entity: object}>
+     */
+    private function executeDeletes(): array
     {
-        foreach ($this->deletes as $entity) {
+        $sync = [];
+
+        foreach ($this->deletes as $objectId => $entity) {
+            // Guarded before any hook fires: an incomplete primary key would
+            // compile to "pk = NULL", a DELETE that matches nothing while
+            // hooks still ran and the entity was still de-registered as if it
+            // had been removed.
+            if ($this->hydrator->extractIdentifier($entity) === null) {
+                throw OrmException::entityWithoutIdentifier($entity::class, 'delete');
+            }
+
             $this->runHooks($entity, BeforeDelete::class);
             $this->dispatch(new BeforeDeleteEvent($entity));
 
@@ -468,25 +500,36 @@ final class UnitOfWork implements UnitOfWorkInterface
                 $builder->where($column, '=', $state[$column] ?? null);
             }
 
-            $builder->execute();
+            if ($builder->execute() === 0) {
+                throw OrmException::writeAffectedNoRow($entity::class, 'DELETE');
+            }
 
             $this->runHooks($entity, AfterDelete::class);
             $this->dispatch(new AfterDeleteEvent($entity));
+
+            $sync[] = ['objectId' => $objectId, 'entity' => $entity];
         }
+
+        return $sync;
     }
 
     /**
      * Apply in-memory synchronisation after a successful flush: promote inserts
-     * into the managed set, refresh snapshots and empty the intention queues.
-     * Generated identifiers are written back during the insert pass, and the
-     * identity map is already seeded there too; the add() below is a safe,
-     * idempotent re-affirmation (same key, same instance) covering any entity
-     * whose identifier only became resolvable after its hooks ran.
+     * into the managed set, refresh snapshots and de-register exactly the
+     * processed intentions. De-registration is targeted by object id — never a
+     * bulk queue reset — so an intention staged by a lifecycle hook or PSR-14
+     * listener *during* the flush survives in its queue and is executed by the
+     * next flush instead of being silently destroyed. Generated identifiers are
+     * written back during the insert pass, and the identity map is already
+     * seeded there too; the add() below is a safe, idempotent re-affirmation
+     * (same key, same instance) covering any entity whose identifier only
+     * became resolvable after its hooks ran.
      *
      * @param list<array{objectId: int, entity: object}>                    $insertSync
      * @param list<array{objectId: int, current: array<string, mixed>}>     $updateSync
+     * @param list<array{objectId: int, entity: object}>                    $deleteSync
      */
-    private function synchronise(array $insertSync, array $updateSync): void
+    private function synchronise(array $insertSync, array $updateSync, array $deleteSync): void
     {
         foreach ($insertSync as $sync) {
             $entity = $sync['entity'];
@@ -500,20 +543,25 @@ final class UnitOfWork implements UnitOfWorkInterface
             $this->managed[$objectId] = $entity;
             $this->snapshots[$objectId] = $this->hydrator->extractState($entity, null);
             $this->loadedFields[$objectId] = null;
-        }
 
-        $this->inserts = [];
+            unset($this->inserts[$objectId]);
+        }
 
         foreach ($updateSync as $update) {
             $this->snapshots[$update['objectId']] = $update['current'];
         }
 
-        foreach ($this->deletes as $objectId => $entity) {
-            $this->identityMap->remove($entity);
-            unset($this->managed[$objectId], $this->snapshots[$objectId], $this->loadedFields[$objectId]);
-        }
+        foreach ($deleteSync as $sync) {
+            $objectId = $sync['objectId'];
 
-        $this->deletes = [];
+            $this->identityMap->remove($sync['entity']);
+            unset(
+                $this->deletes[$objectId],
+                $this->managed[$objectId],
+                $this->snapshots[$objectId],
+                $this->loadedFields[$objectId],
+            );
+        }
     }
 
     private function assignGeneratedId(object $entity, string $primaryKeyField, int|string $generatedId): void

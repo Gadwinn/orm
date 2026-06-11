@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace G\Orm\Tests\Fixture;
 
+use G\Orm\Compiler\Platform\PlatformInterface;
 use G\Orm\Contract\Driver\ConnectionInterface;
 use G\Orm\Contract\Driver\StatementInterface;
 
@@ -63,6 +64,11 @@ final class RecordingConnection implements ConnectionInterface
     {
         $this->statements = [];
         $this->control = [];
+    }
+
+    public function getPlatform(): PlatformInterface
+    {
+        return $this->inner->getPlatform();
     }
 
     public function prepare(string $sql): StatementInterface

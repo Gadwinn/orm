@@ -20,6 +20,11 @@ final class PdoResult implements ResultInterface
     ) {
     }
 
+    public function isResultSet(): bool
+    {
+        return $this->statement->columnCount() > 0;
+    }
+
     public function fetchAll(): array
     {
         $rows = $this->statement->fetchAll(PDO::FETCH_ASSOC);

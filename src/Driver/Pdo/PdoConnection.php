@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace G\Orm\Driver\Pdo;
 
+use G\Orm\Compiler\Platform\MySqlPlatform;
+use G\Orm\Compiler\Platform\PlatformInterface;
+use G\Orm\Compiler\Platform\PostgreSqlPlatform;
+use G\Orm\Compiler\Platform\SqlitePlatform;
+use G\Orm\Compiler\Platform\SqlServerPlatform;
 use G\Orm\Contract\Driver\ConnectionInterface;
 use G\Orm\Contract\Driver\StatementInterface;
 use G\Orm\Exception\DriverException;
@@ -15,28 +20,43 @@ use PDOException;
 /**
  * PDO-backed connection wrapping a native \PDO instance.
  *
- * Transaction control is explicit and never implicit. Identifier quoting is
- * engine-aware: backticks for MySQL/MariaDB, double quotes for PostgreSQL and
- * standard SQL.
+ * Transaction control is explicit and never implicit. Every dialect concern —
+ * identifier quoting included — is owned by the {@see PlatformInterface}
+ * resolved from the PDO driver name at construction time; the connection
+ * itself carries no engine-specific behaviour.
  */
 final class PdoConnection implements ConnectionInterface
 {
     /**
-     * PDO driver name that quotes identifiers with backticks; every other
-     * engine uses the SQL-standard double quote.
+     * PDO driver names with a dedicated platform; any other driver falls back
+     * to the standard-conforming SQLite platform.
      */
     private const DRIVER_MYSQL = 'mysql';
+    private const DRIVER_PGSQL = 'pgsql';
+    private const DRIVER_SQLSRV = 'sqlsrv';
 
-    private const QUOTE_MYSQL = '`';
-    private const QUOTE_STANDARD = '"';
-
-    private readonly string $driverName;
+    private readonly PlatformInterface $platform;
 
     public function __construct(
         private readonly PDO $pdo,
     ) {
         $name = $this->pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
-        $this->driverName = is_string($name) ? $name : '';
+        $this->platform = self::resolvePlatform(is_string($name) ? $name : '');
+    }
+
+    public function getPlatform(): PlatformInterface
+    {
+        return $this->platform;
+    }
+
+    private static function resolvePlatform(string $driverName): PlatformInterface
+    {
+        return match ($driverName) {
+            self::DRIVER_MYSQL => new MySqlPlatform(),
+            self::DRIVER_PGSQL => new PostgreSqlPlatform(),
+            self::DRIVER_SQLSRV => new SqlServerPlatform(),
+            default => new SqlitePlatform(),
+        };
     }
 
     public function beginTransaction(): void
@@ -115,15 +135,7 @@ final class PdoConnection implements ConnectionInterface
 
     public function quoteIdentifier(string $identifier): string
     {
-        $char = $this->driverName === self::DRIVER_MYSQL ? self::QUOTE_MYSQL : self::QUOTE_STANDARD;
-
-        $parts = explode('.', $identifier);
-        $quoted = array_map(
-            static fn (string $part): string => $char . str_replace($char, $char . $char, $part) . $char,
-            $parts
-        );
-
-        return implode('.', $quoted);
+        return $this->platform->quoteIdentifier($identifier);
     }
 
     public function prepare(string $sql): StatementInterface
