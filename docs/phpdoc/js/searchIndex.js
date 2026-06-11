@@ -51,6 +51,131 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/G-Orm-Compiler-CompiledQuery.html#property_bindings"
         },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\AbstractPlatform",
+            "name": "AbstractPlatform",
+            "summary": "Shared\u0020identifier\u002Dquoting\u0020mechanics\u0020for\u0020every\u0020platform.",
+            "url": "classes/G-Orm-Compiler-Platform-AbstractPlatform.html"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\AbstractPlatform\u003A\u003AquoteIdentifier\u0028\u0029",
+            "name": "quoteIdentifier",
+            "summary": "Quote\u0020an\u0020identifier\u0020\u0028table\u0020or\u0020column\u0020name\u0029\u0020for\u0020this\u0020engine.",
+            "url": "classes/G-Orm-Compiler-Platform-AbstractPlatform.html#method_quoteIdentifier"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\AbstractPlatform\u003A\u003AOPENING_QUOTE",
+            "name": "OPENING_QUOTE",
+            "summary": "Identifier\u0020delimiters,\u0020defaulting\u0020to\u0020the\u0020SQL\u002Dstandard\u0020double\u0020quote.",
+            "url": "classes/G-Orm-Compiler-Platform-AbstractPlatform.html#constant_OPENING_QUOTE"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\AbstractPlatform\u003A\u003ACLOSING_QUOTE",
+            "name": "CLOSING_QUOTE",
+            "summary": "",
+            "url": "classes/G-Orm-Compiler-Platform-AbstractPlatform.html#constant_CLOSING_QUOTE"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\MySqlPlatform",
+            "name": "MySqlPlatform",
+            "summary": "MySQL\u0020\/\u0020MariaDB\u0020dialect\u003A\u0020backtick\u0020identifier\u0020quoting\u0020and\u0020the\u0020native\nREGEXP\u0020\/\u0020NOT\u0020REGEXP\u0020comparison\u0020operators.",
+            "url": "classes/G-Orm-Compiler-Platform-MySqlPlatform.html"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\MySqlPlatform\u003A\u003AcompileRegexp\u0028\u0029",
+            "name": "compileRegexp",
+            "summary": "Compile\u0020a\u0020positive\u0020regular\u002Dexpression\u0020predicate\u0020over\u0020an\u0020already\nvalidated\u0020column\u0020and\u0020a\u0020positional\u0020placeholder.",
+            "url": "classes/G-Orm-Compiler-Platform-MySqlPlatform.html#method_compileRegexp"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\MySqlPlatform\u003A\u003AcompileNotRegexp\u0028\u0029",
+            "name": "compileNotRegexp",
+            "summary": "Compile\u0020a\u0020negative\u0020regular\u002Dexpression\u0020predicate\u0020over\u0020an\u0020already\nvalidated\u0020column\u0020and\u0020a\u0020positional\u0020placeholder.\u0020The\u0020case\u002Dinsensitivity\ncontract\u0020of\u0020compileRegexp\u0028\u0029\u0020applies\u0020identically.",
+            "url": "classes/G-Orm-Compiler-Platform-MySqlPlatform.html#method_compileNotRegexp"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\MySqlPlatform\u003A\u003AOPENING_QUOTE",
+            "name": "OPENING_QUOTE",
+            "summary": "Identifier\u0020delimiters,\u0020defaulting\u0020to\u0020the\u0020SQL\u002Dstandard\u0020double\u0020quote.",
+            "url": "classes/G-Orm-Compiler-Platform-MySqlPlatform.html#constant_OPENING_QUOTE"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\MySqlPlatform\u003A\u003ACLOSING_QUOTE",
+            "name": "CLOSING_QUOTE",
+            "summary": "",
+            "url": "classes/G-Orm-Compiler-Platform-MySqlPlatform.html#constant_CLOSING_QUOTE"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\PlatformInterface",
+            "name": "PlatformInterface",
+            "summary": "Encapsulates\u0020the\u0020SQL\u0020dialect\u0020variations\u0020of\u0020one\u0020database\u0020engine.",
+            "url": "classes/G-Orm-Compiler-Platform-PlatformInterface.html"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\PlatformInterface\u003A\u003AquoteIdentifier\u0028\u0029",
+            "name": "quoteIdentifier",
+            "summary": "Quote\u0020an\u0020identifier\u0020\u0028table\u0020or\u0020column\u0020name\u0029\u0020for\u0020this\u0020engine.",
+            "url": "classes/G-Orm-Compiler-Platform-PlatformInterface.html#method_quoteIdentifier"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\PlatformInterface\u003A\u003AcompileRegexp\u0028\u0029",
+            "name": "compileRegexp",
+            "summary": "Compile\u0020a\u0020positive\u0020regular\u002Dexpression\u0020predicate\u0020over\u0020an\u0020already\nvalidated\u0020column\u0020and\u0020a\u0020positional\u0020placeholder.",
+            "url": "classes/G-Orm-Compiler-Platform-PlatformInterface.html#method_compileRegexp"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\PlatformInterface\u003A\u003AcompileNotRegexp\u0028\u0029",
+            "name": "compileNotRegexp",
+            "summary": "Compile\u0020a\u0020negative\u0020regular\u002Dexpression\u0020predicate\u0020over\u0020an\u0020already\nvalidated\u0020column\u0020and\u0020a\u0020positional\u0020placeholder.\u0020The\u0020case\u002Dinsensitivity\ncontract\u0020of\u0020compileRegexp\u0028\u0029\u0020applies\u0020identically.",
+            "url": "classes/G-Orm-Compiler-Platform-PlatformInterface.html#method_compileNotRegexp"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\PostgreSqlPlatform",
+            "name": "PostgreSqlPlatform",
+            "summary": "PostgreSQL\u0020dialect\u003A\u0020SQL\u002Dstandard\u0020double\u002Dquote\u0020identifier\u0020quoting\u0020and\u0020the\nnative\u0020case\u002Dinsensitive\u0020regular\u002Dexpression\u0020match\u0020operators\u0020\u0028\u007E\u002A\u0020\/\u0020\u0021\u007E\u002A\u0029.",
+            "url": "classes/G-Orm-Compiler-Platform-PostgreSqlPlatform.html"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\PostgreSqlPlatform\u003A\u003AcompileRegexp\u0028\u0029",
+            "name": "compileRegexp",
+            "summary": "Architecture\u0020note\u003A\u0020\u0022\u007E\u002A\u0022\u0020is\u0020intentionally\u0020selected\u0020over\u0020the\ncase\u002Dsensitive\u0020\u0022\u007E\u0022.\u0020MySQL\/MariaDB\u0027s\u0020REGEXP\u0020and\u0020SQLite\u0027s\u0020regexp\u0028\u0029\u0020are\ncase\u002Dinsensitive\u0020by\u0020default,\u0020so\u0020the\u0020insensitive\u0020variant\u0020is\u0020the\u0020only\nchoice\u0020that\u0020gives\u0020one\u0020unified\u0020cross\u002Dplatform\u0020matching\u0020behaviour\u003A\u0020the\nsame\u0020builder\u0020chain\u0020matches\u0020the\u0020same\u0020rows\u0020on\u0020every\u0020engine.\u0020Callers\u0020who\nneed\u0020PostgreSQL\u0027s\u0020case\u002Dsensitive\u0020\u0022\u007E\u0022\u0020can\u0020reach\u0020it\u0020explicitly\u0020through\nwhereRaw\u0028\u0029.",
+            "url": "classes/G-Orm-Compiler-Platform-PostgreSqlPlatform.html#method_compileRegexp"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\PostgreSqlPlatform\u003A\u003AcompileNotRegexp\u0028\u0029",
+            "name": "compileNotRegexp",
+            "summary": "Compile\u0020a\u0020negative\u0020regular\u002Dexpression\u0020predicate\u0020over\u0020an\u0020already\nvalidated\u0020column\u0020and\u0020a\u0020positional\u0020placeholder.\u0020The\u0020case\u002Dinsensitivity\ncontract\u0020of\u0020compileRegexp\u0028\u0029\u0020applies\u0020identically.",
+            "url": "classes/G-Orm-Compiler-Platform-PostgreSqlPlatform.html#method_compileNotRegexp"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\SqlitePlatform",
+            "name": "SqlitePlatform",
+            "summary": "SQLite\u0020dialect,\u0020doubling\u0020as\u0020the\u0020conservative\u0020fallback\u0020for\u0020engines\u0020without\na\u0020dedicated\u0020platform\u003A\u0020SQL\u002Dstandard\u0020double\u002Dquote\u0020identifier\u0020quoting\u0020and\u0020the\nbare\u0020REGEXP\u0020\/\u0020NOT\u0020REGEXP\u0020operator\u0020syntax.",
+            "url": "classes/G-Orm-Compiler-Platform-SqlitePlatform.html"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\SqlitePlatform\u003A\u003AcompileRegexp\u0028\u0029",
+            "name": "compileRegexp",
+            "summary": "Compile\u0020a\u0020positive\u0020regular\u002Dexpression\u0020predicate\u0020over\u0020an\u0020already\nvalidated\u0020column\u0020and\u0020a\u0020positional\u0020placeholder.",
+            "url": "classes/G-Orm-Compiler-Platform-SqlitePlatform.html#method_compileRegexp"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\SqlitePlatform\u003A\u003AcompileNotRegexp\u0028\u0029",
+            "name": "compileNotRegexp",
+            "summary": "Compile\u0020a\u0020negative\u0020regular\u002Dexpression\u0020predicate\u0020over\u0020an\u0020already\nvalidated\u0020column\u0020and\u0020a\u0020positional\u0020placeholder.\u0020The\u0020case\u002Dinsensitivity\ncontract\u0020of\u0020compileRegexp\u0028\u0029\u0020applies\u0020identically.",
+            "url": "classes/G-Orm-Compiler-Platform-SqlitePlatform.html#method_compileNotRegexp"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\SqlServerPlatform",
+            "name": "SqlServerPlatform",
+            "summary": "SQL\u0020Server\u0020dialect\u003A\u0020bracket\u0020identifier\u0020quoting\u0020\u0028the\u0020idiomatic\u0020T\u002DSQL\u0020form,\nwith\u0020embedded\u0020closing\u0020brackets\u0020doubled\u0029.",
+            "url": "classes/G-Orm-Compiler-Platform-SqlServerPlatform.html"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\SqlServerPlatform\u003A\u003AcompileRegexp\u0028\u0029",
+            "name": "compileRegexp",
+            "summary": "Compile\u0020a\u0020positive\u0020regular\u002Dexpression\u0020predicate\u0020over\u0020an\u0020already\nvalidated\u0020column\u0020and\u0020a\u0020positional\u0020placeholder.",
+            "url": "classes/G-Orm-Compiler-Platform-SqlServerPlatform.html#method_compileRegexp"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\SqlServerPlatform\u003A\u003AcompileNotRegexp\u0028\u0029",
+            "name": "compileNotRegexp",
+            "summary": "Compile\u0020a\u0020negative\u0020regular\u002Dexpression\u0020predicate\u0020over\u0020an\u0020already\nvalidated\u0020column\u0020and\u0020a\u0020positional\u0020placeholder.\u0020The\u0020case\u002Dinsensitivity\ncontract\u0020of\u0020compileRegexp\u0028\u0029\u0020applies\u0020identically.",
+            "url": "classes/G-Orm-Compiler-Platform-SqlServerPlatform.html#method_compileNotRegexp"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\SqlServerPlatform\u003A\u003AOPENING_QUOTE",
+            "name": "OPENING_QUOTE",
+            "summary": "Identifier\u0020delimiters,\u0020defaulting\u0020to\u0020the\u0020SQL\u002Dstandard\u0020double\u0020quote.",
+            "url": "classes/G-Orm-Compiler-Platform-SqlServerPlatform.html#constant_OPENING_QUOTE"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\SqlServerPlatform\u003A\u003ACLOSING_QUOTE",
+            "name": "CLOSING_QUOTE",
+            "summary": "",
+            "url": "classes/G-Orm-Compiler-Platform-SqlServerPlatform.html#constant_CLOSING_QUOTE"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform\\SqlServerPlatform\u003A\u003APLATFORM_NAME",
+            "name": "PLATFORM_NAME",
+            "summary": "Platform\u0020name\u0020used\u0020in\u0020compile\u002Dtime\u0020rejection\u0020messages.",
+            "url": "classes/G-Orm-Compiler-Platform-SqlServerPlatform.html#constant_PLATFORM_NAME"
+        },                {
             "fqsen": "\\G\\Orm\\Compiler\\QueryState",
             "name": "QueryState",
             "summary": "Structural\u0020carrier\u0020of\u0020an\u0020accumulated\u0020query.",
@@ -118,8 +243,13 @@ Search.appendIndex(
         },                {
             "fqsen": "\\G\\Orm\\Compiler\\SqlCompiler",
             "name": "SqlCompiler",
-            "summary": "Default,\u0020engine\u002Dneutral\u0020SQL\u0020compiler.",
+            "summary": "Default\u0020SQL\u0020compiler.",
             "url": "classes/G-Orm-Compiler-SqlCompiler.html"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\SqlCompiler\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/G-Orm-Compiler-SqlCompiler.html#method___construct"
         },                {
             "fqsen": "\\G\\Orm\\Compiler\\SqlCompiler\u003A\u003Acompile\u0028\u0029",
             "name": "compile",
@@ -175,6 +305,11 @@ Search.appendIndex(
             "name": "compileLimitOffset",
             "summary": "",
             "url": "classes/G-Orm-Compiler-SqlCompiler.html#method_compileLimitOffset"
+        },                {
+            "fqsen": "\\G\\Orm\\Compiler\\SqlCompiler\u003A\u003A\u0024platform",
+            "name": "platform",
+            "summary": "",
+            "url": "classes/G-Orm-Compiler-SqlCompiler.html#property_platform"
         },                {
             "fqsen": "\\G\\Orm\\Compiler\\SqlCompilerInterface",
             "name": "SqlCompilerInterface",
@@ -271,6 +406,11 @@ Search.appendIndex(
             "summary": "Wraps\u0020an\u0020open\u0020database\u0020session.",
             "url": "classes/G-Orm-Contract-Driver-ConnectionInterface.html"
         },                {
+            "fqsen": "\\G\\Orm\\Contract\\Driver\\ConnectionInterface\u003A\u003AgetPlatform\u0028\u0029",
+            "name": "getPlatform",
+            "summary": "The\u0020SQL\u0020platform\u0020\u0028dialect\u0029\u0020of\u0020the\u0020engine\u0020this\u0020session\u0020is\u0020connected\u0020to.",
+            "url": "classes/G-Orm-Contract-Driver-ConnectionInterface.html#method_getPlatform"
+        },                {
             "fqsen": "\\G\\Orm\\Contract\\Driver\\ConnectionInterface\u003A\u003AbeginTransaction\u0028\u0029",
             "name": "beginTransaction",
             "summary": "Begin\u0020a\u0020transaction.",
@@ -325,6 +465,11 @@ Search.appendIndex(
             "name": "ResultInterface",
             "summary": "Wraps\u0020the\u0020outcome\u0020of\u0020an\u0020executed\u0020statement.",
             "url": "classes/G-Orm-Contract-Driver-ResultInterface.html"
+        },                {
+            "fqsen": "\\G\\Orm\\Contract\\Driver\\ResultInterface\u003A\u003AisResultSet\u0028\u0029",
+            "name": "isResultSet",
+            "summary": "Whether\u0020the\u0020executed\u0020statement\u0020produced\u0020a\u0020result\u0020set\u0020\u0028columns\u0020to\nfetch\u0029,\u0020as\u0020reported\u0020by\u0020the\u0020driver.\u0020False\u0020for\u0020plain\u0020write\u0020statements,\ntrue\u0020for\u0020anything\u0020row\u002Dreturning\u0020\u2014\u0020regardless\u0020of\u0020the\u0020SQL\u0027s\u0020leading\nkeyword,\u0020comments\u0020or\u0020CTE\u0020structure.",
+            "url": "classes/G-Orm-Contract-Driver-ResultInterface.html#method_isResultSet"
         },                {
             "fqsen": "\\G\\Orm\\Contract\\Driver\\ResultInterface\u003A\u003AfetchAll\u0028\u0029",
             "name": "fetchAll",
@@ -906,11 +1051,6 @@ Search.appendIndex(
             "summary": "Access\u0020the\u0020SQL\u0020layer.",
             "url": "classes/G-Orm-Core-DbManager.html#method_query"
         },                {
-            "fqsen": "\\G\\Orm\\Core\\DbManager\u003A\u003AisReadStatement\u0028\u0029",
-            "name": "isReadStatement",
-            "summary": "Whether\u0020a\u0020raw\u0020statement\u0020is\u0020a\u0020row\u002Dreturning\u0020read,\u0020deciding\u0020between\u0020a\nfetched\u0020result\u0020set\u0020and\u0020an\u0020affected\u002Drow\u0020count\u0020without\u0020fetching\u0020first.",
-            "url": "classes/G-Orm-Core-DbManager.html#method_isReadStatement"
-        },                {
             "fqsen": "\\G\\Orm\\Core\\DbManager\u003A\u003Apersist\u0028\u0029",
             "name": "persist",
             "summary": "Schedule\u0020an\u0020entity\u0020for\u0020insertion\u0020\u0028or\u0020mark\u0020it\u0020as\u0020managed\u0029\u0020within\u0020the\ncurrent\u0020Unit\u0020Of\u0020Work.\u0020No\u0020SQL\u0020is\u0020emitted\u0020until\u0020flush\u0028\u0029\u0020is\u0020called.",
@@ -1118,12 +1258,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\G\\Orm\\Core\\UnitOfWork\u003A\u003AexecuteDeletes\u0028\u0029",
             "name": "executeDeletes",
-            "summary": "",
+            "summary": "Execute\u0020pending\u0020DELETEs\u0020and\u0020return\u0020the\u0020sync\u0020descriptor\u0020of\u0020each\u0020processed\nentity,\u0020so\u0020synchronise\u0028\u0029\u0020can\u0020de\u002Dregister\u0020exactly\u0020those\u0020\u2014\u0020a\u0020removal\u0020staged\nby\u0020a\u0020hook\u0020during\u0020this\u0020very\u0020loop\u0020stays\u0020queued\u0020for\u0020the\u0020next\u0020flush.",
             "url": "classes/G-Orm-Core-UnitOfWork.html#method_executeDeletes"
         },                {
             "fqsen": "\\G\\Orm\\Core\\UnitOfWork\u003A\u003Asynchronise\u0028\u0029",
             "name": "synchronise",
-            "summary": "Apply\u0020in\u002Dmemory\u0020synchronisation\u0020after\u0020a\u0020successful\u0020flush\u003A\u0020promote\u0020inserts\ninto\u0020the\u0020managed\u0020set,\u0020refresh\u0020snapshots\u0020and\u0020empty\u0020the\u0020intention\u0020queues.",
+            "summary": "Apply\u0020in\u002Dmemory\u0020synchronisation\u0020after\u0020a\u0020successful\u0020flush\u003A\u0020promote\u0020inserts\ninto\u0020the\u0020managed\u0020set,\u0020refresh\u0020snapshots\u0020and\u0020de\u002Dregister\u0020exactly\u0020the\nprocessed\u0020intentions.\u0020De\u002Dregistration\u0020is\u0020targeted\u0020by\u0020object\u0020id\u0020\u2014\u0020never\u0020a\nbulk\u0020queue\u0020reset\u0020\u2014\u0020so\u0020an\u0020intention\u0020staged\u0020by\u0020a\u0020lifecycle\u0020hook\u0020or\u0020PSR\u002D14\nlistener\u0020\u002Aduring\u002A\u0020the\u0020flush\u0020survives\u0020in\u0020its\u0020queue\u0020and\u0020is\u0020executed\u0020by\u0020the\nnext\u0020flush\u0020instead\u0020of\u0020being\u0020silently\u0020destroyed.\u0020Generated\u0020identifiers\u0020are\nwritten\u0020back\u0020during\u0020the\u0020insert\u0020pass,\u0020and\u0020the\u0020identity\u0020map\u0020is\u0020already\nseeded\u0020there\u0020too\u003B\u0020the\u0020add\u0028\u0029\u0020below\u0020is\u0020a\u0020safe,\u0020idempotent\u0020re\u002Daffirmation\n\u0028same\u0020key,\u0020same\u0020instance\u0029\u0020covering\u0020any\u0020entity\u0020whose\u0020identifier\u0020only\nbecame\u0020resolvable\u0020after\u0020its\u0020hooks\u0020ran.",
             "url": "classes/G-Orm-Core-UnitOfWork.html#method_synchronise"
         },                {
             "fqsen": "\\G\\Orm\\Core\\UnitOfWork\u003A\u003AassignGeneratedId\u0028\u0029",
@@ -1241,6 +1381,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/G-Orm-Driver-Pdo-PdoConnection.html#method___construct"
         },                {
+            "fqsen": "\\G\\Orm\\Driver\\Pdo\\PdoConnection\u003A\u003AgetPlatform\u0028\u0029",
+            "name": "getPlatform",
+            "summary": "The\u0020SQL\u0020platform\u0020\u0028dialect\u0029\u0020of\u0020the\u0020engine\u0020this\u0020session\u0020is\u0020connected\u0020to.",
+            "url": "classes/G-Orm-Driver-Pdo-PdoConnection.html#method_getPlatform"
+        },                {
+            "fqsen": "\\G\\Orm\\Driver\\Pdo\\PdoConnection\u003A\u003AresolvePlatform\u0028\u0029",
+            "name": "resolvePlatform",
+            "summary": "",
+            "url": "classes/G-Orm-Driver-Pdo-PdoConnection.html#method_resolvePlatform"
+        },                {
             "fqsen": "\\G\\Orm\\Driver\\Pdo\\PdoConnection\u003A\u003AbeginTransaction\u0028\u0029",
             "name": "beginTransaction",
             "summary": "Begin\u0020a\u0020transaction.",
@@ -1283,23 +1433,23 @@ Search.appendIndex(
         },                {
             "fqsen": "\\G\\Orm\\Driver\\Pdo\\PdoConnection\u003A\u003ADRIVER_MYSQL",
             "name": "DRIVER_MYSQL",
-            "summary": "PDO\u0020driver\u0020name\u0020that\u0020quotes\u0020identifiers\u0020with\u0020backticks\u003B\u0020every\u0020other\nengine\u0020uses\u0020the\u0020SQL\u002Dstandard\u0020double\u0020quote.",
+            "summary": "PDO\u0020driver\u0020names\u0020with\u0020a\u0020dedicated\u0020platform\u003B\u0020any\u0020other\u0020driver\u0020falls\u0020back\nto\u0020the\u0020standard\u002Dconforming\u0020SQLite\u0020platform.",
             "url": "classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_DRIVER_MYSQL"
         },                {
-            "fqsen": "\\G\\Orm\\Driver\\Pdo\\PdoConnection\u003A\u003AQUOTE_MYSQL",
-            "name": "QUOTE_MYSQL",
+            "fqsen": "\\G\\Orm\\Driver\\Pdo\\PdoConnection\u003A\u003ADRIVER_PGSQL",
+            "name": "DRIVER_PGSQL",
             "summary": "",
-            "url": "classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_QUOTE_MYSQL"
+            "url": "classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_DRIVER_PGSQL"
         },                {
-            "fqsen": "\\G\\Orm\\Driver\\Pdo\\PdoConnection\u003A\u003AQUOTE_STANDARD",
-            "name": "QUOTE_STANDARD",
+            "fqsen": "\\G\\Orm\\Driver\\Pdo\\PdoConnection\u003A\u003ADRIVER_SQLSRV",
+            "name": "DRIVER_SQLSRV",
             "summary": "",
-            "url": "classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_QUOTE_STANDARD"
+            "url": "classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_DRIVER_SQLSRV"
         },                {
-            "fqsen": "\\G\\Orm\\Driver\\Pdo\\PdoConnection\u003A\u003A\u0024driverName",
-            "name": "driverName",
+            "fqsen": "\\G\\Orm\\Driver\\Pdo\\PdoConnection\u003A\u003A\u0024platform",
+            "name": "platform",
             "summary": "",
-            "url": "classes/G-Orm-Driver-Pdo-PdoConnection.html#property_driverName"
+            "url": "classes/G-Orm-Driver-Pdo-PdoConnection.html#property_platform"
         },                {
             "fqsen": "\\G\\Orm\\Driver\\Pdo\\PdoConnection\u003A\u003A\u0024pdo",
             "name": "pdo",
@@ -1355,6 +1505,11 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "",
             "url": "classes/G-Orm-Driver-Pdo-PdoResult.html#method___construct"
+        },                {
+            "fqsen": "\\G\\Orm\\Driver\\Pdo\\PdoResult\u003A\u003AisResultSet\u0028\u0029",
+            "name": "isResultSet",
+            "summary": "Whether\u0020the\u0020executed\u0020statement\u0020produced\u0020a\u0020result\u0020set\u0020\u0028columns\u0020to\nfetch\u0029,\u0020as\u0020reported\u0020by\u0020the\u0020driver.\u0020False\u0020for\u0020plain\u0020write\u0020statements,\ntrue\u0020for\u0020anything\u0020row\u002Dreturning\u0020\u2014\u0020regardless\u0020of\u0020the\u0020SQL\u0027s\u0020leading\nkeyword,\u0020comments\u0020or\u0020CTE\u0020structure.",
+            "url": "classes/G-Orm-Driver-Pdo-PdoResult.html#method_isResultSet"
         },                {
             "fqsen": "\\G\\Orm\\Driver\\Pdo\\PdoResult\u003A\u003AfetchAll\u0028\u0029",
             "name": "fetchAll",
@@ -1561,6 +1716,21 @@ Search.appendIndex(
             "summary": "flush\u0028\u0029\u0020was\u0020re\u002Dentered\u0020while\u0020a\u0020flush\u0020was\u0020already\u0020running\u0020\u2014\u0020typically\u0020a\nlifecycle\u0020hook\u0020or\u0020PSR\u002D14\u0020listener\u0020calling\u0020flush\u0028\u0029\/save\u0028\u0029\u0020from\u0020inside\u0020the\nwrite\u0020pipeline,\u0020which\u0020would\u0020re\u002Dprocess\u0020the\u0020still\u002Dpending\u0020intention\u0020queues.",
             "url": "classes/G-Orm-Exception-OrmException.html#method_reentrantFlush"
         },                {
+            "fqsen": "\\G\\Orm\\Exception\\OrmException\u003A\u003AentityWithoutIdentifier\u0028\u0029",
+            "name": "entityWithoutIdentifier",
+            "summary": "An\u0020UPDATE\u0020or\u0020DELETE\u0020was\u0020about\u0020to\u0020target\u0020an\u0020entity\u0020whose\u0020primary\u0020key\u0020is\nnot\u0020fully\u0020initialised.\u0020Emitting\u0020it\u0020would\u0020produce\u0020a\u0020\u0022pk\u0020\u003D\u0020NULL\u0022\u0020predicate\nthat\u0020matches\u0020no\u0020row,\u0020turning\u0020the\u0020write\u0020into\u0020a\u0020silent\u0020no\u002Dop\u0020while\u0020hooks\nand\u0020de\u002Dregistration\u0020still\u0020ran.",
+            "url": "classes/G-Orm-Exception-OrmException.html#method_entityWithoutIdentifier"
+        },                {
+            "fqsen": "\\G\\Orm\\Exception\\OrmException\u003A\u003AinvalidTemporalValue\u0028\u0029",
+            "name": "invalidTemporalValue",
+            "summary": "A\u0020raw\u0020database\u0020value\u0020could\u0020not\u0020be\u0020converted\u0020into\u0020its\u0020rich\u0020PHP\nrepresentation\u0020\u2014\u0020e.g.\u0020a\u0020malformed\u0020temporal\u0020string\u0020reaching\u0020a\nDateTimeImmutable\u0020property.",
+            "url": "classes/G-Orm-Exception-OrmException.html#method_invalidTemporalValue"
+        },                {
+            "fqsen": "\\G\\Orm\\Exception\\OrmException\u003A\u003AwriteAffectedNoRow\u0028\u0029",
+            "name": "writeAffectedNoRow",
+            "summary": "A\u0020flushed\u0020UPDATE\u0020or\u0020DELETE\u0020affected\u0020no\u0020row\u003A\u0020the\u0020database\u0020row\u0020no\u0020longer\nmatches\u0020the\u0020entity\u0027s\u0020identity\u0020\u2014\u0020typically\u0020deleted\u0020by\u0020a\u0020concurrent\ntransaction.\u0020The\u0020flush\u0020is\u0020aborted\u0020so\u0020the\u0020desync\u0020cannot\u0020pass\u0020silently.",
+            "url": "classes/G-Orm-Exception-OrmException.html#method_writeAffectedNoRow"
+        },                {
             "fqsen": "\\G\\Orm\\Exception\\OrmExceptionInterface",
             "name": "OrmExceptionInterface",
             "summary": "Common\u0020contract\u0020implemented\u0020by\u0020every\u0020exception\u0020thrown\u0020by\u0020the\u0020ORM.",
@@ -1576,10 +1746,110 @@ Search.appendIndex(
             "summary": "A\u0020single\u0020statement\u0020mixed\u0020element\u002Dby\u002Delement\u0020bind\u0028\u0029\u0020calls\u0020with\u0020an\narray\u0020of\u0020parameters\u0020passed\u0020to\u0020execute\u0028\u0029.",
             "url": "classes/G-Orm-Exception-QueryException.html#method_mixedBindingStrategies"
         },                {
+            "fqsen": "\\G\\Orm\\Exception\\QueryException\u003A\u003AunsupportedOperator\u0028\u0029",
+            "name": "unsupportedOperator",
+            "summary": "A\u0020whitelisted\u0020operator\u0020reached\u0020a\u0020platform\u0020whose\u0020engine\u0020has\u0020no\u0020reliable\nnative\u0020syntax\u0020for\u0020it.\u0020Failing\u0020at\u0020compile\u0020time\u0020beats\u0020emitting\u0020SQL\u0020that\nonly\u0020breaks\u0020once\u0020it\u0020reaches\u0020a\u0020production\u0020server.",
+            "url": "classes/G-Orm-Exception-QueryException.html#method_unsupportedOperator"
+        },                {
             "fqsen": "\\G\\Orm\\Exception\\TransactionException",
             "name": "TransactionException",
             "summary": "Thrown\u0020when\u0020a\u0020transaction\u0020control\u0020operation\u0020fails\u0020\u0028begin,\u0020commit,\u0020roll\nback\u0029\u0020or\u0020is\u0020used\u0020in\u0020an\u0020invalid\u0020sequence.",
             "url": "classes/G-Orm-Exception-TransactionException.html"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory",
+            "name": "OrmFactory",
+            "summary": "Composition\u0020root\u0020for\u0020one\u0020or\u0020several\u0020databases.",
+            "url": "classes/G-Orm-Factory-OrmFactory.html"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#method___construct"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003Aconnect\u0028\u0029",
+            "name": "connect",
+            "summary": "One\u002Dshot\u0020shortcut\u0020for\u0020the\u0020single\u002Ddatabase\u0020case\u003A\u0020normalise,\u0020connect\u0020and\nwire\u0020a\u0020manager\u0020in\u0020one\u0020call.",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#method_connect"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003Amanager\u0028\u0029",
+            "name": "manager",
+            "summary": "The\u0020fully\u0020wired\u0020manager\u0020for\u0020a\u0020named\u0020connection,\u0020built\u0020on\u0020first\u0020use\u0020and\ncached\u0020afterwards.",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#method_manager"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003Aconnection\u0028\u0029",
+            "name": "connection",
+            "summary": "The\u0020open\u0020connection\u0020for\u0020a\u0020name,\u0020shared\u0020with\u0020the\u0020manager\u0020of\u0020the\u0020same\nname,\u0020built\u0020on\u0020first\u0020use\u0020and\u0020cached\u0020afterwards.",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#method_connection"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003Anormalise\u0028\u0029",
+            "name": "normalise",
+            "summary": "Normalise\u0020any\u0020accepted\u0020configuration\u0020shape\u0020into\u0020the\u0020option\u0020array\u0020the\nPDO\u0020driver\u0020consumes.\u0020Public\u0020so\u0020a\u0020configuration\u0020can\u0020be\u0020inspected\u0020or\nunit\u002Dtested\u0020without\u0020opening\u0020a\u0020connection.",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#method_normalise"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003AfromUri\u0028\u0029",
+            "name": "fromUri",
+            "summary": "Translate\u0020a\u0020database\u0020URI\u0020into\u0020discrete\u0020connection\u0020options.",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#method_fromUri"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003AsqliteOptions\u0028\u0029",
+            "name": "sqliteOptions",
+            "summary": "SQLite\u0020URIs\u0020carry\u0020a\u0020file\u0020path\u0020instead\u0020of\u0020host\/dbname\u0020parts\u003B\u0020an\u0020empty\npath\u0020means\u0020the\u0020in\u002Dmemory\u0020database.",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#method_sqliteOptions"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003AqueryOptions\u0028\u0029",
+            "name": "queryOptions",
+            "summary": "Keep\u0020only\u0020the\u0020recognised\u0020query\u0020parameters\u0020of\u0020a\u0020URI.",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#method_queryOptions"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003ADEFAULT_CONNECTION",
+            "name": "DEFAULT_CONNECTION",
+            "summary": "Name\u0020under\u0020which\u0020a\u0020single\u002Ddatabase\u0020configuration\u0020is\u0020registered\u0020when\u0020no\nexplicit\u0020name\u0020is\u0020used.",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#constant_DEFAULT_CONNECTION"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003ADRIVER_ALIASES",
+            "name": "DRIVER_ALIASES",
+            "summary": "URI\u0020scheme\u0020\u003D\u003E\u0020PDO\u0020driver\u0020name.\u0020Unlisted\u0020schemes\u0020pass\u0020through\u0020verbatim\nso\u0020future\u0020PDO\u0020drivers\u0020keep\u0020working\u0020without\u0020a\u0020factory\u0020change.",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#constant_DRIVER_ALIASES"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003ADRIVER_SQLITE",
+            "name": "DRIVER_SQLITE",
+            "summary": "",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#constant_DRIVER_SQLITE"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003ASQLITE_URI_PREFIX",
+            "name": "SQLITE_URI_PREFIX",
+            "summary": "SQLite\u0020URIs\u0020\u0028\u0022sqlite\u003A\/\/\/var\/app.db\u0022\u0029\u0020have\u0020an\u0020empty\u0020authority,\u0020which\nparse_url\u0028\u0029\u0020rejects\u0020outright\u003B\u0020they\u0020are\u0020recognised\u0020by\u0020prefix\u0020instead.",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#constant_SQLITE_URI_PREFIX"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003AURI_QUERY_OPTIONS",
+            "name": "URI_QUERY_OPTIONS",
+            "summary": "URI\u0020query\u0020parameters\u0020forwarded\u0020to\u0020the\u0020connection\u0020options\u003B\u0020anything\nelse\u0020\u0028serverVersion,\u0020...\u0029\u0020is\u0020configuration\u0020noise\u0020for\u0020other\u0020stacks\u0020and\nis\u0020deliberately\u0020dropped.",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#constant_URI_QUERY_OPTIONS"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003AWINDOWS_DRIVE_PATH",
+            "name": "WINDOWS_DRIVE_PATH",
+            "summary": "A\u0020URL\u0020path\u0020that\u0020is\u0020really\u0020a\u0020Windows\u0020drive\u0020path\u0020\u0028\u0022\/C\u003A\/data\/app.db\u0022\u0029\u003A\nthe\u0020leading\u0020slash\u0020is\u0020an\u0020artefact\u0020of\u0020the\u0020URI\u0020form\u0020and\u0020must\u0020be\u0020removed.",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#constant_WINDOWS_DRIVE_PATH"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003A\u0024connections",
+            "name": "connections",
+            "summary": "",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#property_connections"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003A\u0024managers",
+            "name": "managers",
+            "summary": "",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#property_managers"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003A\u0024configurations",
+            "name": "configurations",
+            "summary": "",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#property_configurations"
+        },                {
+            "fqsen": "\\G\\Orm\\Factory\\OrmFactory\u003A\u003A\u0024dispatcher",
+            "name": "dispatcher",
+            "summary": "",
+            "url": "classes/G-Orm-Factory-OrmFactory.html#property_dispatcher"
         },                {
             "fqsen": "\\G\\Orm\\Hydrator\\Hydrator",
             "name": "Hydrator",
@@ -1623,18 +1893,63 @@ Search.appendIndex(
         },                {
             "fqsen": "\\G\\Orm\\Hydrator\\Hydrator\u003A\u003AtoPhpValue\u0028\u0029",
             "name": "toPhpValue",
-            "summary": "",
+            "summary": "Convert\u0020a\u0020raw\u0020database\u0020value\u0020to\u0020the\u0020property\u0027s\u0020PHP\u0020representation\u003A\nbacked\u0020enums\u0020first,\u0020then\u0020any\u0020converter\u0020registered\u0020for\u0020the\u0020property\u0027s\ntype,\u0020otherwise\u0020the\u0020value\u0020as\u002Dis.",
             "url": "classes/G-Orm-Hydrator-Hydrator.html#method_toPhpValue"
         },                {
             "fqsen": "\\G\\Orm\\Hydrator\\Hydrator\u003A\u003AtoDatabaseValue\u0028\u0029",
             "name": "toDatabaseValue",
-            "summary": "",
+            "summary": "Convert\u0020a\u0020PHP\u0020property\u0020value\u0020to\u0020its\u0020scalar\u0020database\u0020representation\u003A\nbacked\u0020enums\u0020first,\u0020then\u0020any\u0020converter\u0020registered\u0020for\u0020the\u0020property\u0027s\ntype,\u0020otherwise\u0020the\u0020value\u0020as\u002Dis.",
             "url": "classes/G-Orm-Hydrator-Hydrator.html#method_toDatabaseValue"
+        },                {
+            "fqsen": "\\G\\Orm\\Hydrator\\Hydrator\u003A\u003AconverterFor\u0028\u0029",
+            "name": "converterFor",
+            "summary": "",
+            "url": "classes/G-Orm-Hydrator-Hydrator.html#method_converterFor"
+        },                {
+            "fqsen": "\\G\\Orm\\Hydrator\\Hydrator\u003A\u003A\u0024converters",
+            "name": "converters",
+            "summary": "Converters\u0020by\u0020property\u0020type\u0020name,\u0020custom\u0020registrations\u0020taking\nprecedence\u0020over\u0020the\u0020built\u002Din\u0020defaults.",
+            "url": "classes/G-Orm-Hydrator-Hydrator.html#property_converters"
         },                {
             "fqsen": "\\G\\Orm\\Hydrator\\Hydrator\u003A\u003A\u0024metadata",
             "name": "metadata",
             "summary": "",
             "url": "classes/G-Orm-Hydrator-Hydrator.html#property_metadata"
+        },                {
+            "fqsen": "\\G\\Orm\\Hydrator\\Type\\DateTimeImmutableConverter",
+            "name": "DateTimeImmutableConverter",
+            "summary": "Reference\u0020converter\u0020for\u0020DateTimeImmutable\u0020properties.",
+            "url": "classes/G-Orm-Hydrator-Type-DateTimeImmutableConverter.html"
+        },                {
+            "fqsen": "\\G\\Orm\\Hydrator\\Type\\DateTimeImmutableConverter\u003A\u003AtoDatabase\u0028\u0029",
+            "name": "toDatabase",
+            "summary": "Convert\u0020a\u0020PHP\u0020property\u0020value\u0020to\u0020its\u0020scalar\u0020database\u0020representation.",
+            "url": "classes/G-Orm-Hydrator-Type-DateTimeImmutableConverter.html#method_toDatabase"
+        },                {
+            "fqsen": "\\G\\Orm\\Hydrator\\Type\\DateTimeImmutableConverter\u003A\u003AfromDatabase\u0028\u0029",
+            "name": "fromDatabase",
+            "summary": "Convert\u0020a\u0020raw\u0020database\u0020value\u0020to\u0020its\u0020rich\u0020PHP\u0020representation.",
+            "url": "classes/G-Orm-Hydrator-Type-DateTimeImmutableConverter.html#method_fromDatabase"
+        },                {
+            "fqsen": "\\G\\Orm\\Hydrator\\Type\\DateTimeImmutableConverter\u003A\u003ADATABASE_FORMAT",
+            "name": "DATABASE_FORMAT",
+            "summary": "The\u0020engine\u002Dportable\u0020storage\u0020format\u0020for\u0020date\u002Dtime\u0020values.",
+            "url": "classes/G-Orm-Hydrator-Type-DateTimeImmutableConverter.html#constant_DATABASE_FORMAT"
+        },                {
+            "fqsen": "\\G\\Orm\\Hydrator\\Type\\ValueConverterInterface",
+            "name": "ValueConverterInterface",
+            "summary": "Bidirectional\u0020conversion\u0020seam\u0020between\u0020a\u0020rich\u0020PHP\u0020property\u0020value\u0020and\u0020its\nscalar\u0020database\u0020representation.",
+            "url": "classes/G-Orm-Hydrator-Type-ValueConverterInterface.html"
+        },                {
+            "fqsen": "\\G\\Orm\\Hydrator\\Type\\ValueConverterInterface\u003A\u003AtoDatabase\u0028\u0029",
+            "name": "toDatabase",
+            "summary": "Convert\u0020a\u0020PHP\u0020property\u0020value\u0020to\u0020its\u0020scalar\u0020database\u0020representation.",
+            "url": "classes/G-Orm-Hydrator-Type-ValueConverterInterface.html#method_toDatabase"
+        },                {
+            "fqsen": "\\G\\Orm\\Hydrator\\Type\\ValueConverterInterface\u003A\u003AfromDatabase\u0028\u0029",
+            "name": "fromDatabase",
+            "summary": "Convert\u0020a\u0020raw\u0020database\u0020value\u0020to\u0020its\u0020rich\u0020PHP\u0020representation.",
+            "url": "classes/G-Orm-Hydrator-Type-ValueConverterInterface.html#method_fromDatabase"
         },                {
             "fqsen": "\\G\\Orm\\Mapping\\BelongsTo",
             "name": "BelongsTo",
@@ -2266,6 +2581,11 @@ Search.appendIndex(
             "summary": "Guard\u0020a\u0020column\/identifier\u0020token\u0020bound\u0020for\u0020a\u0020clause\u0020that\u0020cannot\u0020be\nparameterised\u0020\u0028WHERE\/HAVING\u0020column,\u0020ORDER\u0020BY\u0020\/\u0020GROUP\u0020BY\u0020term\u0029.\u0020Accepts\u0020a\nbare\u0020or\u0020singly\u002Dqualified\u0020identifier\u0020only\u003B\u0020anything\u0020else\u0020is\u0020an\u0020injection\nattempt\u0020or\u0020an\u0020expression\u0020that\u0020belongs\u0020in\u0020select\u0028\u0029\/havingRaw\u0028\u0029.",
             "url": "classes/G-Orm-Query-QueryBuilder.html#method_assertSafeIdentifier"
         },                {
+            "fqsen": "\\G\\Orm\\Query\\QueryBuilder\u003A\u003AassertRawExpression\u0028\u0029",
+            "name": "assertRawExpression",
+            "summary": "Reject\u0020a\u0020blank\u0020raw\u0020expression\u0020up\u0020front\u003A\u0020emitted\u0020verbatim,\u0020it\u0020would\ncompile\u0020into\u0020syntactically\u0020broken\u0020SQL\u0020\u0028\u0022WHERE\u0020\u0020AND\u0020...\u0022\u0029\u0020that\u0020only\u0020fails\nat\u0020execution\u0020time,\u0020far\u0020from\u0020its\u0020origin.",
+            "url": "classes/G-Orm-Query-QueryBuilder.html#method_assertRawExpression"
+        },                {
             "fqsen": "\\G\\Orm\\Query\\QueryBuilder\u003A\u003AmanualValues\u0028\u0029",
             "name": "manualValues",
             "summary": "",
@@ -2303,7 +2623,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\G\\Orm\\Query\\QueryBuilder\u003A\u003AhydrateAliased\u0028\u0029",
             "name": "hydrateAliased",
-            "summary": "Hydrate\u0020one\u0020alias\u0027s\u0020slice\u0020of\u0020a\u0020row,\u0020resolving\u0020the\u0020instance\u0020through\u0020the\nidentity\u0020map\u0020so\u0020a\u0020row\u0020that\u0020repeats\u0020a\u0020key\u0020reuses\u0020the\u0020same\u0020object.\u0020Returns\nnull\u0020when\u0020the\u0020alias\u0020contributed\u0020no\u0020columns\u0020\u0028its\u0020dataset\u0020was\u0020not\u0020selected\u0029\nor\u0020only\u0020nulls\u0020\u0028an\u0020unmatched\u0020outer\u0020join\u0029.",
+            "summary": "Hydrate\u0020one\u0020alias\u0027s\u0020slice\u0020of\u0020a\u0020row,\u0020resolving\u0020the\u0020instance\u0020through\u0020the\nidentity\u0020map\u0020so\u0020a\u0020row\u0020that\u0020repeats\u0020a\u0020key\u0020reuses\u0020the\u0020same\u0020object.\u0020A\u0020fresh\ninstance\u0020is\u0020registered\u0020with\u0020the\u0020Unit\u0020Of\u0020Work\u0020\u2014\u0020identity\u0020map\u0020entry\u0020plus\noriginal\u002Dstate\u0020snapshot\u0020\u2014\u0020so\u0020it\u0020is\u0020change\u002Dtracked\u0020from\u0020the\u0020moment\u0020it\u0020is\nreturned.\u0020Returns\u0020null\u0020when\u0020the\u0020alias\u0020contributed\u0020no\u0020columns\u0020\u0028its\u0020dataset\nwas\u0020not\u0020selected\u0029\u0020or\u0020only\u0020nulls\u0020\u0028an\u0020unmatched\u0020outer\u0020join\u0029.",
             "url": "classes/G-Orm-Query-QueryBuilder.html#method_hydrateAliased"
         },                {
             "fqsen": "\\G\\Orm\\Query\\QueryBuilder\u003A\u003AsubRowFor\u0028\u0029",
@@ -2391,10 +2711,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/G-Orm-Query-QueryBuilder.html#property_hydrator"
         },                {
-            "fqsen": "\\G\\Orm\\Query\\QueryBuilder\u003A\u003A\u0024identityMap",
-            "name": "identityMap",
+            "fqsen": "\\G\\Orm\\Query\\QueryBuilder\u003A\u003A\u0024unitOfWork",
+            "name": "unitOfWork",
             "summary": "",
-            "url": "classes/G-Orm-Query-QueryBuilder.html#property_identityMap"
+            "url": "classes/G-Orm-Query-QueryBuilder.html#property_unitOfWork"
         },                {
             "fqsen": "\\G\\Orm\\Query\\QueryExpressionClause",
             "name": "QueryExpressionClause",
@@ -2731,6 +3051,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/g-orm-compiler.html"
         },                {
+            "fqsen": "\\G\\Orm\\Compiler\\Platform",
+            "name": "Platform",
+            "summary": "",
+            "url": "namespaces/g-orm-compiler-platform.html"
+        },                {
             "fqsen": "\\G\\Orm\\Contract",
             "name": "Contract",
             "summary": "",
@@ -2766,10 +3091,20 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/g-orm-exception.html"
         },                {
+            "fqsen": "\\G\\Orm\\Factory",
+            "name": "Factory",
+            "summary": "",
+            "url": "namespaces/g-orm-factory.html"
+        },                {
             "fqsen": "\\G\\Orm\\Hydrator",
             "name": "Hydrator",
             "summary": "",
             "url": "namespaces/g-orm-hydrator.html"
+        },                {
+            "fqsen": "\\G\\Orm\\Hydrator\\Type",
+            "name": "Type",
+            "summary": "",
+            "url": "namespaces/g-orm-hydrator-type.html"
         },                {
             "fqsen": "\\G\\Orm\\Mapping",
             "name": "Mapping",

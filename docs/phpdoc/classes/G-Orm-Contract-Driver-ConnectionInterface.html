@@ -114,16 +114,17 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/Driver/ConnectionInterface.php"><a href="files/src-contract-driver-connectioninterface.html"><abbr title="src/Contract/Driver/ConnectionInterface.php">ConnectionInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
             <p class="phpdocumentor-summary">Wraps an open database session.</p>
 
 
-    <section class="phpdocumentor-description"><p>Exposes explicit transaction control, value/identifier quoting and
-statement preparation. Transaction control is deliberately explicit: the
-connection never opens or commits transactions on its own.</p>
+    <section class="phpdocumentor-description"><p>Exposes explicit transaction control, value/identifier quoting, statement
+preparation and the SQL platform (dialect) of the engine behind the
+session. Transaction control is deliberately explicit: the connection
+never opens or commits transactions on its own.</p>
 </section>
 
 
@@ -164,6 +165,13 @@ connection never opens or commits transactions on its own.</p>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Commit the active transaction.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/G-Orm-Contract-Driver-ConnectionInterface.html#method_getPlatform">getPlatform()</a>
+    <span>
+                                &nbsp;: <a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a>    </span>
+</dt>
+<dd>The SQL platform (dialect) of the engine this session is connected to.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/G-Orm-Contract-Driver-ConnectionInterface.html#method_inTransaction">inTransaction()</a>
@@ -236,7 +244,7 @@ connection never opens or commits transactions on its own.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/Driver/ConnectionInterface.php"><a href="files/src-contract-driver-connectioninterface.html"><abbr title="src/Contract/Driver/ConnectionInterface.php">ConnectionInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
@@ -285,7 +293,7 @@ connection never opens or commits transactions on its own.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/Driver/ConnectionInterface.php"><a href="files/src-contract-driver-connectioninterface.html"><abbr title="src/Contract/Driver/ConnectionInterface.php">ConnectionInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
@@ -326,6 +334,48 @@ connection never opens or commits transactions on its own.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getPlatform">
+        getPlatform()
+        <a href="classes/G-Orm-Contract-Driver-ConnectionInterface.html#method_getPlatform" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/Driver/ConnectionInterface.php"><a href="files/src-contract-driver-connectioninterface.html"><abbr title="src/Contract/Driver/ConnectionInterface.php">ConnectionInterface.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">25</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The SQL platform (dialect) of the engine this session is connected to.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getPlatform</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Resolved once at connection time; consumers (the compiler above all)
+delegate every dialect-sensitive SQL fragment to it.</p>
+</section>
+
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_inTransaction">
         inTransaction()
         <a href="classes/G-Orm-Contract-Driver-ConnectionInterface.html#method_inTransaction" class="headerlink"><i class="fas fa-link"></i></a>
@@ -334,7 +384,7 @@ connection never opens or commits transactions on its own.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/Driver/ConnectionInterface.php"><a href="files/src-contract-driver-connectioninterface.html"><abbr title="src/Contract/Driver/ConnectionInterface.php">ConnectionInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">51</span>
 
     </aside>
 
@@ -373,7 +423,7 @@ connection never opens or commits transactions on its own.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/Driver/ConnectionInterface.php"><a href="files/src-contract-driver-connectioninterface.html"><abbr title="src/Contract/Driver/ConnectionInterface.php">ConnectionInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">66</span>
 
     </aside>
 
@@ -444,7 +494,7 @@ values instead.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/Driver/ConnectionInterface.php"><a href="files/src-contract-driver-connectioninterface.html"><abbr title="src/Contract/Driver/ConnectionInterface.php">ConnectionInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">75</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
@@ -509,7 +559,7 @@ values instead.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/Driver/ConnectionInterface.php"><a href="files/src-contract-driver-connectioninterface.html"><abbr title="src/Contract/Driver/ConnectionInterface.php">ConnectionInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">74</span>
 
     </aside>
 
@@ -561,7 +611,7 @@ the cases where a literal must be inlined.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/Driver/ConnectionInterface.php"><a href="files/src-contract-driver-connectioninterface.html"><abbr title="src/Contract/Driver/ConnectionInterface.php">ConnectionInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
@@ -610,7 +660,7 @@ the cases where a literal must be inlined.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/Driver/ConnectionInterface.php"><a href="files/src-contract-driver-connectioninterface.html"><abbr title="src/Contract/Driver/ConnectionInterface.php">ConnectionInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">46</span>
 
     </aside>
 
@@ -668,6 +718,7 @@ the cases where a literal must be inlined.</p>
                     <ul class="phpdocumentor-list -clean">
                                                     <li class=""><a href="classes/G-Orm-Contract-Driver-ConnectionInterface.html#method_beginTransaction">beginTransaction()</a></li>
                                                     <li class=""><a href="classes/G-Orm-Contract-Driver-ConnectionInterface.html#method_commit">commit()</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Contract-Driver-ConnectionInterface.html#method_getPlatform">getPlatform()</a></li>
                                                     <li class=""><a href="classes/G-Orm-Contract-Driver-ConnectionInterface.html#method_inTransaction">inTransaction()</a></li>
                                                     <li class=""><a href="classes/G-Orm-Contract-Driver-ConnectionInterface.html#method_lastInsertId">lastInsertId()</a></li>
                                                     <li class=""><a href="classes/G-Orm-Contract-Driver-ConnectionInterface.html#method_prepare">prepare()</a></li>

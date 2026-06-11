@@ -401,8 +401,11 @@ UPDATE descriptors. Primary-key columns are never part of the SET.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_executeDeletes">executeDeletes()</a>
     <span>
-                                &nbsp;: void    </span>
+                                &nbsp;: array&lt;int, array{objectId: int, entity: object}&gt;    </span>
 </dt>
+<dd>Execute pending DELETEs and return the sync descriptor of each processed
+entity, so synchronise() can de-register exactly those — a removal staged
+by a hook during this very loop stays queued for the next flush.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_executeInserts">executeInserts()</a>
@@ -459,7 +462,15 @@ pays for reflection.</dd>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Apply in-memory synchronisation after a successful flush: promote inserts
-into the managed set, refresh snapshots and empty the intention queues.</dd>
+into the managed set, refresh snapshots and de-register exactly the
+processed intentions. De-registration is targeted by object id — never a
+bulk queue reset — so an intention staged by a lifecycle hook or PSR-14
+listener *during* the flush survives in its queue and is executed by the
+next flush instead of being silently destroyed. Generated identifiers are
+written back during the insert pass, and the identity map is already
+seeded there too; the add() below is a safe, idempotent re-affirmation
+(same key, same instance) covering any entity whose identifier only
+became resolvable after its hooks ran.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a class="" href="classes/G-Orm-Core-UnitOfWork.html#method_writeBuilder">writeBuilder()</a>
@@ -1524,7 +1535,7 @@ query, or null when fully hydrated.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">519</span>
+    <span class="phpdocumentor-element-found-in__line">567</span>
 
     </aside>
 
@@ -1582,7 +1593,7 @@ query, or null when fully hydrated.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">320</span>
+    <span class="phpdocumentor-element-found-in__line">326</span>
 
     </aside>
 
@@ -1691,7 +1702,7 @@ UPDATE descriptors. Primary-key columns are never part of the SET.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">608</span>
+    <span class="phpdocumentor-element-found-in__line">656</span>
 
     </aside>
 
@@ -1736,14 +1747,17 @@ UPDATE descriptors. Primary-key columns are never part of the SET.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">454</span>
+    <span class="phpdocumentor-element-found-in__line">476</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Execute pending DELETEs and return the sync descriptor of each processed
+entity, so synchronise() can de-register exactly those — a removal staged
+by a hook during this very loop stays queued for the next flush.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">executeDeletes</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">executeDeletes</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;int, array{objectId: int, entity: object}&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1754,7 +1768,11 @@ UPDATE descriptors. Primary-key columns are never part of the SET.</p>
 
         
     
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;int, array{objectId: int, entity: object}&gt;</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1770,7 +1788,7 @@ UPDATE descriptors. Primary-key columns are never part of the SET.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">345</span>
+    <span class="phpdocumentor-element-found-in__line">351</span>
 
     </aside>
 
@@ -1811,7 +1829,7 @@ hooks observe it.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">407</span>
+    <span class="phpdocumentor-element-found-in__line">417</span>
 
     </aside>
 
@@ -1870,7 +1888,7 @@ AfterUpdateEvent.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">569</span>
+    <span class="phpdocumentor-element-found-in__line">617</span>
 
     </aside>
 
@@ -1927,7 +1945,7 @@ indexing the class on first request.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">587</span>
+    <span class="phpdocumentor-element-found-in__line">635</span>
 
     </aside>
 
@@ -1978,7 +1996,7 @@ empty method lists), so the scan never repeats for them either.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">534</span>
+    <span class="phpdocumentor-element-found-in__line">582</span>
 
     </aside>
 
@@ -2026,7 +2044,7 @@ empty method lists), so the scan never repeats for them either.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">553</span>
+    <span class="phpdocumentor-element-found-in__line">601</span>
 
     </aside>
 
@@ -2088,26 +2106,29 @@ pays for reflection.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">489</span>
+    <span class="phpdocumentor-element-found-in__line">532</span>
 
     </aside>
 
         <p class="phpdocumentor-summary">Apply in-memory synchronisation after a successful flush: promote inserts
-into the managed set, refresh snapshots and empty the intention queues.</p>
+into the managed set, refresh snapshots and de-register exactly the
+processed intentions. De-registration is targeted by object id — never a
+bulk queue reset — so an intention staged by a lifecycle hook or PSR-14
+listener *during* the flush survives in its queue and is executed by the
+next flush instead of being silently destroyed. Generated identifiers are
+written back during the insert pass, and the identity map is already
+seeded there too; the add() below is a safe, idempotent re-affirmation
+(same key, same instance) covering any entity whose identifier only
+became resolvable after its hooks ran.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">synchronise</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;int, array{objectId: int, entity: object}&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$insertSync</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;int, array{objectId: int, current: array<string,mixed>}&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$updateSync</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">synchronise</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;int, array{objectId: int, entity: object}&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$insertSync</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;int, array{objectId: int, current: array<string,mixed>}&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$updateSync</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;int, array{objectId: int, entity: object}&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$deleteSync</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
-        <section class="phpdocumentor-description"><p>Generated identifiers are written back during the insert pass, and the
-identity map is already seeded there too; the add() below is a safe,
-idempotent re-affirmation (same key, same instance) covering any entity
-whose identifier only became resolvable after its hooks ran.</p>
-</section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -2120,6 +2141,13 @@ whose identifier only became resolvable after its hooks ran.</p>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$updateSync</span>
                 : <span class="phpdocumentor-argument-list__argument__type">array&lt;int, array{objectId: int, current: array<string,mixed>}&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$deleteSync</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;int, array{objectId: int, entity: object}&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -2146,7 +2174,7 @@ whose identifier only became resolvable after its hooks ran.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Core/UnitOfWork.php"><a href="files/src-core-unitofwork.html"><abbr title="src/Core/UnitOfWork.php">UnitOfWork.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">613</span>
+    <span class="phpdocumentor-element-found-in__line">661</span>
 
     </aside>
 

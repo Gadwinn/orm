@@ -130,7 +130,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Exception/OrmException.php"><a href="files/src-exception-ormexception.html"><abbr title="src/Exception/OrmException.php">OrmException.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
@@ -175,6 +175,25 @@ stay consistent across the package.</p>
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/G-Orm-Exception-OrmException.html#method_entityWithoutIdentifier">entityWithoutIdentifier()</a>
+    <span>
+                                &nbsp;: self    </span>
+</dt>
+<dd>An UPDATE or DELETE was about to target an entity whose primary key is
+not fully initialised. Emitting it would produce a &quot;pk = NULL&quot; predicate
+that matches no row, turning the write into a silent no-op while hooks
+and de-registration still ran.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/G-Orm-Exception-OrmException.html#method_invalidTemporalValue">invalidTemporalValue()</a>
+    <span>
+                                &nbsp;: self    </span>
+</dt>
+<dd>A raw database value could not be converted into its rich PHP
+representation — e.g. a malformed temporal string reaching a
+DateTimeImmutable property.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/G-Orm-Exception-OrmException.html#method_managerNotFound">managerNotFound()</a>
     <span>
                                 &nbsp;: self    </span>
@@ -190,6 +209,15 @@ helper or the registry is used.</dd>
 <dd>flush() was re-entered while a flush was already running — typically a
 lifecycle hook or PSR-14 listener calling flush()/save() from inside the
 write pipeline, which would re-process the still-pending intention queues.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/G-Orm-Exception-OrmException.html#method_writeAffectedNoRow">writeAffectedNoRow()</a>
+    <span>
+                                &nbsp;: self    </span>
+</dt>
+<dd>A flushed UPDATE or DELETE affected no row: the database row no longer
+matches the entity&#039;s identity — typically deleted by a concurrent
+transaction. The flush is aborted so the desync cannot pass silently.</dd>
 
     </dl>
 
@@ -211,6 +239,123 @@ write pipeline, which would re-process the still-pending intention queues.</dd>
             -public
                                     -static                    "
 >
+    <h4 class="phpdocumentor-element__name" id="method_entityWithoutIdentifier">
+        entityWithoutIdentifier()
+        <a href="classes/G-Orm-Exception-OrmException.html#method_entityWithoutIdentifier" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Exception/OrmException.php"><a href="files/src-exception-ormexception.html"><abbr title="src/Exception/OrmException.php">OrmException.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">52</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An UPDATE or DELETE was about to target an entity whose primary key is
+not fully initialised. Emitting it would produce a &quot;pk = NULL&quot; predicate
+that matches no row, turning the write into a silent no-op while hooks
+and de-registration still ran.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">entityWithoutIdentifier</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">class-string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entityClass</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$operation</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$entityClass</span>
+                : <span class="phpdocumentor-argument-list__argument__type">class-string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$operation</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">self</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_invalidTemporalValue">
+        invalidTemporalValue()
+        <a href="classes/G-Orm-Exception-OrmException.html#method_invalidTemporalValue" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Exception/OrmException.php"><a href="files/src-exception-ormexception.html"><abbr title="src/Exception/OrmException.php">OrmException.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">68</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A raw database value could not be converted into its rich PHP
+representation — e.g. a malformed temporal string reaching a
+DateTimeImmutable property.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">invalidTemporalValue</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\Throwable">Throwable</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$previous</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$value</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$previous</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\Throwable">Throwable</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">self</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
     <h4 class="phpdocumentor-element__name" id="method_managerNotFound">
         managerNotFound()
         <a href="classes/G-Orm-Exception-OrmException.html#method_managerNotFound" class="headerlink"><i class="fas fa-link"></i></a>
@@ -219,7 +364,7 @@ write pipeline, which would re-process the still-pending intention queues.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Exception/OrmException.php"><a href="files/src-exception-ormexception.html"><abbr title="src/Exception/OrmException.php">OrmException.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
@@ -259,7 +404,7 @@ helper or the registry is used.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Exception/OrmException.php"><a href="files/src-exception-ormexception.html"><abbr title="src/Exception/OrmException.php">OrmException.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
@@ -276,6 +421,64 @@ write pipeline, which would re-process the still-pending intention queues.</p>
     
     
     
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">self</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_writeAffectedNoRow">
+        writeAffectedNoRow()
+        <a href="classes/G-Orm-Exception-OrmException.html#method_writeAffectedNoRow" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Exception/OrmException.php"><a href="files/src-exception-ormexception.html"><abbr title="src/Exception/OrmException.php">OrmException.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">84</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A flushed UPDATE or DELETE affected no row: the database row no longer
+matches the entity&#039;s identity — typically deleted by a concurrent
+transaction. The flush is aborted so the desync cannot pass silently.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">writeAffectedNoRow</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">class-string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entityClass</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$operation</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$entityClass</span>
+                : <span class="phpdocumentor-argument-list__argument__type">class-string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$operation</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
     
 
         
@@ -308,8 +511,11 @@ write pipeline, which would re-process the still-pending intention queues.</p>
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/G-Orm-Exception-OrmException.html#method_entityWithoutIdentifier">entityWithoutIdentifier()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Exception-OrmException.html#method_invalidTemporalValue">invalidTemporalValue()</a></li>
                                             <li class=""><a href="classes/G-Orm-Exception-OrmException.html#method_managerNotFound">managerNotFound()</a></li>
                                             <li class=""><a href="classes/G-Orm-Exception-OrmException.html#method_reentrantFlush">reentrantFlush()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Exception-OrmException.html#method_writeAffectedNoRow">writeAffectedNoRow()</a></li>
                                     </ul>
             </li>
                     </ul>

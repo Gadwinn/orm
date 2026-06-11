@@ -128,7 +128,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoStatement.php"><a href="files/src-driver-pdo-pdostatement.html"><abbr title="src/Driver/Pdo/PdoStatement.php">PdoStatement.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -137,7 +137,10 @@
 
     <section class="phpdocumentor-description"><p>Values may be bound individually with bind() (PDO type inferred from the
 PHP value) or supplied in bulk at execute() time. Positional bindings use
-1-based integer placeholders; named bindings use string placeholders.</p>
+1-based integer placeholders for bind() and a 0-based list for execute(),
+matching PDO's own conventions; named bindings use string placeholders.
+Both paths bind each value with its inferred PDO type — the bulk path never
+falls back to PDO's everything-is-a-string default.</p>
 <p>Bind OR Execute rule: choose one binding style per statement. Either chain
 bind() and then call execute() with no arguments, or pass the full set of
 parameters to execute(); never mix the two. Mixing is rejected to avoid
@@ -253,7 +256,7 @@ parameters are merged with any previously bound values.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoStatement.php"><a href="files/src-driver-pdo-pdostatement.html"><abbr title="src/Driver/Pdo/PdoStatement.php">PdoStatement.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
@@ -290,7 +293,7 @@ parameters are merged with any previously bound values.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoStatement.php"><a href="files/src-driver-pdo-pdostatement.html"><abbr title="src/Driver/Pdo/PdoStatement.php">PdoStatement.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
@@ -332,7 +335,7 @@ parameters are merged with any previously bound values.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoStatement.php"><a href="files/src-driver-pdo-pdostatement.html"><abbr title="src/Driver/Pdo/PdoStatement.php">PdoStatement.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
@@ -376,7 +379,7 @@ parameters are merged with any previously bound values.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoStatement.php"><a href="files/src-driver-pdo-pdostatement.html"><abbr title="src/Driver/Pdo/PdoStatement.php">PdoStatement.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
@@ -435,7 +438,7 @@ chaining.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoStatement.php"><a href="files/src-driver-pdo-pdostatement.html"><abbr title="src/Driver/Pdo/PdoStatement.php">PdoStatement.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">54</span>
 
     </aside>
 
@@ -485,7 +488,7 @@ parameters are merged with any previously bound values.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoStatement.php"><a href="files/src-driver-pdo-pdostatement.html"><abbr title="src/Driver/Pdo/PdoStatement.php">PdoStatement.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
     </aside>
 

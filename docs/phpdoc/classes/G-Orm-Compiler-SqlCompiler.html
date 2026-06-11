@@ -127,11 +127,11 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Compiler/SqlCompiler.php"><a href="files/src-compiler-sqlcompiler.html"><abbr title="src/Compiler/SqlCompiler.php">SqlCompiler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Default, engine-neutral SQL compiler.</p>
+            <p class="phpdocumentor-summary">Default SQL compiler.</p>
 
 
     <section class="phpdocumentor-description"><p>Stateless and reusable. It parameterises every value with positional <code class="prettyprint">?</code>
@@ -140,6 +140,10 @@ quotes identifiers: identifiers are emitted exactly as provided, which
 keeps expressions, aliases and qualified names (&quot;t.col&quot;, &quot;COUNT(*) AS n&quot;)
 transparent and avoids breaking valid SQL. Identifier quoting, when needed,
 is the connection's concern.</p>
+<p>Engine-neutral except where SQL genuinely diverges: those fragments
+(regular-expression predicates today) are delegated to the injected
+<a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a>, defaulting to the standard-conforming SQLite
+platform.</p>
 </section>
 
 
@@ -167,6 +171,19 @@ is the connection's concern.</p>
 
 
 
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/G-Orm-Compiler-SqlCompiler.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/G-Orm-Compiler-SqlCompiler.html#property_platform">$platform</a>
+    <span>
+                        &nbsp;: <a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a>            </span>
+</dt>
+
+    </dl>
 
 <h4 id="toc-methods">
     Methods
@@ -174,6 +191,12 @@ is the connection's concern.</p>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/G-Orm-Compiler-SqlCompiler.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/G-Orm-Compiler-SqlCompiler.html#method_compile">compile()</a>
     <span>
@@ -249,6 +272,50 @@ bindings. The body excludes the leading keyword.</dd>
         
 
         
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/G-Orm-Compiler-SqlCompiler.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                -read-only                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_platform">
+        $platform
+        <a href="classes/G-Orm-Compiler-SqlCompiler.html#property_platform" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Compiler/SqlCompiler.php"><a href="files/src-compiler-sqlcompiler.html"><abbr title="src/Compiler/SqlCompiler.php">SqlCompiler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">29</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$platform</span>
+     = <span class="phpdocumentor-signature__default-value">new SqlitePlatform()</span></code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+            </section>
 
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
@@ -256,6 +323,50 @@ bindings. The body excludes the leading keyword.</dd>
             <a href="classes/G-Orm-Compiler-SqlCompiler.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/G-Orm-Compiler-SqlCompiler.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Compiler/SqlCompiler.php"><a href="files/src-compiler-sqlcompiler.html"><abbr title="src/Compiler/SqlCompiler.php">SqlCompiler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">28</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type"><a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$platform</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">new <a href="classes/G-Orm-Compiler-Platform-SqlitePlatform.html"><abbr title="\G\Orm\Compiler\Platform\SqlitePlatform">SqlitePlatform</abbr></a>()</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$platform</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a></span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">new <a href="classes/G-Orm-Compiler-Platform-SqlitePlatform.html"><abbr title="\G\Orm\Compiler\Platform\SqlitePlatform">SqlitePlatform</abbr></a>()</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+    
+</article>
                     <article
         class="phpdocumentor-element
             -method
@@ -270,7 +381,7 @@ bindings. The body excludes the leading keyword.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Compiler/SqlCompiler.php"><a href="files/src-compiler-sqlcompiler.html"><abbr title="src/Compiler/SqlCompiler.php">SqlCompiler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
@@ -318,7 +429,7 @@ bindings. The body excludes the leading keyword.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Compiler/SqlCompiler.php"><a href="files/src-compiler-sqlcompiler.html"><abbr title="src/Compiler/SqlCompiler.php">SqlCompiler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">114</span>
+    <span class="phpdocumentor-element-found-in__line">126</span>
 
     </aside>
 
@@ -366,7 +477,7 @@ bindings. The body excludes the leading keyword.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Compiler/SqlCompiler.php"><a href="files/src-compiler-sqlcompiler.html"><abbr title="src/Compiler/SqlCompiler.php">SqlCompiler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">210</span>
+    <span class="phpdocumentor-element-found-in__line">224</span>
 
     </aside>
 
@@ -428,7 +539,7 @@ bindings. The body excludes the leading keyword.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Compiler/SqlCompiler.php"><a href="files/src-compiler-sqlcompiler.html"><abbr title="src/Compiler/SqlCompiler.php">SqlCompiler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">66</span>
+    <span class="phpdocumentor-element-found-in__line">78</span>
 
     </aside>
 
@@ -476,7 +587,7 @@ bindings. The body excludes the leading keyword.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Compiler/SqlCompiler.php"><a href="files/src-compiler-sqlcompiler.html"><abbr title="src/Compiler/SqlCompiler.php">SqlCompiler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">137</span>
+    <span class="phpdocumentor-element-found-in__line">149</span>
 
     </aside>
 
@@ -524,7 +635,7 @@ bindings. The body excludes the leading keyword.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Compiler/SqlCompiler.php"><a href="files/src-compiler-sqlcompiler.html"><abbr title="src/Compiler/SqlCompiler.php">SqlCompiler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">246</span>
+    <span class="phpdocumentor-element-found-in__line">260</span>
 
     </aside>
 
@@ -579,7 +690,7 @@ bindings. The body excludes the leading keyword.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Compiler/SqlCompiler.php"><a href="files/src-compiler-sqlcompiler.html"><abbr title="src/Compiler/SqlCompiler.php">SqlCompiler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">227</span>
+    <span class="phpdocumentor-element-found-in__line">241</span>
 
     </aside>
 
@@ -627,7 +738,7 @@ bindings. The body excludes the leading keyword.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Compiler/SqlCompiler.php"><a href="files/src-compiler-sqlcompiler.html"><abbr title="src/Compiler/SqlCompiler.php">SqlCompiler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">183</span>
+    <span class="phpdocumentor-element-found-in__line">195</span>
 
     </aside>
 
@@ -675,7 +786,7 @@ bindings. The body excludes the leading keyword.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Compiler/SqlCompiler.php"><a href="files/src-compiler-sqlcompiler.html"><abbr title="src/Compiler/SqlCompiler.php">SqlCompiler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">156</span>
+    <span class="phpdocumentor-element-found-in__line">168</span>
 
     </aside>
 
@@ -725,7 +836,7 @@ bindings. The body excludes the leading keyword.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Compiler/SqlCompiler.php"><a href="files/src-compiler-sqlcompiler.html"><abbr title="src/Compiler/SqlCompiler.php">SqlCompiler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">43</span>
 
     </aside>
 
@@ -773,7 +884,7 @@ bindings. The body excludes the leading keyword.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Compiler/SqlCompiler.php"><a href="files/src-compiler-sqlcompiler.html"><abbr title="src/Compiler/SqlCompiler.php">SqlCompiler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">98</span>
 
     </aside>
 
@@ -821,14 +932,22 @@ bindings. The body excludes the leading keyword.</p>
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                                                <li><a href="classes/G-Orm-Compiler-SqlCompiler.html#toc-methods">Methods</a></li>
+                                                            <li><a href="classes/G-Orm-Compiler-SqlCompiler.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/G-Orm-Compiler-SqlCompiler.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
             
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/G-Orm-Compiler-SqlCompiler.html#property_platform">$platform</a></li>
+                                            </ul>
+                </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/G-Orm-Compiler-SqlCompiler.html#method___construct">__construct()</a></li>
                                             <li class=""><a href="classes/G-Orm-Compiler-SqlCompiler.html#method_compile">compile()</a></li>
                                             <li class=""><a href="classes/G-Orm-Compiler-SqlCompiler.html#method_compileDelete">compileDelete()</a></li>
                                             <li class=""><a href="classes/G-Orm-Compiler-SqlCompiler.html#method_compileInPredicate">compileInPredicate()</a></li>

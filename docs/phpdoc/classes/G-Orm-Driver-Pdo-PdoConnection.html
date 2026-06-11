@@ -128,16 +128,17 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
             <p class="phpdocumentor-summary">PDO-backed connection wrapping a native \PDO instance.</p>
 
 
-    <section class="phpdocumentor-description"><p>Transaction control is explicit and never implicit. Identifier quoting is
-engine-aware: backticks for MySQL/MariaDB, double quotes for PostgreSQL and
-standard SQL.</p>
+    <section class="phpdocumentor-description"><p>Transaction control is explicit and never implicit. Every dialect concern —
+identifier quoting included — is owned by the <a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a>
+resolved from the PDO driver name at construction time; the connection
+itself carries no engine-specific behaviour.</p>
 </section>
 
 
@@ -174,19 +175,19 @@ standard SQL.</p>
     <span>
         &nbsp;: mixed&nbsp;= &#039;mysql&#039;                            </span>
 </dt>
-<dd>PDO driver name that quotes identifiers with backticks; every other
-engine uses the SQL-standard double quote.</dd>
+<dd>PDO driver names with a dedicated platform; any other driver falls back
+to the standard-conforming SQLite platform.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a class="" href="classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_QUOTE_MYSQL">QUOTE_MYSQL</a>
+    <a class="" href="classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_DRIVER_PGSQL">DRIVER_PGSQL</a>
     <span>
-        &nbsp;: mixed&nbsp;= &#039;`&#039;                            </span>
+        &nbsp;: mixed&nbsp;= &#039;pgsql&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -private">
-    <a class="" href="classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_QUOTE_STANDARD">QUOTE_STANDARD</a>
+    <a class="" href="classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_DRIVER_SQLSRV">DRIVER_SQLSRV</a>
     <span>
-        &nbsp;: mixed&nbsp;= &#039;&quot;&#039;                            </span>
+        &nbsp;: mixed&nbsp;= &#039;sqlsrv&#039;                            </span>
 </dt>
 
     </dl>
@@ -199,15 +200,15 @@ engine uses the SQL-standard double quote.</dd>
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a class="" href="classes/G-Orm-Driver-Pdo-PdoConnection.html#property_driverName">$driverName</a>
-    <span>
-                        &nbsp;: string            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/G-Orm-Driver-Pdo-PdoConnection.html#property_pdo">$pdo</a>
     <span>
                         &nbsp;: <abbr title="\PDO">PDO</abbr>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/G-Orm-Driver-Pdo-PdoConnection.html#property_platform">$platform</a>
+    <span>
+                        &nbsp;: <a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a>            </span>
 </dt>
 
     </dl>
@@ -237,6 +238,13 @@ engine uses the SQL-standard double quote.</dd>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Commit the active transaction.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_getPlatform">getPlatform()</a>
+    <span>
+                                &nbsp;: <a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a>    </span>
+</dt>
+<dd>The SQL platform (dialect) of the engine this session is connected to.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_inTransaction">inTransaction()</a>
@@ -280,6 +288,12 @@ engine uses the SQL-standard double quote.</dd>
 </dt>
 <dd>Roll back the active transaction.</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_resolvePlatform">resolvePlatform()</a>
+    <span>
+                                &nbsp;: <a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a>    </span>
+</dt>
+
     </dl>
 
 
@@ -301,12 +315,12 @@ engine uses the SQL-standard double quote.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">PDO driver name that quotes identifiers with backticks; every other
-engine uses the SQL-standard double quote.</p>
+        <p class="phpdocumentor-summary">PDO driver names with a dedicated platform; any other driver falls back
+to the standard-conforming SQLite platform.</p>
 
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
@@ -324,16 +338,16 @@ engine uses the SQL-standard double quote.</p>
         
     </article>
                     <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_QUOTE_MYSQL">
-        QUOTE_MYSQL
-        <a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_QUOTE_MYSQL" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_DRIVER_PGSQL">
+        DRIVER_PGSQL
+        <a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_DRIVER_PGSQL" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
@@ -342,8 +356,8 @@ engine uses the SQL-standard double quote.</p>
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">QUOTE_MYSQL</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;`&#039;</span>
+    <span class="phpdocumentor-signature__name">DRIVER_PGSQL</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;pgsql&#039;</span>
 </code>
 
 
@@ -354,16 +368,16 @@ engine uses the SQL-standard double quote.</p>
         
     </article>
                     <article class="phpdocumentor-element -constant -private ">
-    <h4 class="phpdocumentor-element__name" id="constant_QUOTE_STANDARD">
-        QUOTE_STANDARD
-        <a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_QUOTE_STANDARD" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_DRIVER_SQLSRV">
+        DRIVER_SQLSRV
+        <a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_DRIVER_SQLSRV" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
@@ -372,8 +386,8 @@ engine uses the SQL-standard double quote.</p>
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">QUOTE_STANDARD</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;&quot;&#039;</span>
+    <span class="phpdocumentor-signature__name">DRIVER_SQLSRV</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;sqlsrv&#039;</span>
 </code>
 
 
@@ -399,9 +413,9 @@ engine uses the SQL-standard double quote.</p>
             -private
                                                 -read-only                    "
 >
-    <h4 class="phpdocumentor-element__name" id="property_driverName">
-        $driverName
-        <a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#property_driverName" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_pdo">
+        $pdo
+        <a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#property_pdo" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
@@ -409,7 +423,7 @@ engine uses the SQL-standard double quote.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -417,8 +431,8 @@ engine uses the SQL-standard double quote.</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$driverName</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\PDO">PDO</abbr></span>
+    <span class="phpdocumentor-signature__name">$pdo</span>
     </code>
 
     
@@ -436,9 +450,9 @@ engine uses the SQL-standard double quote.</p>
             -private
                                                 -read-only                    "
 >
-    <h4 class="phpdocumentor-element__name" id="property_pdo">
-        $pdo
-        <a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#property_pdo" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_platform">
+        $platform
+        <a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#property_platform" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                         <small class="phpdocumentor-element__modifier">read-only</small>                    </span>
@@ -446,7 +460,7 @@ engine uses the SQL-standard double quote.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
     </aside>
 
@@ -454,8 +468,8 @@ engine uses the SQL-standard double quote.</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__type"><abbr title="\PDO">PDO</abbr></span>
-    <span class="phpdocumentor-signature__name">$pdo</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$platform</span>
     </code>
 
     
@@ -488,7 +502,7 @@ engine uses the SQL-standard double quote.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
@@ -532,7 +546,7 @@ engine uses the SQL-standard double quote.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">62</span>
 
     </aside>
 
@@ -567,7 +581,7 @@ engine uses the SQL-standard double quote.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">75</span>
 
     </aside>
 
@@ -594,6 +608,48 @@ engine uses the SQL-standard double quote.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getPlatform">
+        getPlatform()
+        <a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_getPlatform" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">47</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The SQL platform (dialect) of the engine this session is connected to.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getPlatform</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Resolved once at connection time; consumers (the compiler above all)
+delegate every dialect-sensitive SQL fragment to it.</p>
+</section>
+
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_inTransaction">
         inTransaction()
         <a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_inTransaction" class="headerlink"><i class="fas fa-link"></i></a>
@@ -602,7 +658,7 @@ engine uses the SQL-standard double quote.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">101</span>
 
     </aside>
 
@@ -641,7 +697,7 @@ engine uses the SQL-standard double quote.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">106</span>
 
     </aside>
 
@@ -698,7 +754,7 @@ values instead.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">129</span>
+    <span class="phpdocumentor-element-found-in__line">141</span>
 
     </aside>
 
@@ -747,7 +803,7 @@ values instead.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">105</span>
+    <span class="phpdocumentor-element-found-in__line">125</span>
 
     </aside>
 
@@ -799,7 +855,7 @@ the cases where a literal must be inlined.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">116</span>
+    <span class="phpdocumentor-element-found-in__line">136</span>
 
     </aside>
 
@@ -848,7 +904,7 @@ the cases where a literal must be inlined.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">88</span>
 
     </aside>
 
@@ -868,6 +924,54 @@ the cases where a literal must be inlined.</p>
         
     
     
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_resolvePlatform">
+        resolvePlatform()
+        <a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_resolvePlatform" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Driver/Pdo/PdoConnection.php"><a href="files/src-driver-pdo-pdoconnection.html"><abbr title="src/Driver/Pdo/PdoConnection.php">PdoConnection.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">52</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">resolvePlatform</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$driverName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$driverName</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/G-Orm-Compiler-Platform-PlatformInterface.html"><abbr title="\G\Orm\Compiler\Platform\PlatformInterface">PlatformInterface</abbr></a></span>
+            </section>
+
 </article>
             </section>
 
@@ -892,16 +996,16 @@ the cases where a literal must be inlined.</p>
                 <li>
                     <ul class="phpdocumentor-list -clean">
                                                     <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_DRIVER_MYSQL">DRIVER_MYSQL</a></li>
-                                                    <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_QUOTE_MYSQL">QUOTE_MYSQL</a></li>
-                                                    <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_QUOTE_STANDARD">QUOTE_STANDARD</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_DRIVER_PGSQL">DRIVER_PGSQL</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#constant_DRIVER_SQLSRV">DRIVER_SQLSRV</a></li>
                                             </ul>
                 </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Properties</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#property_driverName">$driverName</a></li>
                                                     <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#property_pdo">$pdo</a></li>
+                                                    <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#property_platform">$platform</a></li>
                                             </ul>
                 </li>
             
@@ -911,12 +1015,14 @@ the cases where a literal must be inlined.</p>
                                             <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method___construct">__construct()</a></li>
                                             <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_beginTransaction">beginTransaction()</a></li>
                                             <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_commit">commit()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_getPlatform">getPlatform()</a></li>
                                             <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_inTransaction">inTransaction()</a></li>
                                             <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_lastInsertId">lastInsertId()</a></li>
                                             <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_prepare">prepare()</a></li>
                                             <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_quote">quote()</a></li>
                                             <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_quoteIdentifier">quoteIdentifier()</a></li>
                                             <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_rollBack">rollBack()</a></li>
+                                            <li class=""><a href="classes/G-Orm-Driver-Pdo-PdoConnection.html#method_resolvePlatform">resolvePlatform()</a></li>
                                     </ul>
             </li>
                     </ul>

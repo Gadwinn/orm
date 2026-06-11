@@ -457,7 +457,7 @@ with AND.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">304</span>
+    <span class="phpdocumentor-element-found-in__line">323</span>
 
     </aside>
 
@@ -496,7 +496,7 @@ with AND.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">259</span>
+    <span class="phpdocumentor-element-found-in__line">278</span>
 
     </aside>
 
@@ -536,7 +536,7 @@ which supports multi-table deletes.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">285</span>
+    <span class="phpdocumentor-element-found-in__line">304</span>
 
     </aside>
 
@@ -590,7 +590,7 @@ rows.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">277</span>
+    <span class="phpdocumentor-element-found-in__line">296</span>
 
     </aside>
 
@@ -702,7 +702,7 @@ up front through update() and insert().</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">268</span>
+    <span class="phpdocumentor-element-found-in__line">287</span>
 
     </aside>
 
@@ -755,7 +755,7 @@ up front through update() and insert().</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">297</span>
+    <span class="phpdocumentor-element-found-in__line">316</span>
 
     </aside>
 
@@ -794,7 +794,7 @@ up front through update() and insert().</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">161</span>
+    <span class="phpdocumentor-element-found-in__line">171</span>
 
     </aside>
 
@@ -843,7 +843,7 @@ up front through update() and insert().</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">171</span>
+    <span class="phpdocumentor-element-found-in__line">186</span>
 
     </aside>
 
@@ -851,22 +851,23 @@ up front through update() and insert().</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">groupByRaw</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__variadic-operator">...</span><span class="phpdocumentor-signature__argument__name">$expressions</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
+                    <span class="phpdocumentor-signature__name">groupByRaw</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">literal-string&nbsp;</span><span class="phpdocumentor-signature__argument__variadic-operator">...</span><span class="phpdocumentor-signature__argument__name">$expressions</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
         <section class="phpdocumentor-description"><p>Trusted surface: it bypasses the identifier whitelist that guards
 groupBy(), so it can carry native grouping expressions such as
-&quot;YEAR(created_at)&quot;. The caller owns its safety — it must never be
-assembled from external input.</p>
+&quot;YEAR(created_at)&quot;. The literal-string constraint makes PHPStan reject
+any expression assembled from external or runtime input at the call
+site. A blank expression is rejected at call time.</p>
 </section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$expressions</span>
-                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                : <span class="phpdocumentor-argument-list__argument__type">literal-string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -874,6 +875,22 @@ assembled from external input.</p>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="method_groupByRaw_tags">
+        Tags
+        <a href="classes/G-Orm-Contract-QueryBuilderInterface.html#method_groupByRaw_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">throws</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/G-Orm-Exception-QueryException.html"><abbr title="\G\Orm\Exception\QueryException">QueryException</abbr></a></span>
+                                                                                        <section class="phpdocumentor-description"><p>When an expression is blank.</p>
+</section>
+
+                                    </dd>
+                        </dl>
 
         
     
@@ -897,7 +914,7 @@ assembled from external input.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">182</span>
+    <span class="phpdocumentor-element-found-in__line">197</span>
 
     </aside>
 
@@ -964,7 +981,7 @@ returns the builder.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">200</span>
+    <span class="phpdocumentor-element-found-in__line">219</span>
 
     </aside>
 
@@ -972,24 +989,25 @@ returns the builder.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">havingRaw</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expression</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$bindings</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
+                    <span class="phpdocumentor-signature__name">havingRaw</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">literal-string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expression</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$bindings</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
         <section class="phpdocumentor-description"><p>Trusted surface: the expression is emitted verbatim and is not validated
 against the identifier whitelist that guards having(), so it can carry
-aggregate expressions such as &quot;COUNT(*) &gt; ?&quot;. The caller owns its safety —
-it must be a literal/developer-controlled fragment, never built from
-external input — and every value must travel through a &quot;?&quot; placeholder via
-$bindings rather than being interpolated.</p>
+aggregate expressions such as &quot;COUNT(*) &gt; ?&quot;. The literal-string
+constraint makes PHPStan reject any expression assembled from external or
+runtime input at the call site; every value must travel through a &quot;?&quot;
+placeholder via $bindings rather than being interpolated. A blank
+expression is rejected at call time.</p>
 </section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$expression</span>
-                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                : <span class="phpdocumentor-argument-list__argument__type">literal-string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -1004,6 +1022,22 @@ $bindings rather than being interpolated.</p>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="method_havingRaw_tags">
+        Tags
+        <a href="classes/G-Orm-Contract-QueryBuilderInterface.html#method_havingRaw_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">throws</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/G-Orm-Exception-QueryException.html"><abbr title="\G\Orm\Exception\QueryException">QueryException</abbr></a></span>
+                                                                                        <section class="phpdocumentor-description"><p>When the expression is blank.</p>
+</section>
+
+                                    </dd>
+                        </dl>
 
         
     
@@ -1027,7 +1061,7 @@ $bindings rather than being interpolated.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">122</span>
+    <span class="phpdocumentor-element-found-in__line">126</span>
 
     </aside>
 
@@ -1083,7 +1117,7 @@ $bindings rather than being interpolated.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">218</span>
+    <span class="phpdocumentor-element-found-in__line">237</span>
 
     </aside>
 
@@ -1135,7 +1169,7 @@ accepts a payload itself.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 
     </aside>
 
@@ -1201,7 +1235,7 @@ condition for the manual form.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">129</span>
+    <span class="phpdocumentor-element-found-in__line">133</span>
 
     </aside>
 
@@ -1257,7 +1291,7 @@ condition for the manual form.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">205</span>
+    <span class="phpdocumentor-element-found-in__line">224</span>
 
     </aside>
 
@@ -1306,7 +1340,7 @@ condition for the manual form.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">210</span>
+    <span class="phpdocumentor-element-found-in__line">229</span>
 
     </aside>
 
@@ -1355,7 +1389,7 @@ condition for the manual form.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">146</span>
+    <span class="phpdocumentor-element-found-in__line">150</span>
 
     </aside>
 
@@ -1416,7 +1450,7 @@ an unsafe identifier raises a QueryException.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">156</span>
+    <span class="phpdocumentor-element-found-in__line">166</span>
 
     </aside>
 
@@ -1424,22 +1458,24 @@ an unsafe identifier raises a QueryException.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">orderByRaw</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expression</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
+                    <span class="phpdocumentor-signature__name">orderByRaw</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">literal-string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expression</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
     
         <section class="phpdocumentor-description"><p>Trusted surface: it bypasses the identifier/direction whitelist that
 guards orderBy(), so it can carry native ordering expressions such as
-&quot;LOWER(name) DESC&quot; or &quot;FIELD(status, 'a', 'b')&quot;. The caller owns its
-safety — it must never be assembled from external input.</p>
+&quot;LOWER(name) DESC&quot; or &quot;FIELD(status, 'a', 'b')&quot;. The literal-string
+constraint makes PHPStan reject any expression assembled from external or
+runtime input at the call site. A blank expression is rejected at call
+time.</p>
 </section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$expression</span>
-                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                : <span class="phpdocumentor-argument-list__argument__type">literal-string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -1447,6 +1483,22 @@ safety — it must never be assembled from external input.</p>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="method_orderByRaw_tags">
+        Tags
+        <a href="classes/G-Orm-Contract-QueryBuilderInterface.html#method_orderByRaw_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">throws</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/G-Orm-Exception-QueryException.html"><abbr title="\G\Orm\Exception\QueryException">QueryException</abbr></a></span>
+                                                                                        <section class="phpdocumentor-description"><p>When the expression is blank.</p>
+</section>
+
+                                    </dd>
+                        </dl>
 
         
     
@@ -1533,7 +1585,7 @@ safety — it must never be assembled from external input.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">136</span>
+    <span class="phpdocumentor-element-found-in__line">140</span>
 
     </aside>
 
@@ -1638,7 +1690,7 @@ safety — it must never be assembled from external input.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">253</span>
+    <span class="phpdocumentor-element-found-in__line">272</span>
 
     </aside>
 
@@ -1704,7 +1756,7 @@ single column name.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">290</span>
+    <span class="phpdocumentor-element-found-in__line">309</span>
 
     </aside>
 
@@ -1743,7 +1795,7 @@ single column name.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">239</span>
+    <span class="phpdocumentor-element-found-in__line">258</span>
 
     </aside>
 
@@ -1795,7 +1847,7 @@ accepts a payload itself.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">231</span>
+    <span class="phpdocumentor-element-found-in__line">250</span>
 
     </aside>
 
@@ -1928,7 +1980,7 @@ returned (manual form).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Contract/QueryBuilderInterface.php"><a href="files/src-contract-querybuilderinterface.html"><abbr title="src/Contract/QueryBuilderInterface.php">QueryBuilderInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">99</span>
+    <span class="phpdocumentor-element-found-in__line">103</span>
 
     </aside>
 
@@ -1937,7 +1989,7 @@ with AND.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">whereRaw</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expression</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$bindings</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
+                    <span class="phpdocumentor-signature__name">whereRaw</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">literal-string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expression</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$bindings</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1945,17 +1997,18 @@ with AND.</p>
         <section class="phpdocumentor-description"><p>Trusted surface: the expression is emitted verbatim and bypasses the
 identifier whitelist that guards where(), so it can carry native
 functions and database-specific syntax (e.g. &quot;LOWER(email) = ?&quot;,
-&quot;JSON_EXTRACT(meta, '$.tier') = ?&quot;). The caller owns its safety — it must
-be a literal/developer-controlled fragment, never built from external
-input — and every value must travel through a &quot;?&quot; placeholder via
-$bindings rather than being interpolated.</p>
+&quot;JSON_EXTRACT(meta, '$.tier') = ?&quot;). The literal-string constraint makes
+PHPStan reject any expression assembled from external or runtime input at
+the call site; every value must travel through a &quot;?&quot; placeholder via
+$bindings rather than being interpolated. A blank expression is rejected
+at call time.</p>
 </section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-argument-list__argument__name">$expression</span>
-                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                : <span class="phpdocumentor-argument-list__argument__type">literal-string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -1970,6 +2023,22 @@ $bindings rather than being interpolated.</p>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="method_whereRaw_tags">
+        Tags
+        <a href="classes/G-Orm-Contract-QueryBuilderInterface.html#method_whereRaw_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">throws</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/G-Orm-Exception-QueryException.html"><abbr title="\G\Orm\Exception\QueryException">QueryException</abbr></a></span>
+                                                                                        <section class="phpdocumentor-description"><p>When the expression is blank.</p>
+</section>
+
+                                    </dd>
+                        </dl>
 
         
     
