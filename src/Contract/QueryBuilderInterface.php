@@ -287,6 +287,20 @@ interface QueryBuilderInterface
     public function get(): array;
 
     /**
+     * Execute a SELECT and stream the matching rows one at a time.
+     *
+     * The streaming counterpart of get(): same compiled query, but rows are
+     * yielded as they are fetched rather than collected into an array, so the
+     * memory footprint stays flat over large exports and batch jobs. The
+     * underlying statement remains open until the generator is exhausted.
+     *
+     * @return \Generator<int, array<string, mixed>>
+     *
+     * @throws \G\Orm\Exception\QueryException
+     */
+    public function cursor(): \Generator;
+
+    /**
      * Execute a SELECT and return the first matching row, or null.
      *
      * @return array<string, mixed>|null

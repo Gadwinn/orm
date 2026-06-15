@@ -243,6 +243,25 @@ $orm->flush();                   // UPDATE users SET name = ? WHERE id = ?
 
 An empty/`*` select is auto-expanded to alias-prefixed entity columns; an explicit root-only select (`u.*`) returns the roots alone and leaves relations untouched — never lazily fetched.
 
+### Streaming large result sets: `cursor()`
+
+`get()` materialises the whole result set; for exports and batch jobs that don't fit comfortably in memory, `cursor()` is the streaming counterpart — same compiled query, but rows are *yielded* one at a time instead of collected into an array. It keeps the builder's compilation (WHERE, JOIN, bindings) instead of dropping to hand-written SQL on the raw driver.
+
+```php
+foreach ($orm->query()->from('orders')->where('archived', '=', 0)->cursor() as $row) {
+    fputcsv($out, $row);     // one row in memory at a time
+}
+```
+
+> **Memory note:** fetching row by row only lowers the footprint when the driver isn't buffering the whole set client-side. SQLite streams natively; **MySQL buffers by default** — enable real streaming by passing the PDO attribute through the connection `options`, after which no other query may run on that connection until the cursor is drained:
+> ```php
+> $orm = OrmFactory::connect([
+>     'driver' => 'mysql', 'host' => '127.0.0.1', 'dbname' => 'shop', 'user' => 'app',
+>     'options' => [\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false],
+> ]);
+> ```
+> `cursor()` yields plain rows (read-only). It is deliberately not an entity terminal: streaming hydration would either retain every entity in the Identity Map — defeating the purpose — or yield untracked entities that silently skip change detection. Need typed objects in a stream? Hydrate from the yielded rows yourself, or page through `getEntities()` with `limit()`/`offset()`.
+
 ### Writes through the builder
 
 ```php

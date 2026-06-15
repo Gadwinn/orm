@@ -16,6 +16,7 @@ use G\Orm\Contract\QueryExpressionClauseInterface;
 use G\Orm\Contract\UnitOfWorkInterface;
 use G\Orm\Exception\QueryException;
 use G\Orm\Mapping\RelationType;
+use Generator;
 use ReflectionProperty;
 
 /**
@@ -378,6 +379,37 @@ final class QueryBuilder implements QueryBuilderInterface
         $statement = $this->connection->prepare($compiled->sql);
 
         return $statement->execute($compiled->bindings)->fetchAll();
+    }
+
+    /**
+     * Execute a SELECT and stream the rows one at a time instead of
+     * materialising the whole result set, as get() does.
+     *
+     * The same compiled query and bindings as get(); only the consumption
+     * differs. Use it for exports and batch jobs where the result set would
+     * not fit comfortably in memory. The statement stays open for the life of
+     * the generator, so iterate it to completion (or let it fall out of
+     * scope) before issuing another query on an unbuffered connection.
+     *
+     * Memory note: fetching row by row only lowers the footprint when the
+     * driver itself does not buffer the whole set client-side. SQLite streams
+     * natively; MySQL buffers by default — pass
+     * PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false through the connection
+     * "options" to stream there too (no other query may run on that
+     * connection until the cursor is drained).
+     *
+     * @return Generator<int, array<string, mixed>>
+     *
+     * @throws QueryException
+     */
+    public function cursor(): Generator
+    {
+        $compiled = $this->compile();
+        $result = $this->connection->prepare($compiled->sql)->execute($compiled->bindings);
+
+        while (($row = $result->fetchAssociative()) !== null) {
+            yield $row;
+        }
     }
 
     /**
