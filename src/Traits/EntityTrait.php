@@ -23,7 +23,7 @@ use G\Orm\Registry\OrmRegistry;
  *
  * Relation-hydration guideline:
  *
- * Relations remain explicit — the trait provides no magic loading. Write
+ * Relations remain explicit - the trait provides no magic loading. Write
  * relation accessors by hand as concise wrappers around a registry-resolved
  * repository, using the protected orm() helper:
  *

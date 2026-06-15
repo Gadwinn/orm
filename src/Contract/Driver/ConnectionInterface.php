@@ -56,7 +56,7 @@ interface ConnectionInterface
      * The last inserted id is state owned by the database session, not by an
      * individual statement result. For tables with a composite primary key
      * (no single auto-generated column) this returns 0, or throws, depending
-     * on the engine — standard behaviour; callers must rely on extracted key
+     * on the engine - standard behaviour; callers must rely on extracted key
      * values instead.
      *
      * @param string|null $name Optional sequence name (e.g. PostgreSQL).

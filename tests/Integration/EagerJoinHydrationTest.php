@@ -152,7 +152,7 @@ final class EagerJoinHydrationTest extends OrmTestCase
     /**
      * The fix for the silent-update hole: an entity hydrated by the eager
      * terminal is registered with the Unit Of Work (snapshot included), so
-     * mutating it and flushing writes the diff — it is never a second-class,
+     * mutating it and flushing writes the diff - it is never a second-class,
      * untracked instance.
      */
     public function testEntitiesHydratedByTheEagerTerminalAreChangeTracked(): void

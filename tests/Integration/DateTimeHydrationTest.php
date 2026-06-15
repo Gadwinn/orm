@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 /**
  * End-to-end life of a DateTimeImmutable column through the converter seam:
  * bound as a scalar string on INSERT, hydrated back into a fresh instance,
- * and change-tracked against its scalar snapshot — so replacing the object
+ * and change-tracked against its scalar snapshot - so replacing the object
  * with an equal instance is silent, and replacing it with a different one
  * diffs into a single-column UPDATE.
  */

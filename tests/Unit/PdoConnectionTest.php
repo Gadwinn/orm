@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * The PDO connection wrapper: engine-aware identifier quoting, explicit
  * transaction control, value quoting, last-insert-id retrieval and statement
- * preparation — including the failure paths that translate PDOExceptions into
+ * preparation - including the failure paths that translate PDOExceptions into
  * the ORM's typed exception hierarchy.
  */
 #[CoversClass(PdoConnection::class)]

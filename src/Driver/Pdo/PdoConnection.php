@@ -20,8 +20,8 @@ use PDOException;
 /**
  * PDO-backed connection wrapping a native \PDO instance.
  *
- * Transaction control is explicit and never implicit. Every dialect concern —
- * identifier quoting included — is owned by the {@see PlatformInterface}
+ * Transaction control is explicit and never implicit. Every dialect concern -
+ * identifier quoting included - is owned by the {@see PlatformInterface}
  * resolved from the PDO driver name at construction time; the connection
  * itself carries no engine-specific behaviour.
  */

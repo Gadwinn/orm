@@ -11,7 +11,7 @@ namespace G\Orm\Event;
  * entity's snapshot and is handed to #[BeforeUpdate]/#[AfterUpdate] hooks and
  * the matching events. Keys are mapped column names (which equal the property
  * name for a default mapping), so a hook can guard its behaviour on whether a
- * field genuinely changed — the canonical use being to avoid rewriting a value
+ * field genuinely changed - the canonical use being to avoid rewriting a value
  * the caller never touched.
  */
 final class Changeset

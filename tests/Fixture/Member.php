@@ -14,7 +14,7 @@ use G\Orm\Mapping\Table;
  * Fixture exercising the #[BeforeUpdate] hook and its Changeset argument.
  *
  * The hook audits every update with a fresh timestamp, but only ever rewrites
- * the password when it was genuinely part of the change set — so an unrelated
+ * the password when it was genuinely part of the change set - so an unrelated
  * edit can never silently re-hash a credential it never touched.
  */
 #[Table('members')]

@@ -60,7 +60,7 @@ final class PlatformCompilationTest extends OrmTestCase
 
     /**
      * Fail-fast rule: REGEXP_LIKE() only exists on SQL Server 2025+/Azure, so
-     * the platform refuses to compile regex predicates at all — a loud
+     * the platform refuses to compile regex predicates at all - a loud
      * compile-time QueryException instead of SQL that breaks at runtime on
      * the 2019/2022 servers still in production.
      */

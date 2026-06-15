@@ -11,7 +11,7 @@ use G\Orm\Mapping\Table;
 
 /**
  * Fixture with a rich temporal column: the DateTimeImmutable property crosses
- * the database boundary through the built-in value converter — persisted as a
+ * the database boundary through the built-in value converter - persisted as a
  * "Y-m-d H:i:s" string, hydrated back into a fresh instance, and snapshot as
  * its scalar form so change tracking diffs values, never references.
  */

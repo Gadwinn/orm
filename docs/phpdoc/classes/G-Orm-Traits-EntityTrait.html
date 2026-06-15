@@ -122,7 +122,7 @@ runtime that has bound a manager to the current context.</p>
 save() and remove() never issue SQL directly, so snapshots, change
 detection and transactions stay unified with the rest of the ORM.</p>
 <p>Relation-hydration guideline:</p>
-<p>Relations remain explicit — the trait provides no magic loading. Write
+<p>Relations remain explicit - the trait provides no magic loading. Write
 relation accessors by hand as concise wrappers around a registry-resolved
 repository, using the protected orm() helper:</p>
 <pre class="prettyprint"><code class="prettyprint">public function address(): ?Address

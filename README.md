@@ -9,8 +9,8 @@ No lazy loading, no proxies, no magic property access. Entities are plain PHP ob
 | Concern | Choice |
 |---|---|
 | Language | PHP **>= 8.3** (typed properties, enums, attributes) |
-| Persistence | PDO (`ext-pdo`) — MySQL/MariaDB, PostgreSQL, SQLite, SQL Server |
-| Events | PSR-14 (`psr/event-dispatcher`) — optional external dispatch |
+| Persistence | PDO (`ext-pdo`) - MySQL/MariaDB, PostgreSQL, SQLite, SQL Server |
+| Events | PSR-14 (`psr/event-dispatcher`) - optional external dispatch |
 | Mapping | Native PHP attributes only (no XML/YAML/annotations) |
 | Quality bar | PHPStan level max · PSR-12 · zero magic numbers |
 
@@ -22,11 +22,11 @@ Architecture: Unit of Work · Identity Map · Repository · Hydrator (+ value co
 composer require gadwinn/orm
 ```
 
-`ext-pdo` is a hard requirement. Install the concrete PDO driver for your database (`ext-pdo_mysql`, `ext-pdo_sqlite`, …) — these are advertised via `suggest`.
+`ext-pdo` is a hard requirement. Install the concrete PDO driver for your database (`ext-pdo_mysql`, `ext-pdo_sqlite`, …) - these are advertised via `suggest`.
 
 ## Bootstrap
 
-`OrmFactory` is the composition root. It accepts three configuration shapes — pick whichever fits your environment — and wires a fully configured manager (connection, SQL dialect, Unit of Work) per database.
+`OrmFactory` is the composition root. It accepts three configuration shapes - pick whichever fits your environment - and wires a fully configured manager (connection, SQL dialect, Unit of Work) per database.
 
 ```php
 use G\Orm\Factory\OrmFactory;
@@ -54,13 +54,13 @@ $orm = OrmFactory::connect('sqlite::memory:');
 
 Configuration notes:
 
-- **URI** — percent-encoded credentials are decoded (`p%40ss` → `p@ss`); recognised query parameters (`charset`, `unix_socket`) are forwarded, unknown ones (e.g. `serverVersion`) are silently ignored for compatibility with configs written for other stacks.
-- **DSN** — a bare PDO DSN cannot carry credentials; when a user/password is needed, use the URI form or the array form (`['dsn' => ..., 'user' => ..., 'password' => ...]`).
-- **Security** — when a URI cannot be parsed, the exception deliberately never echoes the configuration string, so credentials can't leak into logs. Keep connection strings in environment variables, not in code.
+- **URI** - percent-encoded credentials are decoded (`p%40ss` → `p@ss`); recognised query parameters (`charset`, `unix_socket`) are forwarded, unknown ones (e.g. `serverVersion`) are silently ignored for compatibility with configs written for other stacks.
+- **DSN** - a bare PDO DSN cannot carry credentials; when a user/password is needed, use the URI form or the array form (`['dsn' => ..., 'user' => ..., 'password' => ...]`).
+- **Security** - when a URI cannot be parsed, the exception deliberately never echoes the configuration string, so credentials can't leak into logs. Keep connection strings in environment variables, not in code.
 
 ### Multiple databases
 
-The factory holds **named** configurations and lazily builds one manager per name, cached for its lifetime. Each named manager owns its private connection, Unit of Work and Identity Map — two databases never share tracking state, and transactions are per connection.
+The factory holds **named** configurations and lazily builds one manager per name, cached for its lifetime. Each named manager owns its private connection, Unit of Work and Identity Map - two databases never share tracking state, and transactions are per connection.
 
 ```php
 $factory = new OrmFactory([
@@ -77,7 +77,7 @@ $shop->persist($order);
 $shop->flush();                                // touches the shop database only
 ```
 
-An unknown name raises a `ConnectionException` listing the configured names. With `EntityTrait`/`OrmRegistry`, bind the manager that owns the entity's database (`OrmRegistry::set($factory->manager('analytics'))`) — the registry holds one manager per execution context.
+An unknown name raises a `ConnectionException` listing the configured names. With `EntityTrait`/`OrmRegistry`, bind the manager that owns the entity's database (`OrmRegistry::set($factory->manager('analytics'))`) - the registry holds one manager per execution context.
 
 ### Low-level wiring
 
@@ -91,7 +91,7 @@ $connection = (new PdoDriver())->connect(OrmFactory::normalise('mysql://app:secr
 $orm = DbManager::create($connection);
 ```
 
-PDO is configured for real prepared statements (`ATTR_EMULATE_PREPARES => false`), exception error mode, and associative fetch. Pass integer-keyed PDO attributes under the `options` key of the array form to override. Every binding — bulk or individual — travels with its inferred PDO type (`int`, `bool`, `null`, `string`), never as a stringly-typed blob. The SQL dialect ([see Platforms](#sql-dialects-platform-layer)) is resolved from the PDO driver name at connection time.
+PDO is configured for real prepared statements (`ATTR_EMULATE_PREPARES => false`), exception error mode, and associative fetch. Pass integer-keyed PDO attributes under the `options` key of the array form to override. Every binding - bulk or individual - travels with its inferred PDO type (`int`, `bool`, `null`, `string`), never as a stringly-typed blob. The SQL dialect ([see Platforms](#sql-dialects-platform-layer)) is resolved from the PDO driver name at connection time.
 
 ## Map an entity
 
@@ -123,7 +123,7 @@ final class User
     #[Column(name: 'created_at')]
     public DateTimeImmutable $createdAt;   // stored as "Y-m-d H:i:s"
 
-    // Relations are descriptive metadata only — they never auto-load.
+    // Relations are descriptive metadata only - they never auto-load.
     #[BelongsTo(targetEntity: Address::class, foreignKey: 'address_id')]
     public ?Address $address = null;
 }
@@ -135,18 +135,18 @@ Relation attributes: `#[BelongsTo(targetEntity, foreignKey)]` (owning side), `#[
 
 # The four ways to use it
 
-The manager exposes four usage levels — pick your altitude per call site, mix freely. They all share the same connection, transaction, and (for the upper two) the same Unit of Work.
+The manager exposes four usage levels - pick your altitude per call site, mix freely. They all share the same connection, transaction, and (for the upper two) the same Unit of Work.
 
 | Level | Surface | Returns |
 |---|---|---|
 | 1. Raw SQL | `$orm->query($sql, $bindings)` | rows or affected count |
 | 2. Query builder | `$orm->query()` | rows, count, or tracked entities |
 | 3. Repositories | `$orm->repository(User::class)` | tracked entities |
-| 4. Unit of Work / Active record | `persist` / `flush` / `EntityTrait` | — |
+| 4. Unit of Work / Active record | `persist` / `flush` / `EntityTrait` | - |
 
 ## 1. Raw SQL
 
-`query()` with a SQL string executes immediately. The driver — not a keyword heuristic — decides what comes back: statements that produce a result set return rows, anything else returns the affected-row count. Leading comments, parenthesised SELECTs and data-modifying CTEs are all classified correctly.
+`query()` with a SQL string executes immediately. The driver - not a keyword heuristic - decides what comes back: statements that produce a result set return rows, anything else returns the affected-row count. Leading comments, parenthesised SELECTs and data-modifying CTEs are all classified correctly.
 
 ```php
 $rows  = $orm->query('SELECT * FROM users WHERE email = ?', ['ada@example.com']); // list<array>
@@ -187,13 +187,13 @@ Clause operators: `eq · neq · gt · gte · lt · lte · like · notLike · reg
 
 ### Validated by default, raw by intent
 
-The standard surfaces are **hard-validated**: operators against a closed whitelist, sort directions against `ASC|DESC`, and every column reaching a non-parameterisable clause (WHERE/HAVING column, ORDER BY, GROUP BY) against a strict identifier pattern (`col` or `alias.col`, nothing else). A user-supplied sort field or operator can therefore be passed straight through — an injection payload raises a `QueryException`, it never reaches the SQL.
+The standard surfaces are **hard-validated**: operators against a closed whitelist, sort directions against `ASC|DESC`, and every column reaching a non-parameterisable clause (WHERE/HAVING column, ORDER BY, GROUP BY) against a strict identifier pattern (`col` or `alias.col`, nothing else). A user-supplied sort field or operator can therefore be passed straight through - an injection payload raises a `QueryException`, it never reaches the SQL.
 
 ```php
 $orm->query()->from('users')->orderBy($_GET['sort'] ?? 'id', $_GET['dir'] ?? 'ASC'); // safe
 ```
 
-When you need native SQL power (functions, JSON paths, aggregates), reach for the explicit **raw escape hatches**. They emit the expression verbatim — and PHPStan's `literal-string` constraint rejects any expression assembled from runtime input at the call site, so values must travel through `?` bindings:
+When you need native SQL power (functions, JSON paths, aggregates), reach for the explicit **raw escape hatches**. They emit the expression verbatim - and PHPStan's `literal-string` constraint rejects any expression assembled from runtime input at the call site, so values must travel through `?` bindings:
 
 ```php
 $orm->query()
@@ -213,14 +213,14 @@ $orm->query()
 **Entity-style joins** resolve the table and the `ON` condition from relation metadata; **manual joins** require an explicit condition:
 
 ```php
-// Entity join — ON clause derived from the BelongsTo relation
+// Entity join - ON clause derived from the BelongsTo relation
 $rows = $orm->query()
     ->from(User::class, 'u')
     ->leftJoin(Address::class, 'a')
     ->where('u.id', '=', 1)
     ->get();
 
-// Manual join — explicit ON condition is mandatory
+// Manual join - explicit ON condition is mandatory
 $rows = $orm->query()
     ->from('orders')
     ->join('customers', 'orders.customer_id = customers.id')
@@ -229,7 +229,7 @@ $rows = $orm->query()
 
 ### Eager hydration: `getEntities()`
 
-The SELECT-driven eager terminal. No `with()`, no proxies: which relations are hydrated is decided strictly by the columns present in the result set. Every hydrated entity — root and joined alike — is **registered with the Unit of Work**, so it is change-tracked exactly like a repository-loaded one.
+The SELECT-driven eager terminal. No `with()`, no proxies: which relations are hydrated is decided strictly by the columns present in the result set. Every hydrated entity - root and joined alike - is **registered with the Unit of Work**, so it is change-tracked exactly like a repository-loaded one.
 
 ```php
 $users = $orm->query()
@@ -241,11 +241,11 @@ $users[0]->name = 'Ada Lovelace';
 $orm->flush();                   // UPDATE users SET name = ? WHERE id = ?
 ```
 
-An empty/`*` select is auto-expanded to alias-prefixed entity columns; an explicit root-only select (`u.*`) returns the roots alone and leaves relations untouched — never lazily fetched.
+An empty/`*` select is auto-expanded to alias-prefixed entity columns; an explicit root-only select (`u.*`) returns the roots alone and leaves relations untouched - never lazily fetched.
 
 ### Streaming large result sets: `cursor()`
 
-`get()` materialises the whole result set; for exports and batch jobs that don't fit comfortably in memory, `cursor()` is the streaming counterpart — same compiled query, but rows are *yielded* one at a time instead of collected into an array. It keeps the builder's compilation (WHERE, JOIN, bindings) instead of dropping to hand-written SQL on the raw driver.
+`get()` materialises the whole result set; for exports and batch jobs that don't fit comfortably in memory, `cursor()` is the streaming counterpart - same compiled query, but rows are *yielded* one at a time instead of collected into an array. It keeps the builder's compilation (WHERE, JOIN, bindings) instead of dropping to hand-written SQL on the raw driver.
 
 ```php
 foreach ($orm->query()->from('orders')->where('archived', '=', 0)->cursor() as $row) {
@@ -253,14 +253,14 @@ foreach ($orm->query()->from('orders')->where('archived', '=', 0)->cursor() as $
 }
 ```
 
-> **Memory note:** fetching row by row only lowers the footprint when the driver isn't buffering the whole set client-side. SQLite streams natively; **MySQL buffers by default** — enable real streaming by passing the PDO attribute through the connection `options`, after which no other query may run on that connection until the cursor is drained:
+> **Memory note:** fetching row by row only lowers the footprint when the driver isn't buffering the whole set client-side. SQLite streams natively; **MySQL buffers by default** - enable real streaming by passing the PDO attribute through the connection `options`, after which no other query may run on that connection until the cursor is drained:
 > ```php
 > $orm = OrmFactory::connect([
 >     'driver' => 'mysql', 'host' => '127.0.0.1', 'dbname' => 'shop', 'user' => 'app',
 >     'options' => [\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false],
 > ]);
 > ```
-> `cursor()` yields plain rows (read-only). It is deliberately not an entity terminal: streaming hydration would either retain every entity in the Identity Map — defeating the purpose — or yield untracked entities that silently skip change detection. Need typed objects in a stream? Hydrate from the yielded rows yourself, or page through `getEntities()` with `limit()`/`offset()`.
+> `cursor()` yields plain rows (read-only). It is deliberately not an entity terminal: streaming hydration would either retain every entity in the Identity Map - defeating the purpose - or yield untracked entities that silently skip change detection. Need typed objects in a stream? Hydrate from the yielded rows yourself, or page through `getEntities()` with `limit()`/`offset()`.
 
 ### Writes through the builder
 
@@ -324,7 +324,7 @@ $admins = $orm->repository(User::class)->activeAdmins();
 
 ## 4. Unit of Work
 
-Mutations are staged and applied on `flush()`. Updates are derived from a snapshot diff — only changed columns are written. A generated identifier is back-filled onto the entity after insert.
+Mutations are staged and applied on `flush()`. Updates are derived from a snapshot diff - only changed columns are written. A generated identifier is back-filled onto the entity after insert.
 
 ```php
 $user = new User();
@@ -332,10 +332,10 @@ $user->name  = 'Ada';
 $user->email = 'ada@example.com';
 
 $orm->persist($user);
-$orm->flush();              // INSERT — $user->id is now populated
+$orm->flush();              // INSERT - $user->id is now populated
 
 $user->name = 'Ada Lovelace';
-$orm->flush();              // UPDATE — snapshot diff, name column only
+$orm->flush();              // UPDATE - snapshot diff, name column only
 
 $orm->remove($user);
 $orm->flush();              // DELETE
@@ -345,13 +345,13 @@ $orm->flush();              // DELETE
 
 The flush pipeline fails loudly instead of drifting silently:
 
-- **Re-entrant flush** — a lifecycle hook or listener calling `flush()` from inside a running flush raises `OrmException` instead of double-writing or recursing. Staging *intentions* from a hook (`persist()` without flush) is supported: they survive the running flush and are written by the next one.
-- **Incomplete primary key** — an UPDATE/DELETE whose entity has no fully-initialised key is rejected before any hook fires (a `pk = NULL` predicate would silently match nothing).
-- **Lost update detection** — an UPDATE/DELETE that affects zero rows (the row vanished under a concurrent transaction) aborts the flush, rolls back, and purges the now-stale in-memory state.
+- **Re-entrant flush** - a lifecycle hook or listener calling `flush()` from inside a running flush raises `OrmException` instead of double-writing or recursing. Staging *intentions* from a hook (`persist()` without flush) is supported: they survive the running flush and are written by the next one.
+- **Incomplete primary key** - an UPDATE/DELETE whose entity has no fully-initialised key is rejected before any hook fires (a `pk = NULL` predicate would silently match nothing).
+- **Lost update detection** - an UPDATE/DELETE that affects zero rows (the row vanished under a concurrent transaction) aborts the flush, rolls back, and purges the now-stale in-memory state.
 
 ### Active-record trait (optional)
 
-`EntityTrait` adds convenience helpers while keeping entities pure POPOs — no base class, no injected state. It resolves the active manager through `OrmRegistry`, bound once per execution context.
+`EntityTrait` adds convenience helpers while keeping entities pure POPOs - no base class, no injected state. It resolves the active manager through `OrmRegistry`, bound once per execution context.
 
 ```php
 use G\Orm\Registry\OrmRegistry;
@@ -377,7 +377,7 @@ $repo  = User::repository();
 OrmRegistry::clear();       // reset at the request / coroutine boundary
 ```
 
-For concurrent runtimes (Swoole/RoadRunner/FrankenPHP), install a context-aware resolver once at worker start via `OrmRegistry::useResolver(...)`; entity code stays unchanged. Relation accessors stay explicit — write them by hand over the protected `orm()` helper rather than hiding queries behind property access.
+For concurrent runtimes (Swoole/RoadRunner/FrankenPHP), install a context-aware resolver once at worker start via `OrmRegistry::useResolver(...)`; entity code stays unchanged. Relation accessors stay explicit - write them by hand over the protected `orm()` helper rather than hiding queries behind property access.
 
 ---
 
@@ -451,7 +451,7 @@ Dialect-sensitive SQL is owned by a `PlatformInterface`, resolved once from `PDO
 | SQLite *(default/fallback)* | `"col"` | `col REGEXP ?` (requires a registered `regexp()` function) |
 | SQL Server | `[col]` | **rejected at compile time** |
 
-PostgreSQL's `~*` is selected deliberately over `~`: MySQL and SQLite match case-insensitively by default, so the insensitive variant is the only unified cross-platform behaviour (case-sensitive `~` stays reachable via `whereRaw()`). SQL Server throws a `QueryException` instead of emitting `REGEXP_LIKE()`, which only exists on SQL Server 2025+/Azure — fail fast at the call site rather than at runtime on a 2019/2022 server.
+PostgreSQL's `~*` is selected deliberately over `~`: MySQL and SQLite match case-insensitively by default, so the insensitive variant is the only unified cross-platform behaviour (case-sensitive `~` stays reachable via `whereRaw()`). SQL Server throws a `QueryException` instead of emitting `REGEXP_LIKE()`, which only exists on SQL Server 2025+/Azure - fail fast at the call site rather than at runtime on a 2019/2022 server.
 
 ## Value converters (rich types)
 

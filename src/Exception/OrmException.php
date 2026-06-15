@@ -29,7 +29,7 @@ final class OrmException extends RuntimeException implements OrmExceptionInterfa
     }
 
     /**
-     * flush() was re-entered while a flush was already running — typically a
+     * flush() was re-entered while a flush was already running - typically a
      * lifecycle hook or PSR-14 listener calling flush()/save() from inside the
      * write pipeline, which would re-process the still-pending intention queues.
      */
@@ -62,7 +62,7 @@ final class OrmException extends RuntimeException implements OrmExceptionInterfa
 
     /**
      * A raw database value could not be converted into its rich PHP
-     * representation — e.g. a malformed temporal string reaching a
+     * representation - e.g. a malformed temporal string reaching a
      * DateTimeImmutable property.
      */
     public static function invalidTemporalValue(string $value, Throwable $previous): self
@@ -76,7 +76,7 @@ final class OrmException extends RuntimeException implements OrmExceptionInterfa
 
     /**
      * A flushed UPDATE or DELETE affected no row: the database row no longer
-     * matches the entity's identity — typically deleted by a concurrent
+     * matches the entity's identity - typically deleted by a concurrent
      * transaction. The flush is aborted so the desync cannot pass silently.
      *
      * @param class-string $entityClass

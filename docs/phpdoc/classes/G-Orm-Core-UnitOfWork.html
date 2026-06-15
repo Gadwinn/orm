@@ -143,8 +143,8 @@ snapshot and only the changed, non-key columns are written.</p>
 value. Partial hydration is honoured through per-entity loaded-field masks:
 a column absent from the mask is &quot;unknown&quot; and never diffed, which prevents
 phantom updates from never-loaded columns.</p>
-<p>A dual-layer lifecycle wraps each write. Internal hooks — methods flagged
-with the #[Before*]/#[After*] attributes — always fire; an optional PSR-14
+<p>A dual-layer lifecycle wraps each write. Internal hooks - methods flagged
+with the #[Before*]/#[After*] attributes - always fire; an optional PSR-14
 dispatcher additionally emits the matching events. For updates the pipeline
 is synchronised: the user-driven <a href="classes/G-Orm-Event-Changeset.html"><abbr title="\G\Orm\Event\Changeset">Changeset</abbr></a> is handed to #[BeforeUpdate]
 hooks, the entity is then re-diffed so columns the hook mutated join the SET
@@ -241,7 +241,7 @@ mapped primary-key property is typed as int.</dd>
 </dt>
 <dd>Re-entrancy guard. Lifecycle hooks and PSR-14 listeners run inside the
 flush loop while the intention queues are still populated; a hook that
-called flush() again would re-iterate those queues — double-writing rows
+called flush() again would re-iterate those queues - double-writing rows
 and, for a self-triggering hook, recursing without bound until memory is
 exhausted. The guard turns that into an explicit OrmException instead of
 silent state duplication.</dd>
@@ -404,7 +404,7 @@ UPDATE descriptors. Primary-key columns are never part of the SET.</dd>
                                 &nbsp;: array&lt;int, array{objectId: int, entity: object}&gt;    </span>
 </dt>
 <dd>Execute pending DELETEs and return the sync descriptor of each processed
-entity, so synchronise() can de-register exactly those — a removal staged
+entity, so synchronise() can de-register exactly those - a removal staged
 by a hook during this very loop stays queued for the next flush.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
@@ -463,8 +463,8 @@ pays for reflection.</dd>
 </dt>
 <dd>Apply in-memory synchronisation after a successful flush: promote inserts
 into the managed set, refresh snapshots and de-register exactly the
-processed intentions. De-registration is targeted by object id — never a
-bulk queue reset — so an intention staged by a lifecycle hook or PSR-14
+processed intentions. De-registration is targeted by object id - never a
+bulk queue reset - so an intention staged by a lifecycle hook or PSR-14
 listener *during* the flush survives in its queue and is executed by the
 next flush instead of being silently destroyed. Generated identifiers are
 written back during the insert pass, and the identity map is already
@@ -733,7 +733,7 @@ mapped primary-key property is typed as int.</p>
 
         <p class="phpdocumentor-summary">Re-entrancy guard. Lifecycle hooks and PSR-14 listeners run inside the
 flush loop while the intention queues are still populated; a hook that
-called flush() again would re-iterate those queues — double-writing rows
+called flush() again would re-iterate those queues - double-writing rows
 and, for a self-triggering hook, recursing without bound until memory is
 exhausted. The guard turns that into an explicit OrmException instead of
 silent state duplication.</p>
@@ -1752,7 +1752,7 @@ UPDATE descriptors. Primary-key columns are never part of the SET.</p>
     </aside>
 
         <p class="phpdocumentor-summary">Execute pending DELETEs and return the sync descriptor of each processed
-entity, so synchronise() can de-register exactly those — a removal staged
+entity, so synchronise() can de-register exactly those - a removal staged
 by a hook during this very loop stays queued for the next flush.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -2112,8 +2112,8 @@ pays for reflection.</p>
 
         <p class="phpdocumentor-summary">Apply in-memory synchronisation after a successful flush: promote inserts
 into the managed set, refresh snapshots and de-register exactly the
-processed intentions. De-registration is targeted by object id — never a
-bulk queue reset — so an intention staged by a lifecycle hook or PSR-14
+processed intentions. De-registration is targeted by object id - never a
+bulk queue reset - so an intention staged by a lifecycle hook or PSR-14
 listener *during* the flush survives in its queue and is executed by the
 next flush instead of being silently destroyed. Generated identifiers are
 written back during the insert pass, and the identity map is already

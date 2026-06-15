@@ -197,7 +197,7 @@ interpolated into the SQL verbatim.</dd>
         &nbsp;: mixed&nbsp;= &#039;/^[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9...                            </span>
 </dt>
 <dd>A bare or singly-qualified identifier (&quot;col&quot; or &quot;alias.col&quot;). It rejects
-whitespace, punctuation, parentheses and operators — exactly the payload
+whitespace, punctuation, parentheses and operators - exactly the payload
 an injected column or ORDER BY term needs. Raw SQL expressions
 (aggregates, function calls) remain available through select() and
 havingRaw(), which are the trusted SQL-first surfaces.</dd>
@@ -590,8 +590,8 @@ select is left exactly as the developer wrote it.</dd>
 </dt>
 <dd>Hydrate one alias&#039;s slice of a row, resolving the instance through the
 identity map so a row that repeats a key reuses the same object. A fresh
-instance is registered with the Unit Of Work — identity map entry plus
-original-state snapshot — so it is change-tracked from the moment it is
+instance is registered with the Unit Of Work - identity map entry plus
+original-state snapshot - so it is change-tracked from the moment it is
 returned. Returns null when the alias contributed no columns (its dataset
 was not selected) or only nulls (an unmatched outer join).</dd>
 
@@ -731,7 +731,7 @@ interpolated into the SQL verbatim.</p>
     </aside>
 
         <p class="phpdocumentor-summary">A bare or singly-qualified identifier (&quot;col&quot; or &quot;alias.col&quot;). It rejects
-whitespace, punctuation, parentheses and operators — exactly the payload
+whitespace, punctuation, parentheses and operators - exactly the payload
 an injected column or ORDER BY term needs. Raw SQL expressions
 (aggregates, function calls) remain available through select() and
 havingRaw(), which are the trusted SQL-first surfaces.</p>
@@ -3327,8 +3327,8 @@ select is left exactly as the developer wrote it.</p>
 
         <p class="phpdocumentor-summary">Hydrate one alias&#039;s slice of a row, resolving the instance through the
 identity map so a row that repeats a key reuses the same object. A fresh
-instance is registered with the Unit Of Work — identity map entry plus
-original-state snapshot — so it is change-tracked from the moment it is
+instance is registered with the Unit Of Work - identity map entry plus
+original-state snapshot - so it is change-tracked from the moment it is
 returned. Returns null when the alias contributed no columns (its dataset
 was not selected) or only nulls (an unmatched outer join).</p>
 

@@ -48,7 +48,7 @@ final class IntBackedEnumTest extends OrmTestCase
 
         // A fresh manager starts with an empty identity map, so find() truly
         // hydrates the row from the database rather than returning the managed
-        // instance — the integer column is converted up to the enum case.
+        // instance - the integer column is converted up to the enum case.
         $reloaded = DbManager::create($this->connection)->repository(Account::class)->find($id);
 
         self::assertInstanceOf(Account::class, $reloaded);

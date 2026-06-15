@@ -12,7 +12,7 @@ use G\Orm\Contract\Driver\StatementInterface;
  * Transparent {@see ConnectionInterface} decorator that records every SQL
  * string handed to prepare().
  *
- * It lets a test assert precisely which statements the Unit Of Work emitted —
+ * It lets a test assert precisely which statements the Unit Of Work emitted -
  * for instance that a dirty-diff UPDATE targets only the modified column, or
  * that a no-op flush emits nothing at all. Transaction control is delegated
  * untouched and is deliberately not recorded, so the statement log holds SQL

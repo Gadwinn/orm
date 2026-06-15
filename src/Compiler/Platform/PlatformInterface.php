@@ -27,7 +27,7 @@ interface PlatformInterface
      * Compile a positive regular-expression predicate over an already
      * validated column and a positional placeholder.
      *
-     * Architecture note — cross-platform semantics: the REGEXP operator is
+     * Architecture note - cross-platform semantics: the REGEXP operator is
      * case-insensitive by default on MySQL/MariaDB and SQLite. Platforms
      * whose engines offer a case-sensitivity choice must therefore select
      * their case-INSENSITIVE form (PostgreSQL: "~*", never "~") so the same

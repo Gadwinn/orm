@@ -18,7 +18,7 @@ use G\Orm\Contract\IdentityMapInterface;
  * The s:/c: discriminator keeps a scalar key from ever folding onto a
  * single-field composite that stringifies identically, and every field and
  * value is percent-encoded so the '=' and '&' structural delimiters can never
- * appear inside a component — a string primary key containing them would
+ * appear inside a component - a string primary key containing them would
  * otherwise alias a different identity. Composite identifiers are associative
  * arrays; their fields are sorted alphabetically before flattening so that two
  * callers passing the same key in a different order resolve to the same slot.

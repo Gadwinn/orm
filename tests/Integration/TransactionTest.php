@@ -16,7 +16,7 @@ use RuntimeException;
  * Explicit transaction lifecycle across multiple flushes.
  *
  * When the caller owns the transaction, each flush() must apply its writes but
- * participate silently — never issuing its own COMMIT — so the whole unit is
+ * participate silently - never issuing its own COMMIT - so the whole unit is
  * committed (or rolled back) once, by the caller.
  */
 #[CoversClass(DbManager::class)]

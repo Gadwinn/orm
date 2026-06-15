@@ -16,7 +16,7 @@ interface ResultInterface
     /**
      * Whether the executed statement produced a result set (columns to
      * fetch), as reported by the driver. False for plain write statements,
-     * true for anything row-returning — regardless of the SQL's leading
+     * true for anything row-returning - regardless of the SQL's leading
      * keyword, comments or CTE structure.
      */
     public function isResultSet(): bool;

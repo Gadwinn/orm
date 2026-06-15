@@ -47,8 +47,8 @@ use Throwable;
  * a column absent from the mask is "unknown" and never diffed, which prevents
  * phantom updates from never-loaded columns.
  *
- * A dual-layer lifecycle wraps each write. Internal hooks — methods flagged
- * with the #[Before*]/#[After*] attributes — always fire; an optional PSR-14
+ * A dual-layer lifecycle wraps each write. Internal hooks - methods flagged
+ * with the #[Before*]/#[After*] attributes - always fire; an optional PSR-14
  * dispatcher additionally emits the matching events. For updates the pipeline
  * is synchronised: the user-driven {@see Changeset} is handed to #[BeforeUpdate]
  * hooks, the entity is then re-diffed so columns the hook mutated join the SET
@@ -120,7 +120,7 @@ final class UnitOfWork implements UnitOfWorkInterface
     /**
      * Re-entrancy guard. Lifecycle hooks and PSR-14 listeners run inside the
      * flush loop while the intention queues are still populated; a hook that
-     * called flush() again would re-iterate those queues — double-writing rows
+     * called flush() again would re-iterate those queues - double-writing rows
      * and, for a self-triggering hook, recursing without bound until memory is
      * exhausted. The guard turns that into an explicit OrmException instead of
      * silent state duplication.
@@ -369,7 +369,7 @@ final class UnitOfWork implements UnitOfWorkInterface
             // Engine note: lastInsertId() without a sequence name covers
             // MySQL/MariaDB/SQLite. PostgreSQL requires the sequence name (or
             // INSERT ... RETURNING); generated identifiers are not yet
-            // supported there — assign the key explicitly instead.
+            // supported there - assign the key explicitly instead.
             $primaryKeyFields = $schema->getPrimaryKeyFields();
             if (count($primaryKeyFields) === 1 && $this->hydrator->extractIdentifier($entity) === null) {
                 $this->assignGeneratedId($entity, $primaryKeyFields[0], $this->connection->lastInsertId());
@@ -468,7 +468,7 @@ final class UnitOfWork implements UnitOfWorkInterface
 
     /**
      * Execute pending DELETEs and return the sync descriptor of each processed
-     * entity, so synchronise() can de-register exactly those — a removal staged
+     * entity, so synchronise() can de-register exactly those - a removal staged
      * by a hook during this very loop stays queued for the next flush.
      *
      * @return list<array{objectId: int, entity: object}>
@@ -516,8 +516,8 @@ final class UnitOfWork implements UnitOfWorkInterface
     /**
      * Apply in-memory synchronisation after a successful flush: promote inserts
      * into the managed set, refresh snapshots and de-register exactly the
-     * processed intentions. De-registration is targeted by object id — never a
-     * bulk queue reset — so an intention staged by a lifecycle hook or PSR-14
+     * processed intentions. De-registration is targeted by object id - never a
+     * bulk queue reset - so an intention staged by a lifecycle hook or PSR-14
      * listener *during* the flush survives in its queue and is executed by the
      * next flush instead of being silently destroyed. Generated identifiers are
      * written back during the insert pass, and the identity map is already

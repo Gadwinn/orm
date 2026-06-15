@@ -220,7 +220,7 @@ final class MetadataReader implements MetadataReaderInterface
      *
      * Relations join on exactly one key column, so a composite-key target is
      * rejected explicitly instead of silently joining on its first #[Id]
-     * column — a condition that would look right and match wrong rows.
+     * column - a condition that would look right and match wrong rows.
      *
      * @param class-string $entityClass
      */

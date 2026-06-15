@@ -65,7 +65,7 @@ final class QueryBuilder implements QueryBuilderInterface
 
     /**
      * A bare or singly-qualified identifier ("col" or "alias.col"). It rejects
-     * whitespace, punctuation, parentheses and operators — exactly the payload
+     * whitespace, punctuation, parentheses and operators - exactly the payload
      * an injected column or ORDER BY term needs. Raw SQL expressions
      * (aggregates, function calls) remain available through select() and
      * havingRaw(), which are the trusted SQL-first surfaces.
@@ -393,7 +393,7 @@ final class QueryBuilder implements QueryBuilderInterface
      *
      * Memory note: fetching row by row only lowers the footprint when the
      * driver itself does not buffer the whole set client-side. SQLite streams
-     * natively; MySQL buffers by default — pass
+     * natively; MySQL buffers by default - pass
      * PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false through the connection
      * "options" to stream there too (no other query may run on that
      * connection until the cursor is drained).
@@ -783,8 +783,8 @@ final class QueryBuilder implements QueryBuilderInterface
     /**
      * Hydrate one alias's slice of a row, resolving the instance through the
      * identity map so a row that repeats a key reuses the same object. A fresh
-     * instance is registered with the Unit Of Work — identity map entry plus
-     * original-state snapshot — so it is change-tracked from the moment it is
+     * instance is registered with the Unit Of Work - identity map entry plus
+     * original-state snapshot - so it is change-tracked from the moment it is
      * returned. Returns null when the alias contributed no columns (its dataset
      * was not selected) or only nulls (an unmatched outer join).
      *

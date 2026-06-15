@@ -103,8 +103,8 @@ final class UnitOfWorkTest extends OrmTestCase
         $user = $this->makeUser('John', 'john@test.com');
         $this->manager->repository(User::class)->save($user);
 
-        // After the insert the baseline snapshot must be the full, flat row —
-        // not empty, not partially tracked — so subsequent diffs are accurate.
+        // After the insert the baseline snapshot must be the full, flat row -
+        // not empty, not partially tracked - so subsequent diffs are accurate.
         self::assertSame(
             ['id' => 1, 'name' => 'John', 'email' => 'john@test.com'],
             $this->snapshotOf($this->manager->unitOfWork(), $user)

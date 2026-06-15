@@ -12,7 +12,7 @@ use G\Orm\Registry\OrmRegistry;
 
 /**
  * Fixture whose #[AfterInsert] hook stages a follow-up audit row via persist()
- * — without flushing. It proves that an intention staged during a running
+ * - without flushing. It proves that an intention staged during a running
  * flush survives in the queue and is written by the next flush, instead of
  * being silently destroyed by a bulk queue reset.
  */

@@ -11,7 +11,7 @@ namespace G\Orm\Hydrator\Type;
  * Converters are resolved by the property's declared (or inferred) type and
  * applied at the hydration boundary in both directions: fromDatabase() when a
  * row is materialised into an entity, toDatabase() whenever entity state is
- * extracted — hydration snapshots, change-detection diffs and statement
+ * extracted - hydration snapshots, change-detection diffs and statement
  * bindings alike. Because snapshots therefore hold the scalar form, two
  * equal-but-distinct object instances never register as a phantom change and
  * no reference type is ever shared between an entity and its snapshot.

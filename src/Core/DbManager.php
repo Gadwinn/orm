@@ -97,7 +97,7 @@ final class DbManager implements DbManagerInterface
         $result = $this->connection->prepare($sql)->execute($bindings);
 
         // The driver, not a keyword heuristic, decides between a fetched
-        // result set and an affected-row count — so leading comments,
+        // result set and an affected-row count - so leading comments,
         // parenthesised SELECTs and data-modifying CTEs are all classified
         // by what they actually produced.
         return $result->isResultSet() ? $result->fetchAll() : $result->rowCount();

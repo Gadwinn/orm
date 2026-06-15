@@ -10,7 +10,7 @@ namespace G\Orm\Compiler\Platform;
  * bare REGEXP / NOT REGEXP operator syntax.
  *
  * SQLite parses the REGEXP operator natively but only executes it when a
- * regexp() user function has been registered on the connection — a runtime
+ * regexp() user function has been registered on the connection - a runtime
  * concern of the application, not of SQL compilation.
  */
 final class SqlitePlatform extends AbstractPlatform

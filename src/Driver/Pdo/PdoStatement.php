@@ -17,7 +17,7 @@ use PDOException;
  * PHP value) or supplied in bulk at execute() time. Positional bindings use
  * 1-based integer placeholders for bind() and a 0-based list for execute(),
  * matching PDO's own conventions; named bindings use string placeholders.
- * Both paths bind each value with its inferred PDO type — the bulk path never
+ * Both paths bind each value with its inferred PDO type - the bulk path never
  * falls back to PDO's everything-is-a-string default.
  *
  * Bind OR Execute rule: choose one binding style per statement. Either chain

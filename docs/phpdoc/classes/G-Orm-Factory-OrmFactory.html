@@ -140,14 +140,14 @@ per connection.</p>
 PDO driver consumes:</p>
 <ul>
 <li>PDO DSN string:  'pgsql:host=127.0.0.1;dbname=shop'
-(a bare DSN cannot carry credentials — use the array or URI form when
+(a bare DSN cannot carry credentials - use the array or URI form when
 a user/password is needed)</li>
 <li>option array:    ['driver' =&gt; 'mysql', 'host' =&gt; ..., 'user' =&gt; ...]
 (the exact contract of <a href="classes/G-Orm-Driver-Pdo-PdoDriver.html#method_connect"><abbr title="\G\Orm\Driver\Pdo\PdoDriver::connect()">PdoDriver::connect()</abbr></a>)</li>
 <li>URI string:      'mysql://db_user:db_password@127.0.0.1:3306/db_name'
 (scheme aliases like mariadb/postgres/mssql resolve to their PDO
 driver; percent-encoded credentials are decoded; recognised query
-parameters are kept, unknown ones — e.g. serverVersion — are ignored)</li>
+parameters are kept, unknown ones - e.g. serverVersion - are ignored)</li>
 </ul>
 <p>Security: a URI may embed credentials, so when one cannot be parsed the
 exception deliberately never echoes the configuration string.</p>

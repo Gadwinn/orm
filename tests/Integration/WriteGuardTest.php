@@ -16,7 +16,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
  * A predicate "pk = NULL" matches no row in SQL, so an UPDATE or DELETE built
  * from an incomplete primary key would be a silent no-op while hooks still
  * fired and the entity was still de-registered. Likewise, a write that
- * affects zero rows means the database row vanished between load and flush —
+ * affects zero rows means the database row vanished between load and flush -
  * a lost update. Both conditions must abort the flush loudly instead of
  * letting memory and database drift apart.
  */

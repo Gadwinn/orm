@@ -24,14 +24,14 @@ use Psr\EventDispatcher\EventDispatcherInterface;
  * PDO driver consumes:
  *
  *   - PDO DSN string:  'pgsql:host=127.0.0.1;dbname=shop'
- *     (a bare DSN cannot carry credentials — use the array or URI form when
+ *     (a bare DSN cannot carry credentials - use the array or URI form when
  *     a user/password is needed)
  *   - option array:    ['driver' => 'mysql', 'host' => ..., 'user' => ...]
  *     (the exact contract of {@see PdoDriver::connect()})
  *   - URI string:      'mysql://db_user:db_password@127.0.0.1:3306/db_name'
  *     (scheme aliases like mariadb/postgres/mssql resolve to their PDO
  *     driver; percent-encoded credentials are decoded; recognised query
- *     parameters are kept, unknown ones — e.g. serverVersion — are ignored)
+ *     parameters are kept, unknown ones - e.g. serverVersion - are ignored)
  *
  * Security: a URI may embed credentials, so when one cannot be parsed the
  * exception deliberately never echoes the configuration string.
