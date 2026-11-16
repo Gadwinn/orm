@@ -328,6 +328,10 @@ final class QueryBuilder implements QueryBuilderInterface
 
     public function limit(int $limit): static
     {
+        if ($limit < 0) {
+            throw new QueryException('A LIMIT must not be negative.');
+        }
+
         $this->state->limit = $limit;
 
         return $this;
@@ -335,6 +339,10 @@ final class QueryBuilder implements QueryBuilderInterface
 
     public function offset(int $offset): static
     {
+        if ($offset < 0) {
+            throw new QueryException('An OFFSET must not be negative.');
+        }
+
         $this->state->offset = $offset;
 
         return $this;

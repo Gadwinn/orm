@@ -219,12 +219,17 @@ interface QueryBuilderInterface
     public function havingRaw(string $expression, array $bindings = []): static;
 
     /**
-     * Limit the number of returned rows.
+     * Limit the number of returned rows. The clause is written in the
+     * syntax of the connected engine.
+     *
+     * @throws \G\Orm\Exception\QueryException When the limit is negative.
      */
     public function limit(int $limit): static;
 
     /**
-     * Offset the returned rows.
+     * Offset the returned rows. Works with or without a limit on every engine.
+     *
+     * @throws \G\Orm\Exception\QueryException When the offset is negative.
      */
     public function offset(int $offset): static;
 

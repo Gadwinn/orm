@@ -13,6 +13,11 @@ final class MySqlPlatform extends AbstractPlatform
     protected const string OPENING_QUOTE = '`';
     protected const string CLOSING_QUOTE = '`';
 
+    /**
+     * MySQL has no "no limit" keyword: its manual recommends the largest BIGINT UNSIGNED.
+     */
+    protected const ?string UNLIMITED = '18446744073709551615';
+
     public function compileRegexp(string $column, string $placeholder): string
     {
         return $column . ' REGEXP ' . $placeholder;
