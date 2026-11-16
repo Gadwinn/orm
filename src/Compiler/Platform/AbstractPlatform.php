@@ -21,6 +21,12 @@ abstract class AbstractPlatform implements PlatformInterface
     protected const string OPENING_QUOTE = '"';
     protected const string CLOSING_QUOTE = '"';
 
+    /**
+     * LIMIT value standing for "no limit" on engines that refuse an OFFSET
+     * without a LIMIT; null when the engine accepts a lone OFFSET.
+     */
+    protected const ?string UNLIMITED = null;
+
     public function quoteIdentifier(string $identifier): string
     {
         $quoted = array_map(
@@ -31,5 +37,22 @@ abstract class AbstractPlatform implements PlatformInterface
         );
 
         return implode('.', $quoted);
+    }
+
+    public function compileLimitOffset(?int $limit, ?int $offset, bool $ordered): string
+    {
+        $sql = '';
+
+        if ($limit !== null) {
+            $sql .= ' LIMIT ' . $limit;
+        } elseif ($offset !== null && static::UNLIMITED !== null) {
+            $sql .= ' LIMIT ' . static::UNLIMITED;
+        }
+
+        if ($offset !== null) {
+            $sql .= ' OFFSET ' . $offset;
+        }
+
+        return $sql;
     }
 }

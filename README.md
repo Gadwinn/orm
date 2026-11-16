@@ -444,14 +444,16 @@ $orm = DbManager::create($connection, $psr14Dispatcher);
 
 Dialect-sensitive SQL is owned by a `PlatformInterface`, resolved once from `PDO::ATTR_DRIVER_NAME` at connection time and injected into the compiler by `DbManager::create()`. The same builder chain produces each engine's exact syntax:
 
-| Engine | Identifier quoting | `REGEXP` / `NOT REGEXP` |
-|---|---|---|
-| MySQL / MariaDB | `` `col` `` | `col REGEXP ?` / `col NOT REGEXP ?` |
-| PostgreSQL | `"col"` | `col ~* ?` / `col !~* ?` |
-| SQLite *(default/fallback)* | `"col"` | `col REGEXP ?` (requires a registered `regexp()` function) |
-| SQL Server | `[col]` | **rejected at compile time** |
+| Engine | Identifier quoting | `REGEXP` / `NOT REGEXP` | `limit(10)->offset(20)` |
+|---|---|---|---|
+| MySQL / MariaDB | `` `col` `` | `col REGEXP ?` / `col NOT REGEXP ?` | `LIMIT 10 OFFSET 20` |
+| PostgreSQL | `"col"` | `col ~* ?` / `col !~* ?` | `LIMIT 10 OFFSET 20` |
+| SQLite *(default/fallback)* | `"col"` | `col REGEXP ?` (requires a registered `regexp()` function) | `LIMIT 10 OFFSET 20` |
+| SQL Server | `[col]` | **rejected at compile time** | `OFFSET 20 ROWS FETCH NEXT 10 ROWS ONLY` |
 
 PostgreSQL's `~*` is selected deliberately over `~`: MySQL and SQLite match case-insensitively by default, so the insensitive variant is the only unified cross-platform behaviour (case-sensitive `~` stays reachable via `whereRaw()`). SQL Server throws a `QueryException` instead of emitting `REGEXP_LIKE()`, which only exists on SQL Server 2025+/Azure - fail fast at the call site rather than at runtime on a 2019/2022 server.
+
+An `offset()` without a `limit()` works everywhere (MySQL and SQLite receive the "no limit" value they require). On SQL Server, a limited query without `orderBy()` gets a neutral `ORDER BY (SELECT NULL)`, since `OFFSET ... FETCH` only exists after an `ORDER BY`; add a real `orderBy()` for a stable pagination. Negative limits and offsets throw a `QueryException`.
 
 ## Value converters (rich types)
 
