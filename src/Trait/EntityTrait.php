@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace G\Orm\Traits;
+namespace G\Orm\Trait;
 
 use G\Orm\Contract\DbManagerInterface;
 use G\Orm\Contract\QueryBuilderInterface;
