@@ -38,15 +38,15 @@ logs/*
 *.sublime-*
 .sublime-workspace
 
-# Ignore composer backup files
+# Ignore composer backup files and the lock file (a library is not locked)
 composer.phar
+composer.lock
 
 # Ignore version control history
 .history
 
 # Ignore PHPUnit result cache
 .phpunit.result.cache
-.phpunit.cache/
 
 # Ignore PHPStan configuration files
 phpstan.neon
@@ -56,3 +56,10 @@ phpstan.neon
 
 # Ignore temporary files with .tmp extension
 *.tmp
+
+# Generated API documentation (composer gen-docs)
+/docs/phpdoc/
+
+# Test databases
+*.sqlite
+.phpunit.cache/
