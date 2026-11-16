@@ -9,7 +9,7 @@ use G\Orm\Contract\RepositoryInterface;
 use G\Orm\Registry\OrmRegistry;
 use G\Orm\Tests\Fixture\RegistryAwareEntity;
 use G\Orm\Tests\OrmTestCase;
-use G\Orm\Traits\EntityTrait;
+use G\Orm\Trait\EntityTrait;
 use PHPUnit\Framework\Attributes\CoversTrait;
 
 /**

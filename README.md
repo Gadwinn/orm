@@ -355,7 +355,7 @@ The flush pipeline fails loudly instead of drifting silently:
 
 ```php
 use G\Orm\Registry\OrmRegistry;
-use G\Orm\Traits\EntityTrait;
+use G\Orm\Trait\EntityTrait;
 
 OrmRegistry::set($orm);     // bootstrap: bind for this request/worker
 
