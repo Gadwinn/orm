@@ -84,6 +84,8 @@ interface UnitOfWorkInterface
      *
      * @throws \G\Orm\Exception\QueryException
      * @throws \G\Orm\Exception\TransactionException
+     * @throws \G\Orm\Exception\OrmException When the flush is re-entrant or an entity to
+     *                                       update or delete has no usable identifier.
      */
     public function flush(): void;
 

@@ -1,6 +1,6 @@
 {
     "name": "gadwinn/orm",
-    "description": "",
+    "description": "SQL-first ORM: Unit of Work, Identity Map, attribute mapping, fluent query builder for MySQL, PostgreSQL, SQLite and SQL Server.",
     "type": "library",
     "minimum-stability": "stable",
     "license": "MIT",

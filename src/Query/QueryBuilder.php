@@ -695,19 +695,18 @@ final class QueryBuilder implements QueryBuilderInterface
     }
 
     /**
+     * Column names cannot be parameterised: they are guarded like every other
+     * identifier, so an array built from user input (a submitted form) cannot
+     * inject SQL through its keys.
+     *
      * @param string|array<string, mixed> $column
      */
     private function assign(string|array $column, mixed $value): static
     {
-        if (is_array($column)) {
-            foreach ($column as $key => $assigned) {
-                $this->state->values[$key] = $assigned;
-            }
-
-            return $this;
+        foreach (is_array($column) ? $column : [$column => $value] as $key => $assigned) {
+            $this->assertSafeIdentifier((string) $key);
+            $this->state->values[$key] = $assigned;
         }
-
-        $this->state->values[$column] = $value;
 
         return $this;
     }

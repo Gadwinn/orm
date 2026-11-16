@@ -174,4 +174,30 @@ final class QueryBuilderSecurityTest extends OrmTestCase
     {
         return new QueryBuilder($this->compiler, $this->connection);
     }
+
+    public function testRejectsUnsafeColumnNameInInsertValues(): void
+    {
+        $this->expectException(QueryException::class);
+        $this->expectExceptionMessage('Unsafe SQL identifier');
+
+        // Typical mass-assignment input: the array keys come from a submitted form.
+        $this->builder()->insert('users')->values(['name' => 'Ada', 'role) VALUES (1, 2); --' => 'x']);
+    }
+
+    public function testRejectsUnsafeColumnNameInUpdateSet(): void
+    {
+        $this->expectException(QueryException::class);
+        $this->expectExceptionMessage('Unsafe SQL identifier');
+
+        $this->builder()->update('users')->set("name = 'x', is_admin", 1);
+    }
+
+    public function testAcceptsPlainColumnNamesInAssignments(): void
+    {
+        $insert = $this->builder()->insert('users')->values(['name' => 'Ada', 'email' => 'a@b.c']);
+        $update = $this->builder()->update('users')->set('name', 'Ada')->set(['email' => 'a@b.c']);
+
+        self::assertSame('INSERT INTO users (name, email) VALUES (?, ?)', $insert->toSql());
+        self::assertSame('UPDATE users SET name = ?, email = ?', $update->toSql());
+    }
 }
