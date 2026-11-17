@@ -36,4 +36,24 @@ final class SqlServerPlatform extends AbstractPlatform
     {
         throw QueryException::unsupportedOperator('NOT REGEXP', self::PLATFORM_NAME);
     }
+
+    /**
+     * T-SQL has no LIMIT: rows are limited with OFFSET ... FETCH, which only
+     * exists as a suffix of ORDER BY. An unordered statement gets the neutral
+     * "ORDER BY (SELECT NULL)" so the clause stays valid.
+     */
+    public function compileLimitOffset(?int $limit, ?int $offset, bool $ordered): string
+    {
+        if ($limit === null && $offset === null) {
+            return '';
+        }
+
+        $sql = ($ordered ? '' : ' ORDER BY (SELECT NULL)') . ' OFFSET ' . ($offset ?? 0) . ' ROWS';
+
+        if ($limit !== null) {
+            $sql .= ' FETCH NEXT ' . $limit . ' ROWS ONLY';
+        }
+
+        return $sql;
+    }
 }

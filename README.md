@@ -93,6 +93,28 @@ $orm = DbManager::create($connection);
 
 PDO is configured for real prepared statements (`ATTR_EMULATE_PREPARES => false`), exception error mode, and associative fetch. Pass integer-keyed PDO attributes under the `options` key of the array form to override. Every binding - bulk or individual - travels with its inferred PDO type (`int`, `bool`, `null`, `string`), never as a stringly-typed blob. The SQL dialect ([see Platforms](#sql-dialects-platform-layer)) is resolved from the PDO driver name at connection time.
 
+### Query logging
+
+`LoggingConnection` decorates any connection and sends every executed query to a PSR-3 logger (`composer require psr/log`). Wrap the connection before handing it to `DbManager::create()`:
+
+```php
+use G\Orm\Driver\LoggingConnection;
+
+$connection = (new PdoDriver())->connect(OrmFactory::normalise($config));
+$orm = DbManager::create(new LoggingConnection($connection, $logger));
+```
+
+Each statement execution is logged at the `debug` level with this contract (tools such as the SQL panel of `gadwinn/debug` rely on it):
+
+| Field | Content |
+|---|---|
+| message | the SQL, as prepared |
+| `context['bindings']` | every value bound with `bind()` or `execute()`, keyed by placeholder |
+| `context['duration']` | execution time in milliseconds (`float`) |
+| `context['exception']` | the `Throwable`, only when the execution failed (it is rethrown untouched) |
+
+Transactions are logged as `BEGIN`, `COMMIT` and `ROLLBACK` with empty bindings. Every other method is delegated without logging. Do not log in production unless the logger is filtered: bindings may hold personal data.
+
 ## Map an entity
 
 Attributes only. `name`/`type` are inferred from the property when omitted; backed enums and `DateTimeImmutable` map automatically ([see Value converters](#value-converters-rich-types)).
@@ -355,7 +377,7 @@ The flush pipeline fails loudly instead of drifting silently:
 
 ```php
 use G\Orm\Registry\OrmRegistry;
-use G\Orm\Traits\EntityTrait;
+use G\Orm\Trait\EntityTrait;
 
 OrmRegistry::set($orm);     // bootstrap: bind for this request/worker
 
@@ -444,14 +466,16 @@ $orm = DbManager::create($connection, $psr14Dispatcher);
 
 Dialect-sensitive SQL is owned by a `PlatformInterface`, resolved once from `PDO::ATTR_DRIVER_NAME` at connection time and injected into the compiler by `DbManager::create()`. The same builder chain produces each engine's exact syntax:
 
-| Engine | Identifier quoting | `REGEXP` / `NOT REGEXP` |
-|---|---|---|
-| MySQL / MariaDB | `` `col` `` | `col REGEXP ?` / `col NOT REGEXP ?` |
-| PostgreSQL | `"col"` | `col ~* ?` / `col !~* ?` |
-| SQLite *(default/fallback)* | `"col"` | `col REGEXP ?` (requires a registered `regexp()` function) |
-| SQL Server | `[col]` | **rejected at compile time** |
+| Engine | Identifier quoting | `REGEXP` / `NOT REGEXP` | `limit(10)->offset(20)` |
+|---|---|---|---|
+| MySQL / MariaDB | `` `col` `` | `col REGEXP ?` / `col NOT REGEXP ?` | `LIMIT 10 OFFSET 20` |
+| PostgreSQL | `"col"` | `col ~* ?` / `col !~* ?` | `LIMIT 10 OFFSET 20` |
+| SQLite *(default/fallback)* | `"col"` | `col REGEXP ?` (requires a registered `regexp()` function) | `LIMIT 10 OFFSET 20` |
+| SQL Server | `[col]` | **rejected at compile time** | `OFFSET 20 ROWS FETCH NEXT 10 ROWS ONLY` |
 
 PostgreSQL's `~*` is selected deliberately over `~`: MySQL and SQLite match case-insensitively by default, so the insensitive variant is the only unified cross-platform behaviour (case-sensitive `~` stays reachable via `whereRaw()`). SQL Server throws a `QueryException` instead of emitting `REGEXP_LIKE()`, which only exists on SQL Server 2025+/Azure - fail fast at the call site rather than at runtime on a 2019/2022 server.
+
+An `offset()` without a `limit()` works everywhere (MySQL and SQLite receive the "no limit" value they require). On SQL Server, a limited query without `orderBy()` gets a neutral `ORDER BY (SELECT NULL)`, since `OFFSET ... FETCH` only exists after an `ORDER BY`; add a real `orderBy()` for a stable pagination. Negative limits and offsets throw a `QueryException`.
 
 ## Value converters (rich types)
 
@@ -475,3 +499,7 @@ vendor/bin/phpstan analyse  # level max
 vendor/bin/phpcs            # PSR-12
 vendor/bin/phpmnd src       # zero magic numbers
 ```
+
+## License
+
+MIT, see [LICENSE](LICENSE).

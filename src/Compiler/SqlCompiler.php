@@ -70,7 +70,7 @@ final class SqlCompiler implements SqlCompilerInterface
         }
 
         $sql .= $this->compileOrderBy($state->orderBy);
-        $sql .= $this->compileLimitOffset($state->limit, $state->offset);
+        $sql .= $this->platform->compileLimitOffset($state->limit, $state->offset, $state->orderBy !== []);
 
         return new CompiledQuery($sql, $bindings);
     }
@@ -255,20 +255,5 @@ final class SqlCompiler implements SqlCompilerInterface
         }
 
         return ' ORDER BY ' . implode(', ', $parts);
-    }
-
-    private function compileLimitOffset(?int $limit, ?int $offset): string
-    {
-        $sql = '';
-
-        if ($limit !== null) {
-            $sql .= ' LIMIT ' . $limit;
-        }
-
-        if ($offset !== null) {
-            $sql .= ' OFFSET ' . $offset;
-        }
-
-        return $sql;
     }
 }

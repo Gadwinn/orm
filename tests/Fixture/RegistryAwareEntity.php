@@ -8,7 +8,7 @@ use G\Orm\Contract\DbManagerInterface;
 use G\Orm\Mapping\Column;
 use G\Orm\Mapping\Id;
 use G\Orm\Mapping\Table;
-use G\Orm\Traits\EntityTrait;
+use G\Orm\Trait\EntityTrait;
 
 /**
  * Minimal entity fixture that exercises EntityTrait so static analysis can

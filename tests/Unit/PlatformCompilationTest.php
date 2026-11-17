@@ -113,6 +113,77 @@ final class PlatformCompilationTest extends OrmTestCase
         self::assertSame('[we]]ird]', (new SqlServerPlatform())->quoteIdentifier('we]ird'));
     }
 
+    /**
+     * @return array<string, array{PlatformInterface, string, string, string}>
+     */
+    public static function limitOffsetProvider(): array
+    {
+        return [
+            'mysql' => [
+                new MySqlPlatform(),
+                ' LIMIT 10',
+                ' LIMIT 10 OFFSET 20',
+                ' LIMIT 18446744073709551615 OFFSET 20',
+            ],
+            'pgsql' => [new PostgreSqlPlatform(), ' LIMIT 10', ' LIMIT 10 OFFSET 20', ' OFFSET 20'],
+            'sqlite' => [new SqlitePlatform(), ' LIMIT 10', ' LIMIT 10 OFFSET 20', ' LIMIT -1 OFFSET 20'],
+            'sqlsrv' => [
+                new SqlServerPlatform(),
+                ' OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY',
+                ' OFFSET 20 ROWS FETCH NEXT 10 ROWS ONLY',
+                ' OFFSET 20 ROWS',
+            ],
+        ];
+    }
+
+    #[\PHPUnit\Framework\Attributes\DataProvider('limitOffsetProvider')]
+    public function testEachPlatformCompilesItsOwnLimitAndOffset(
+        PlatformInterface $platform,
+        string $limitOnly,
+        string $limitAndOffset,
+        string $offsetOnly
+    ): void {
+        $base = 'SELECT * FROM users ORDER BY id ASC';
+
+        self::assertSame($base, $this->builder($platform)->from('users')->orderBy('id')->toSql());
+        self::assertSame(
+            $base . $limitOnly,
+            $this->builder($platform)->from('users')->orderBy('id')->limit(10)->toSql()
+        );
+        self::assertSame(
+            $base . $limitAndOffset,
+            $this->builder($platform)->from('users')->orderBy('id')->limit(10)->offset(20)->toSql()
+        );
+        self::assertSame(
+            $base . $offsetOnly,
+            $this->builder($platform)->from('users')->orderBy('id')->offset(20)->toSql()
+        );
+    }
+
+    /**
+     * T-SQL only accepts OFFSET ... FETCH after an ORDER BY: an unordered
+     * statement receives a neutral one instead of failing on the server.
+     */
+    public function testSqlServerAddsANeutralOrderByToAnUnorderedLimitedSelect(): void
+    {
+        self::assertSame(
+            'SELECT * FROM users ORDER BY (SELECT NULL) OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY',
+            $this->builder(new SqlServerPlatform())->from('users')->limit(5)->toSql()
+        );
+    }
+
+    public function testNegativeLimitAndOffsetAreRejected(): void
+    {
+        foreach (['limit', 'offset'] as $method) {
+            try {
+                $this->builder(new SqlitePlatform())->from('users')->{$method}(-1);
+                self::fail('Expected a QueryException for a negative ' . $method . '.');
+            } catch (QueryException $exception) {
+                self::assertStringContainsString('must not be negative', $exception->getMessage());
+            }
+        }
+    }
+
     private function builder(PlatformInterface $platform): QueryBuilder
     {
         return new QueryBuilder(new SqlCompiler($platform), $this->connection);

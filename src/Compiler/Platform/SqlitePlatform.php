@@ -15,6 +15,11 @@ namespace G\Orm\Compiler\Platform;
  */
 final class SqlitePlatform extends AbstractPlatform
 {
+    /**
+     * SQLite reads a negative LIMIT as "no limit".
+     */
+    protected const ?string UNLIMITED = '-1';
+
     public function compileRegexp(string $column, string $placeholder): string
     {
         return $column . ' REGEXP ' . $placeholder;

@@ -49,4 +49,17 @@ interface PlatformInterface
      *                                         the predicate reliably.
      */
     public function compileNotRegexp(string $column, string $placeholder): string;
+
+    /**
+     * Compile the row-limiting clause of a SELECT, with its leading space,
+     * or an empty string when neither a limit nor an offset is set.
+     *
+     * Engines disagree on this clause: "LIMIT n OFFSET m" (MySQL, PostgreSQL,
+     * SQLite) versus "OFFSET m ROWS FETCH NEXT n ROWS ONLY" (SQL Server,
+     * which additionally demands an ORDER BY), and only some accept an
+     * offset without a limit.
+     *
+     * @param bool $ordered Whether the statement already carries an ORDER BY.
+     */
+    public function compileLimitOffset(?int $limit, ?int $offset, bool $ordered): string;
 }
