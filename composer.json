@@ -22,9 +22,11 @@
     },
     "suggest": {
         "ext-pdo_sqlite": "To use the built-in SQLite driver",
-        "ext-pdo_mysql": "To use the built-in MySQL driver"
+        "ext-pdo_mysql": "To use the built-in MySQL driver",
+        "psr/log": "To log executed queries with G\\Orm\\Driver\\LoggingConnection"
     },
     "require-dev": {
+        "psr/log": "^3.0",
         "roave/security-advisories": "dev-latest@dev",
         "phpdocumentor/shim": "*",
         "phpstan/phpstan": "*",

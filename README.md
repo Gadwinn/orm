@@ -93,6 +93,28 @@ $orm = DbManager::create($connection);
 
 PDO is configured for real prepared statements (`ATTR_EMULATE_PREPARES => false`), exception error mode, and associative fetch. Pass integer-keyed PDO attributes under the `options` key of the array form to override. Every binding - bulk or individual - travels with its inferred PDO type (`int`, `bool`, `null`, `string`), never as a stringly-typed blob. The SQL dialect ([see Platforms](#sql-dialects-platform-layer)) is resolved from the PDO driver name at connection time.
 
+### Query logging
+
+`LoggingConnection` decorates any connection and sends every executed query to a PSR-3 logger (`composer require psr/log`). Wrap the connection before handing it to `DbManager::create()`:
+
+```php
+use G\Orm\Driver\LoggingConnection;
+
+$connection = (new PdoDriver())->connect(OrmFactory::normalise($config));
+$orm = DbManager::create(new LoggingConnection($connection, $logger));
+```
+
+Each statement execution is logged at the `debug` level with this contract (tools such as the SQL panel of `gadwinn/debug` rely on it):
+
+| Field | Content |
+|---|---|
+| message | the SQL, as prepared |
+| `context['bindings']` | every value bound with `bind()` or `execute()`, keyed by placeholder |
+| `context['duration']` | execution time in milliseconds (`float`) |
+| `context['exception']` | the `Throwable`, only when the execution failed (it is rethrown untouched) |
+
+Transactions are logged as `BEGIN`, `COMMIT` and `ROLLBACK` with empty bindings. Every other method is delegated without logging. Do not log in production unless the logger is filtered: bindings may hold personal data.
+
 ## Map an entity
 
 Attributes only. `name`/`type` are inferred from the property when omitted; backed enums and `DateTimeImmutable` map automatically ([see Value converters](#value-converters-rich-types)).
