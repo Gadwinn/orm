@@ -499,3 +499,7 @@ vendor/bin/phpstan analyse  # level max
 vendor/bin/phpcs            # PSR-12
 vendor/bin/phpmnd src       # zero magic numbers
 ```
+
+## License
+
+MIT, see [LICENSE](LICENSE).
