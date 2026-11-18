@@ -71,6 +71,7 @@ final class PdoDriverTest extends TestCase
         $attribute = defined('Pdo\Mysql::ATTR_FOUND_ROWS')
             ? constant('Pdo\Mysql::ATTR_FOUND_ROWS')
             : constant('PDO::MYSQL_ATTR_FOUND_ROWS');
+        self::assertIsInt($attribute);
         $options = new \ReflectionMethod(PdoDriver::class, 'pdoOptions');
 
         $mysql = $options->invoke(new PdoDriver(), [], 'mysql:host=db;dbname=app');

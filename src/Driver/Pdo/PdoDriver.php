@@ -213,7 +213,7 @@ final class PdoDriver implements DriverInterface
     {
         foreach (self::FOUND_ROWS_CONSTANTS as $name) {
             if (defined($name)) {
-                return constant($name);
+                return filter_var(constant($name), FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
             }
         }
 
