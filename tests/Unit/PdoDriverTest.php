@@ -68,9 +68,7 @@ final class PdoDriverTest extends TestCase
             self::markTestSkipped('pdo_mysql is not loaded.');
         }
 
-        $attribute = defined('Pdo\Mysql::ATTR_FOUND_ROWS')
-            ? constant('Pdo\Mysql::ATTR_FOUND_ROWS')
-            : constant('PDO::MYSQL_ATTR_FOUND_ROWS');
+        $attribute = (new \ReflectionMethod(PdoDriver::class, 'mysqlFoundRowsAttribute'))->invoke(new PdoDriver());
         self::assertIsInt($attribute);
         $options = new \ReflectionMethod(PdoDriver::class, 'pdoOptions');
 
