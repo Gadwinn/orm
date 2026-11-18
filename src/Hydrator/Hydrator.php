@@ -6,6 +6,7 @@ namespace G\Orm\Hydrator;
 
 use BackedEnum;
 use DateTimeImmutable;
+use DateTimeInterface;
 use G\Orm\Contract\EntityMetadataInterface;
 use G\Orm\Contract\HydratorInterface;
 use G\Orm\Contract\MetadataReaderInterface;
@@ -13,6 +14,8 @@ use G\Orm\Contract\PropertyMetadataInterface;
 use G\Orm\Hydrator\Type\DateTimeImmutableConverter;
 use G\Orm\Hydrator\Type\ValueConverterInterface;
 use ReflectionClass;
+use ReflectionEnum;
+use ReflectionNamedType;
 
 /**
  * Reflection-based hydrator bridging the column world and the entity world.
@@ -37,6 +40,9 @@ use ReflectionClass;
  */
 final class Hydrator implements HydratorInterface
 {
+    private const INTEGER_PATTERN = '/^-?\d+$/D';
+    private const INT_TYPE = 'int';
+
     /**
      * Converters by property type name, custom registrations taking
      * precedence over the built-in defaults.
@@ -54,8 +60,11 @@ final class Hydrator implements HydratorInterface
         private readonly MetadataReaderInterface $metadata,
         array $converters = [],
     ) {
+        $dates = new DateTimeImmutableConverter();
         $this->converters = $converters + [
-            DateTimeImmutable::class => new DateTimeImmutableConverter(),
+            DateTimeImmutable::class => $dates,
+            // A property typed with the interface receives a DateTimeImmutable.
+            DateTimeInterface::class => $dates,
         ];
     }
 
@@ -196,6 +205,16 @@ final class Hydrator implements HydratorInterface
     {
         $enumClass = $property->getEnumClass();
         if ($enumClass !== null && (is_int($value) || is_string($value))) {
+            // Some drivers (pdo_sqlsrv, DECIMAL columns...) return integers as
+            // strings, which an int-backed enum refuses.
+            if (
+                is_string($value)
+                && $this->isIntBacked($enumClass)
+                && preg_match(self::INTEGER_PATTERN, $value) === 1
+            ) {
+                $value = (int) $value;
+            }
+
             return $enumClass::from($value);
         }
 
@@ -218,6 +237,16 @@ final class Hydrator implements HydratorInterface
         $converter = $property === null ? null : $this->converterFor($property);
 
         return $converter === null ? $value : $converter->toDatabase($value);
+    }
+
+    /**
+     * @param class-string<BackedEnum> $enumClass
+     */
+    private function isIntBacked(string $enumClass): bool
+    {
+        $backing = (new ReflectionEnum($enumClass))->getBackingType();
+
+        return $backing instanceof ReflectionNamedType && $backing->getName() === self::INT_TYPE;
     }
 
     private function converterFor(PropertyMetadataInterface $property): ?ValueConverterInterface

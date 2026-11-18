@@ -75,7 +75,7 @@ final class QueryBuilder implements QueryBuilderInterface
      * engines; map such a column to a non-reserved name via #[Column(name:)]
      * or reach it through a raw surface with engine quoting.
      */
-    private const IDENTIFIER_PATTERN = '/^[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)?$/';
+    private const IDENTIFIER_PATTERN = '/^[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)?$/D';
 
     private QueryState $state;
 
