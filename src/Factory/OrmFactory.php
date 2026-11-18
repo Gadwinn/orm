@@ -201,7 +201,8 @@ final class OrmFactory
         $options = ['driver' => $driver];
 
         if (isset($parts['host'])) {
-            $options['host'] = $parts['host'];
+            // parse_url() keeps the brackets of an IPv6 literal ("[::1]").
+            $options['host'] = trim($parts['host'], '[]');
         }
 
         if (isset($parts['port'])) {

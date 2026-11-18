@@ -59,6 +59,11 @@ final class MetadataReader implements MetadataReaderInterface
         $localKeyColumn = null;
 
         foreach ($reflection->getProperties() as $property) {
+            // A static property belongs to the class, never to a row.
+            if ($property->isStatic()) {
+                continue;
+            }
+
             $name = $property->getName();
 
             if ($this->isRelation($property)) {
