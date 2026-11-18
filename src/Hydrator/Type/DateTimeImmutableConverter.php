@@ -6,6 +6,7 @@ namespace G\Orm\Hydrator\Type;
 
 use DateMalformedStringException;
 use DateTimeImmutable;
+use DateTimeInterface;
 use G\Orm\Exception\OrmException;
 
 /**
@@ -25,7 +26,9 @@ final class DateTimeImmutableConverter implements ValueConverterInterface
 
     public function toDatabase(mixed $value): mixed
     {
-        return $value instanceof DateTimeImmutable ? $value->format(self::DATABASE_FORMAT) : $value;
+        // Any DateTimeInterface (a mutable DateTime assigned to a property
+        // typed with the interface included).
+        return $value instanceof DateTimeInterface ? $value->format(self::DATABASE_FORMAT) : $value;
     }
 
     public function fromDatabase(mixed $value): mixed

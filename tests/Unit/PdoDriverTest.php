@@ -62,6 +62,29 @@ final class PdoDriverTest extends TestCase
         self::assertInstanceOf(ConnectionInterface::class, $connection);
     }
 
+    public function testMysqlCountsMatchedRowsUnlessTheCallerSaysOtherwise(): void
+    {
+        if (!extension_loaded('pdo_mysql')) {
+            self::markTestSkipped('pdo_mysql is not loaded.');
+        }
+
+        $attribute = (new \ReflectionMethod(PdoDriver::class, 'mysqlFoundRowsAttribute'))->invoke(new PdoDriver());
+        self::assertIsInt($attribute);
+        $options = new \ReflectionMethod(PdoDriver::class, 'pdoOptions');
+
+        $mysql = $options->invoke(new PdoDriver(), [], 'mysql:host=db;dbname=app');
+        self::assertIsArray($mysql);
+        self::assertTrue($mysql[$attribute]);
+
+        $overridden = $options->invoke(new PdoDriver(), ['options' => [$attribute => false]], 'mysql:host=db');
+        self::assertIsArray($overridden);
+        self::assertFalse($overridden[$attribute]);
+
+        $sqlite = $options->invoke(new PdoDriver(), [], 'sqlite::memory:');
+        self::assertIsArray($sqlite);
+        self::assertArrayNotHasKey($attribute, $sqlite);
+    }
+
     public function testBuildingADsnFromPartsWithAnUnknownDriverFails(): void
     {
         // Exercises the discrete-parts DSN assembly and the connect() catch

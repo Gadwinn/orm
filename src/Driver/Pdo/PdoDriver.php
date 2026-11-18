@@ -31,6 +31,9 @@ final class PdoDriver implements DriverInterface
 
     private const SQLITE_IN_MEMORY = ':memory:';
 
+    /** @var list<string> Name of the MySQL "found rows" attribute, newest first. */
+    private const FOUND_ROWS_CONSTANTS = ['Pdo\Mysql::ATTR_FOUND_ROWS', 'PDO::MYSQL_ATTR_FOUND_ROWS'];
+
     /**
      * Discrete DSN parts recognised per driver. Drivers not listed here fall
      * back to the MySQL-shaped set below (kept permissive for unknown/custom
@@ -69,7 +72,7 @@ final class PdoDriver implements DriverInterface
         $password = isset($options['password']) ? $this->stringOption($options['password']) : null;
 
         try {
-            $pdo = new PDO($dsn, $user, $password, $this->pdoOptions($options));
+            $pdo = new PDO($dsn, $user, $password, $this->pdoOptions($options, $dsn));
         } catch (PDOException $exception) {
             throw new ConnectionException(
                 'Unable to open the database connection: ' . $exception->getMessage(),
@@ -176,13 +179,24 @@ final class PdoDriver implements DriverInterface
      *
      * @return array<int, mixed>
      */
-    private function pdoOptions(array $options): array
+    private function pdoOptions(array $options, string $dsn): array
     {
         $merged = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES => false,
         ];
+
+        // MySQL reports the rows *changed* by an UPDATE, so writing values the
+        // row already holds would count 0 and look like a vanished row to the
+        // unit of work. FOUND_ROWS makes it report the rows *matched*, as the
+        // other engines do. (Pdo\Mysql exists from PHP 8.4; the PDO::MYSQL_*
+        // constant is deprecated from 8.5.)
+        // Set before the caller's options, which may still override it.
+        $foundRows = $this->mysqlFoundRowsAttribute();
+        if ($foundRows !== null && str_starts_with($dsn, self::DRIVER_MYSQL . ':')) {
+            $merged[$foundRows] = true;
+        }
 
         if (isset($options['options']) && is_array($options['options'])) {
             foreach ($options['options'] as $key => $value) {
@@ -193,5 +207,16 @@ final class PdoDriver implements DriverInterface
         }
 
         return $merged;
+    }
+
+    private function mysqlFoundRowsAttribute(): ?int
+    {
+        foreach (self::FOUND_ROWS_CONSTANTS as $name) {
+            if (defined($name)) {
+                return filter_var(constant($name), FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
+            }
+        }
+
+        return null;
     }
 }

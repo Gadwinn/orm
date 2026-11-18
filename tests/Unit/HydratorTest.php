@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace G\Orm\Tests\Unit;
 
+use DateTime;
+use DateTimeImmutable;
 use G\Orm\Hydrator\Hydrator;
 use G\Orm\Metadata\MetadataReader;
 use G\Orm\Tests\Fixture\Article;
+use G\Orm\Tests\Fixture\Level;
 use G\Orm\Tests\Fixture\Status;
+use G\Orm\Tests\Fixture\Visit;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
@@ -34,6 +38,37 @@ final class HydratorTest extends TestCase
         self::assertNull($article->subtitle);
         // String backing value converted up to the enum instance.
         self::assertSame(Status::Published, $article->status);
+    }
+
+    public function testHydratesAnIntBackedEnumReadAsAString(): void
+    {
+        // pdo_sqlsrv (and DECIMAL columns) return integers as strings.
+        $visit = $this->hydrator()->hydrate(Visit::class, ['id' => '3', 'level' => '1', 'seen_at' => null]);
+
+        self::assertInstanceOf(Visit::class, $visit);
+        self::assertSame(3, $visit->id);
+        self::assertSame(Level::Admin, $visit->level);
+        self::assertNull($visit->seenAt);
+    }
+
+    public function testConvertsADateTimeInterfacePropertyBothWays(): void
+    {
+        $hydrator = $this->hydrator();
+        $visit = $hydrator->hydrate(Visit::class, ['id' => 1, 'level' => 0, 'seen_at' => '2024-03-15 10:30:45']);
+
+        self::assertInstanceOf(Visit::class, $visit);
+        self::assertInstanceOf(DateTimeImmutable::class, $visit->seenAt);
+        self::assertSame('2024-03-15 10:30:45', $visit->seenAt->format('Y-m-d H:i:s'));
+
+        $visit->seenAt = new DateTime('2025-01-02 03:04:05');
+        self::assertSame('2025-01-02 03:04:05', $hydrator->extractState($visit)['seen_at']);
+    }
+
+    public function testNeverMapsAStaticProperty(): void
+    {
+        $visit = $this->hydrator()->hydrate(Visit::class, ['id' => 1, 'level' => 0, 'seen_at' => null]);
+
+        self::assertArrayNotHasKey('instances', $this->hydrator()->extractState($visit));
     }
 
     public function testExtractsEnumBackToItsBackingValue(): void

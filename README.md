@@ -363,6 +363,20 @@ $orm->remove($user);
 $orm->flush();              // DELETE
 ```
 
+### Long-running workers (FrankenPHP, RoadRunner, Swoole)
+
+The unit of work keeps every loaded entity in its identity map, so `find()` returns the same
+instance for the same row without querying again. In a classic PHP request this state dies
+with the request. In a worker process where one `DbManager` serves many requests, clear it at
+the end of each request; otherwise later requests read stale entities and memory grows:
+
+```php
+$orm->unitOfWork()->clear();   // forgets loaded entities and pending intentions
+```
+
+With `gadwinn/framework`, declare it in `config/reset.php`: it then runs after each request,
+only if the manager was used.
+
 ### Write-integrity guards
 
 The flush pipeline fails loudly instead of drifting silently:

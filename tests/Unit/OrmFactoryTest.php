@@ -40,6 +40,11 @@ final class OrmFactoryTest extends TestCase
         );
     }
 
+    public function testStripsTheBracketsOfAnIpv6Host(): void
+    {
+        self::assertSame('::1', OrmFactory::normalise('pgsql://app@[::1]:5432/shop')['host']);
+    }
+
     public function testUnknownUriQueryParametersAreDropped(): void
     {
         $options = OrmFactory::normalise('mysql://app@db.local/shop?serverVersion=8.0.37');
