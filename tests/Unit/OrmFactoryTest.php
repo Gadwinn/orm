@@ -81,6 +81,13 @@ final class OrmFactoryTest extends TestCase
         );
     }
 
+    public function testSqliteUriForTheInMemoryDatabase(): void
+    {
+        self::assertSame(['driver' => 'sqlite'], OrmFactory::normalise('sqlite://'));
+        self::assertSame(['driver' => 'sqlite'], OrmFactory::normalise('sqlite:///:memory:'));
+        self::assertSame(['driver' => 'sqlite'], OrmFactory::normalise('sqlite://:memory:'));
+    }
+
     public function testDsnStringPassesThroughUntouched(): void
     {
         self::assertSame(
@@ -152,5 +159,6 @@ final class OrmFactoryTest extends TestCase
 
         self::assertInstanceOf(DbManagerInterface::class, $orm);
         self::assertSame([['one' => 1]], $orm->query('SELECT 1 AS one'));
+        self::assertSame([['one' => 1]], OrmFactory::connect('sqlite:///:memory:')->query('SELECT 1 AS one'));
     }
 }
