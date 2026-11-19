@@ -49,7 +49,7 @@ $orm = OrmFactory::connect('pgsql:host=127.0.0.1;dbname=shop');
 
 // SQLite: file URI, or the bare DSN for in-memory
 $orm = OrmFactory::connect('sqlite:///var/data/app.db');   // sqlite:///C:/data/app.db on Windows
-$orm = OrmFactory::connect('sqlite::memory:');
+$orm = OrmFactory::connect('sqlite::memory:');            // or the URI sqlite:///:memory: (also sqlite://)
 ```
 
 Configuration notes:

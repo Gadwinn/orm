@@ -63,6 +63,8 @@ final class OrmFactory
      */
     private const SQLITE_URI_PREFIX = 'sqlite://';
 
+    private const SQLITE_MEMORY = ':memory:';
+
     /**
      * URI query parameters forwarded to the connection options; anything
      * else (serverVersion, ...) is configuration noise for other stacks and
@@ -227,7 +229,7 @@ final class OrmFactory
 
     /**
      * SQLite URIs carry a file path instead of host/dbname parts; an empty
-     * path means the in-memory database.
+     * path, or ":memory:" ("sqlite:///:memory:"), means the in-memory database.
      *
      * @return array<string, string>
      */
@@ -235,6 +237,10 @@ final class OrmFactory
     {
         if (preg_match(self::WINDOWS_DRIVE_PATH, $path) === 1) {
             $path = ltrim($path, '/');
+        }
+
+        if (ltrim($path, '/') === self::SQLITE_MEMORY) {
+            $path = '';
         }
 
         $options = ['driver' => self::DRIVER_SQLITE];
